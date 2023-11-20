@@ -1,37 +1,19 @@
 <?php
     session_start();
-    $page = "hotel";
-    $changeInformation=false;
-    $signInFalse=false;
-    if(isset($_GET["hotel"])){
-        $page = "hotel";
+    $page = "hotel.php";
+    $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation", "logout"];
+    foreach($validPages as $p){
+        if(isset($_GET[$p])){
+            $page = $p;
+            break;
+        }
     }
-    else if(isset($_GET["impressum"])){
-        $page = "impressum";
-    }
-    else if(isset($_GET["F_and_Q"])){
-        $page = "F_and_Q";
-    }
-    else if(isset($_GET["new_reservation"])){
-        $page = "new_reservation";
-    }
-    else if(isset($_GET["reserved_rooms"])){
-        $page = "reserved_rooms";
-    }
-    else if(isset($_GET["signup"])){
-        $page = "signup";
-    }
-    else if(isset($_GET["signin"])){
-        $page = "signin";
-    }
-    else if(isset($_GET["userInformation"])){
-        $page = "userInformation";
-    }
-    else if(isset($_GET["logout"])){
+    
+    if ($page === "logout") {
         session_destroy();
         header("Location: index.php");
         exit();
-    }
+    }    
     if(isset($_GET["changeInformation"])){
         $changeInformation=true;
         $page="userInformation";
@@ -102,7 +84,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $page ?></title>
-    <link rel ="stylesheet" href="./styles/main.css">
+    <link rel ="stylesheet" href="styles/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;500;700&display=swap" rel="stylesheet">
 </head>
