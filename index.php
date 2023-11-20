@@ -1,6 +1,7 @@
 <?php
     session_start();
     $page = "hotel";
+    // hi there
     $changeInformation=false;
     $signInFalse=false;
     if(isset($_GET["hotel"])){
