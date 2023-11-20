@@ -1,0 +1,190 @@
+
+/* For all pages thats linked to this sheet*/
+/*-----------------------------------------*/
+html,body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+/*-----------------------------------------*/
+
+
+
+/* for the Home Page*/
+/*------------------*/
+.card{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.card-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+}
+.carousel-item img{
+    max-height: 70vh;
+}
+.carousel-caption{
+    background-color: rgb(0,0,0,0.5);
+    font-family:'Courier New', Courier, monospace;
+    padding: 5px;
+}
+.carousel-caption>h5{
+    font-weight: bold;
+}
+.card-text{
+    border: 2px;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(0,0,0,0.3);
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 18px;    
+    margin-top: 16%;
+}
+/*------------------*/
+/* for Reservation Page */
+/*--------------------------*/
+
+/*--------------------------*/
+
+
+
+/* for the Impressum Page*/
+/*-----------------------*/
+#impressum-body{
+    margin-left:3vw;
+    margin-right: 3vw;
+    color: black;
+}
+#impressum-and-home{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.impressum-header{
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-style: oblique;
+    font-size: 20px;
+}
+.impressum-paragraph{
+    margin-left: 1vw;
+}
+#impressum-photos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    height: auto;
+}
+#impressum-bertan-photo{
+    width: 140px;
+    margin-bottom: 10px;
+}
+.impressum-p{
+    margin: 0px;
+}
+.impressum-div{
+    margin-bottom: 5vh;
+}
+/*-----------------------*/
+
+
+
+/* For the F&Q page*/
+/*-----------------*/
+.accordion-button::after {
+    background-color: white;
+    border-radius: 5px;
+}
+#accordionExample .accordion-body{
+    height: 5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+}
+#accordionExample .accordion-button {
+    height: 5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+/*-----------------*/
+
+
+
+/*media for responsiv page*/
+/*------------------------*/
+@media  (max-width:500px) {
+    #impressum-bertan-photo{
+        width: 30vw;
+    }
+    #impressum-muayad-photo{
+        width:30vw;
+    }
+    #impressum-photos{
+        margin: 0px;
+    }
+}
+/*------------------------*/
+
+/* For the Sign page*/
+/*-----------------*/
+.sign-outter{
+    padding:10px;
+}
+.sign-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sign-logo
+{
+    display: flex;
+    justify-content: center;
+}
+.sign-logo-p{
+    font-family: serif; 
+    font-size: 30px;
+    padding-top: 25px;
+    padding-left: 5px;
+}
+.sign-bar{
+    display: flex;
+    flex-direction: column;
+}
+.sign-bar>input{
+    padding: 5px;
+    margin: 10px;
+}
+.sign-bar>.sign-buttons{
+    margin: 10px;
+    padding: 5px;
+}
+.signup-and-home{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+.signup-and-home>p{
+    margin-left: 35%;
+    font-size: 25px;
+    font-family: serif;
+}
+.sign-bar>input:focus{
+    outline: 1px solid gray;
+}
+.error{
+    color: red;
+}
+/*-----------------*/
+
+
+
+
+
+
