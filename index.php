@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $page = "wassup dsadasdasdasda motherjackson";
+    $page = "hotel.php";
     $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation", "logout"];
     foreach($validPages as $p){
         if(isset($_GET[$p])){
