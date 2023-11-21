@@ -55,6 +55,13 @@
                 <div class="signup-and-home">
                     <p>Sign Up</p>
                 </div>
+                <div>
+                    <?php
+                        if($emailexist){
+                            echo "<p class='error' style='text-align:center;'>Email existiert schon</p>";
+                        }
+                    ?>
+                </div>
                 <select class="sign-buttons" id="Anrede" name="Anrede" width="">
                     <option value="Herr.">Herr.</option>
                     <option value="Frau.">Frau.</option>
@@ -62,40 +69,40 @@
                 <input type="text" id="vorname" name="vorname" placeholder="Vorname" value="<?php echo $vorname ?>"  size="12">
                 <?php
                     if(isset($errors['vorname'])){
-                        echo "<span class='error''>".$errors['vorname']."</span>";
+                        echo "<p class='error' style='text-align:center;'>".$errors['vorname']."</p>";
                     }
                 ?>
                 <input type="text" id="nachname" name="nachname" placeholder="Nachname" value="<?php echo $nachname ?>"  size="12">
                 <?php
                     if(isset($errors['nachname'])){
-                        echo "<span class='error'>".$errors['nachname']."</span>";
+                        echo "<p class='error' style='text-align:center;'>".$errors['nachname']."</p>";
                     }
                 ?>
                 <input type="text" id="username" name="username" value="<?php echo $username ?>"  placeholder="UserName">
                 <?php
                     if(isset($errors['username'])){
-                        echo "<span class='error'>".$errors['username']."</span>";
+                        echo "<p class='error' style='text-align:center;'>".$errors['username']."</p>";
                     }
                 ?>
                 <input type="email" id="email" name="email" value="<?php echo $email ?>"  placeholder="Email">
                 <?php
                     if(isset($errors['email'])){
-                        echo "<span class='error'>".$errors['email']."</span>";
+                        echo "<p class='error' style='text-align:center;'>".$errors['email']."</p>";
                     }
                 ?>
                 <input type="password" id="password" name="password" value="<?php echo $password ?>" placeholder="Password">
                 <?php
                     if(isset($errors['password'])){
-                        echo "<span class='error'>".$errors['password']."</span>";
+                        echo "<p class='error' style='text-align:center;'>".$errors['password']."</p>";
                     }
                 ?>
                 <input type="password" id="confirmPassword" name="confirmpassword" value="<?php echo $confirmpassword ?>"  placeholder="Password wiederholen">
                 <?php
                     if(isset($errors['confirmpassword'])){
-                        echo "<span class='error'>".$errors['confirmpassword']."</span>";
+                        echo "<p class='error' style='text-align:center;'>".$errors['confirmpassword']."</p>";
                     }
                     if($password !== $confirmpassword){
-                        echo "<span class='error' style='font-weight:bold;'>Passwords sind nicht identisch</span>";
+                        echo "<p class='error' style='font-weight:bold; text-align:center;'>Passwords sind nicht identisch</p>";
                     }
                 ?>
                 <div class="sign-buttons d-flex justify-content-between">

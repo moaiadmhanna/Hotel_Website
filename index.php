@@ -1,7 +1,11 @@
 <?php
     session_start();
-    $page = "hotel.php";
-    $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation", "logout"];
+    $page = "hotel";
+    $jsonFile = 'data/signdata.json';
+    $data = file_exists($jsonFile) ? json_decode(file_get_contents($jsonFile), true) : array();
+    $emailexist = false;
+    $changeInformation=false;
+    $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation"];
     foreach($validPages as $p){
         if(isset($_GET[$p])){
             $page = $p;
@@ -9,7 +13,7 @@
         }
     }
     
-    if ($page === "logout") {
+    if (isset($_GET["logout"])) {
         session_destroy();
         header("Location: index.php");
         exit();
@@ -18,13 +22,30 @@
         $changeInformation=true;
         $page="userInformation";
     }
-
     if(isset($_POST["changeInformation"])){
-        $_SESSION["vorname"]=$_POST["vorname"];
-        $_SESSION["nachname"]=$_POST["nachname"];
-        $_SESSION["username"]=$_POST["username"];
-        $_SESSION["email"]=$_POST["email"];
-        $_SESSION["password"]=$_POST["password"];
+        $newEmail = $_POST["email"];
+        foreach($data as $key =>$user){
+            if($user["email"]==$newEmail){
+                $emailexist = true;
+                break;
+            }
+            if($user["email"]==$_SESSION["email"]){
+                $data[$key]["vorname"] = $_POST["vorname"];
+                $data[$key]["nachname"] = $_POST["nachname"];
+                $data[$key]["username"] = $_POST["username"];
+                $data[$key]["email"] = $_POST["email"];
+                $data[$key]["password"] = $_POST["password"];
+
+                $_SESSION["vorname"] = $data[$key]["vorname"];
+                $_SESSION["nachname"] = $data[$key]["nachname"];
+                $_SESSION["username"] = $data[$key]["username"];
+                $_SESSION["email"] = $data[$key]["email"];
+                $_SESSION["password"] = $data[$key]["password"];
+                break;
+            }
+        }
+        $newJsonString = json_encode($data,JSON_PRETTY_PRINT);
+        file_put_contents($jsonFile, $newJsonString);
         $changeInformation=false;
         $page="userInformation";
     }
@@ -33,25 +54,47 @@
             $page = "signup";
         }
         else{
-            $_SESSION["vorname"]=$_POST["vorname"];
-            $_SESSION["nachname"]=$_POST["nachname"];
-            $_SESSION["username"]=$_POST["username"];
-            $_SESSION["email"]=$_POST["email"];
-            $_SESSION["password"] = $_POST["password"];
-            $page = "hotel";
+            $newArrayToAdd = array(
+                "vorname" => $_POST["vorname"],
+                "nachname" => $_POST["nachname"],
+                "username" => $_POST["username"],
+                "email" => $_POST["email"],
+                "password" => $_POST["password"],
+            );
+            $newEmail = $_POST["email"];
+            foreach($data as $user){
+                if($user["email"]==$newEmail){
+                    $emailexist = true;
+                    break;
+                }
+            }
+            if(!$emailexist){
+                $data[] = $newArrayToAdd;
+                $jsonString = json_encode($data, JSON_PRETTY_PRINT);
+                file_put_contents($jsonFile, $jsonString);
+            }
+            else{
+                $page = "signup";
+            }
         }
     }
 
     if(isset($_POST["login"])){
-        if(isset($_SESSION["email"])&&isset($_SESSION["password"])){
-            if($_POST["email"]== $_SESSION["email"] && $_POST["password"] == $_SESSION["password"]){
-                $_SESSION["logged"] = true;
-                $_SESSION["reservationNumber"]=1;
-                $page = "hotel";
+        $page = "signin";
+        foreach($data as $user){
+            if($user["email"]==$_POST["email"]){
+                $_SESSION["vorname"]=$user["vorname"];
+                $_SESSION["nachname"]=$user["nachname"];
+                $_SESSION["username"]=$user["username"];
+                $_SESSION["email"]=$user["email"];
+                $_SESSION["password"]=$user["password"];
+                $_SESSION["logged"]=true;
+                $page ="hotel";
+                break;
             }
-        }
-        else{
-            $signInFalse=true;
+            else{
+                $signInFalse=true;
+            }
         }
     }
     $avilable_rooms=array(

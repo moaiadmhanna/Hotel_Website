@@ -33,16 +33,25 @@
                 <div class="signup-and-home">
                     <p>Sign In</p>
                 </div>
+                <div>
+                    <?php
+                        if(isset($_POST["login"])){
+                            if(!isset($_SESSION["logged"])&&!isset($errors["email"])&&!isset($errors["password"])){
+                                echo "<p class='error' style='text-align:center;'>Email oder passwort ist falsch</p>";
+                            }
+                        }
+                    ?>
+                </div>
                 <input type="email" id="email" name="email" value="<?php echo $email?>"placeholder="Email:">
                 <?php
-                    if(isset($errors["email"]) && $signInFalse==false){
-                        echo "<span class='error'>".$errors["email"]."</span>";
+                    if(isset($errors["email"])){
+                        echo "<span class='error' style='text-align:center;'>".$errors["email"]."</span>";
                     }
                 ?>
                 <input type="password" id="password" name="password"  value="<?php echo $password?>" placeholder="Password:">
                 <?php
-                    if(isset($errors["password"]) && $signInFalse==false){
-                        echo "<span class='error'>".$errors["password"]."</span>";
+                    if(isset($errors["password"])){
+                        echo "<span class='error' style='text-align:center;'>".$errors["password"]."</span>";
                     }
                 ?>
                 <div class="sign-buttons d-flex justify-content-between">
