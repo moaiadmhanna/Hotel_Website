@@ -1,8 +1,12 @@
 <?php
     session_start();
     $page = "hotel";
-    $jsonFile = 'data/signdata.json';
-    $data = file_exists($jsonFile) ? json_decode(file_get_contents($jsonFile), true) : array();
+    $roomsFile='data/rooms.json';
+    $signinJsonFile = 'data/signdata.json';
+    $reservationJsonFile = 'data/reservations.json';
+    $signdata = file_exists($signinJsonFile) ? json_decode(file_get_contents($signinJsonFile), true) : array();
+    $reservationdata= file_exists($reservationJsonFile) ? json_decode(file_get_contents($reservationJsonFile), true) : array();
+    $roomsData=file_exists($roomsFile) ? json_decode(file_get_contents($roomsFile), true) : array();
     $emailexist = false;
     $changeInformation=false;
     $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation"];
@@ -24,27 +28,27 @@
     }
     if(isset($_POST["changeInformation"])){
         $newEmail = $_POST["email"];
-        foreach($data as $key =>$user){
+        foreach($signdata as $key =>$user){
             if($user["email"]==$newEmail){
                 $emailexist = true;
                 break;
             }
             if($user["email"]==$_SESSION["email"]){
-                $data[$key]["vorname"] = $_POST["vorname"];
-                $data[$key]["nachname"] = $_POST["nachname"];
-                $data[$key]["username"] = $_POST["username"];
-                $data[$key]["email"] = $_POST["email"];
-                $data[$key]["password"] = password_hash($_POST["password"].$data[$key]["salt"],PASSWORD_DEFAULT);
+                $signdata[$key]["vorname"] = $_POST["vorname"];
+                $signdata[$key]["nachname"] = $_POST["nachname"];
+                $signdata[$key]["username"] = $_POST["username"];
+                $signdata[$key]["email"] = $_POST["email"];
+                $signdata[$key]["password"] = password_hash($_POST["password"].$signdata[$key]["salt"],PASSWORD_DEFAULT);
 
-                $_SESSION["vorname"] = $data[$key]["vorname"];
-                $_SESSION["nachname"] = $data[$key]["nachname"];
-                $_SESSION["username"] = $data[$key]["username"];
-                $_SESSION["email"] = $data[$key]["email"];
+                $_SESSION["vorname"] = $signdata[$key]["vorname"];
+                $_SESSION["nachname"] = $signdata[$key]["nachname"];
+                $_SESSION["username"] = $signdata[$key]["username"];
+                $_SESSION["email"] = $signdata[$key]["email"];
                 break;
             }
         }
-        $newJsonString = json_encode($data,JSON_PRETTY_PRINT);
-        file_put_contents($jsonFile, $newJsonString);
+        $newJsonString = json_encode($signdata,JSON_PRETTY_PRINT);
+        file_put_contents($signinJsonFile, $newJsonString);
         $changeInformation=false;
         $page="userInformation";
     }
@@ -65,16 +69,16 @@
                 "salt" => $salt,
             );
             $newEmail = $_POST["email"];
-            foreach($data as $user){
+            foreach($signdata as $user){
                 if($user["email"]==$newEmail){
                     $emailexist = true;
                     break;
                 }
             }
             if(!$emailexist){
-                $data[] = $newArrayToAdd;
-                $jsonString = json_encode($data, JSON_PRETTY_PRINT);
-                file_put_contents($jsonFile, $jsonString);
+                $signdata[] = $newArrayToAdd;
+                $jsonString = json_encode($signdata, JSON_PRETTY_PRINT);
+                file_put_contents($signinJsonFile, $jsonString);
             }
             else{
                 $page = "signup";
@@ -84,7 +88,7 @@
 
     if(isset($_POST["login"])){
         $page = "signin";
-        foreach($data as $user){
+        foreach($signdata as $user){
             if($user["email"]==$_POST["email"] && password_verify($_POST["password"].$user["salt"],$user["password"])){
                 $_SESSION["vorname"]=$user["vorname"];
                 $_SESSION["nachname"]=$user["nachname"];
@@ -99,27 +103,26 @@
             }
         }
     }
-    $avilable_rooms=array(
-        "Zimmer 1" => null,
-        "Zimmer 2" => null,
-        "Zimmer 3" => null,
-    );
     if(isset($_POST["newReservation"])){
         if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
             $fruehstueck = empty($_POST["fruehstueck"])?"no":"yes";
             $parkplatz = empty($_POST["parkplatz"])?"no":"yes";
             $haustier = empty($_POST["haustier"])?"no":"yes";
             $reservation = array(
+                "reservationEmail" => $_SESSION["email"],
                 "zimmer" => $_POST["zimmer"],
                 "anreiseDatum" => $_POST["anreiseDatum"],
                 "abreiseDatum" => $_POST["abreiseDatum"],
                 "fruehstueck" => $fruehstueck,
                 "parkplatz" => $parkplatz,
                 "haustier" => $haustier,
-
             );
-            $_SESSION["reservation" . $_SESSION["reservationNumber"]]=$reservation;
-            $_SESSION["reservationNumber"]++;
+            $reservationdata[]=$reservation;
+            $jsonString = json_encode($reservationdata, JSON_PRETTY_PRINT);
+            file_put_contents($reservationJsonFile, $jsonString);
+            $roomsData[$_POST["zimmer"]]="reserved";
+            $newJsonString = json_encode($roomsData,JSON_PRETTY_PRINT);
+            file_put_contents($roomsFile, $newJsonString);
         };
     }
 ?>
