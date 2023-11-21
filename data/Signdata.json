@@ -1,18 +1,3 @@
 [
-    {
-        "vorname": "Mhd",
-        "nachname": "Mhanna",
-        "username": "MASTX31",
-        "email": "moaiadmhana999@gmail.com",
-        "password": "$2y$10$x99eIIxc2gx63onbEC9xIO22ICELVCKjvnWGTA49GxZ31CfFsX4uC",
-        "salt": "c4ac21ba4fb8ddaa45f4a534660385c8"
-    },
-    {
-        "vorname": "Bertan",
-        "nachname": "tan",
-        "username": "mmhanna",
-        "email": "ammar.mhannna@gmail.com",
-        "password": "$2y$10$QQxrEjbwbw7UmyiS1tcHr.O3.YqsbJ1dRxug3JQzrtB\/FutIIG3NG",
-        "salt": "9d4c06fcc03c0b3c305723b234c10400"
-    }
+    
 ]

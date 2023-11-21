@@ -1,20 +1,3 @@
 [
-    {
-        "reservationEmail": "ammar.mhannna@gmail.com",
-        "zimmer": "Zimmer 1",
-        "anreiseDatum": "2023-11-02",
-        "abreiseDatum": "2023-11-04",
-        "fruehstueck": "yes",
-        "parkplatz": "no",
-        "haustier": "no"
-    },
-    {
-        "reservationEmail": "moaiadmhana999@gmail.com",
-        "zimmer": "Zimmer 5",
-        "anreiseDatum": "2023-11-10",
-        "abreiseDatum": "2023-11-19",
-        "fruehstueck": "no",
-        "parkplatz": "yes",
-        "haustier": "yes"
-    }
+    
 ]
