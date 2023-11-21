@@ -1,3 +1,20 @@
 [
-    
+    {
+        "reservationEmail": "admin@gmail.com",
+        "zimmer": "Zimmer 1",
+        "anreiseDatum": "2023-11-15",
+        "abreiseDatum": "2023-11-16",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "no"
+    },
+    {
+        "reservationEmail": "admin@gmail.com",
+        "zimmer": "Zimmer 2",
+        "anreiseDatum": "2023-11-16",
+        "abreiseDatum": "2023-11-18",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "no"
+    }
 ]

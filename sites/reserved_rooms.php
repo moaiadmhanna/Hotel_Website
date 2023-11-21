@@ -57,6 +57,7 @@
                 $reservationCounter++;
             }
         }
+        $reservationCounter=1;
         if($numberOfReservations==1){      
             echo "
             <div class='d-flex flex-column  align-items-center'>
