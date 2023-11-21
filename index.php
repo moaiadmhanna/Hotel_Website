@@ -34,13 +34,12 @@
                 $data[$key]["nachname"] = $_POST["nachname"];
                 $data[$key]["username"] = $_POST["username"];
                 $data[$key]["email"] = $_POST["email"];
-                $data[$key]["password"] = $_POST["password"];
+                $data[$key]["password"] = password_hash($_POST["password"].$data[$key]["salt"],PASSWORD_DEFAULT);
 
                 $_SESSION["vorname"] = $data[$key]["vorname"];
                 $_SESSION["nachname"] = $data[$key]["nachname"];
                 $_SESSION["username"] = $data[$key]["username"];
                 $_SESSION["email"] = $data[$key]["email"];
-                $_SESSION["password"] = $data[$key]["password"];
                 break;
             }
         }
@@ -54,12 +53,16 @@
             $page = "signup";
         }
         else{
+            $rawPassword = $_POST['password'];
+            $salt = bin2hex(random_bytes(16));
+            $hashedPassword = password_hash($rawPassword . $salt, PASSWORD_DEFAULT);
             $newArrayToAdd = array(
                 "vorname" => $_POST["vorname"],
                 "nachname" => $_POST["nachname"],
                 "username" => $_POST["username"],
                 "email" => $_POST["email"],
-                "password" => $_POST["password"],
+                "password" => $hashedPassword,
+                "salt" => $salt,
             );
             $newEmail = $_POST["email"];
             foreach($data as $user){
@@ -82,12 +85,11 @@
     if(isset($_POST["login"])){
         $page = "signin";
         foreach($data as $user){
-            if($user["email"]==$_POST["email"]){
+            if($user["email"]==$_POST["email"] && password_verify($_POST["password"].$user["salt"],$user["password"])){
                 $_SESSION["vorname"]=$user["vorname"];
                 $_SESSION["nachname"]=$user["nachname"];
                 $_SESSION["username"]=$user["username"];
                 $_SESSION["email"]=$user["email"];
-                $_SESSION["password"]=$user["password"];
                 $_SESSION["logged"]=true;
                 $page ="hotel";
                 break;
