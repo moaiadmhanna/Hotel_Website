@@ -123,7 +123,7 @@
             $roomsData[$_POST["zimmer"]]="reserved";
             $newJsonString = json_encode($roomsData,JSON_PRETTY_PRINT);
             file_put_contents($roomsFile, $newJsonString);
-        };
+            };
     }
 ?>
 <!DOCTYPE html>
