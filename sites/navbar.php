@@ -32,6 +32,7 @@
                                         ";
                                     }
                                 ?>
+                                <li><a class="dropdown-item" href="?news">News</a></li>
                                 <li><a class="dropdown-item" href="?impressum">Impressum</a></li>
                                 <li><a class="dropdown-item" href="?F_and_Q">F&Q</a></li>
                             </ul>

@@ -1,0 +1,18 @@
+[
+    {
+        "vorname": "Muayad",
+        "nachname": "Mhanna",
+        "username": "admin",
+        "email": "admin@gmail.com",
+        "password": "$2y$10$VVO24Zr8XTBxNV.i61sCI.aM8MkSqeDj9EdQjWe8UiuFCCH235E2.",
+        "salt": "b349927904639510eaf2e996fe897e5d"
+    },
+    {
+        "vorname": "Muayad",
+        "nachname": "Mhanna",
+        "username": "Moaiad123",
+        "email": "moaiadmhanna@gmail.com",
+        "password": "$2y$10$tzFMj0Irgnswq6jdg0vqTuZyfUWhhIZliKZdPerC8qflLBNBZGT7y",
+        "salt": "61b578f8d95d0549146529d71d2ca3d4"
+    }
+]

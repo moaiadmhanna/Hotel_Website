@@ -50,8 +50,8 @@
                 <select id="zimmer" name="zimmer">
                     <option value="" disabled selected>Bitte wählen Sie</option>
                     <?php
-                        foreach($avilable_rooms as $room => $status){
-                            if(empty($status)){
+                        foreach($roomsData as $room => $status){
+                            if($status == "free"){
                                 echo "<option value='$room'>".$room."</option>";
                             };
                         }

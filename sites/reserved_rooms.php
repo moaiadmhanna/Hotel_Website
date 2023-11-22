@@ -16,36 +16,48 @@
         include_once "navbar.php";
     ?>
     <?php
-        $numberOfReservations=$_SESSION["reservationNumber"];
-        for($i = 1; $i < $numberOfReservations; $i++){
-            $zimmer = $_SESSION["reservation".$i]["zimmer"];
-            $anreiseDatum = $_SESSION["reservation".$i]["anreiseDatum"];
-            $abreiseDatum = $_SESSION["reservation".$i]["abreiseDatum"];
-            $fruehstueck = $_SESSION["reservation".$i]["fruehstueck"];
-            $parkplatz = $_SESSION["reservation".$i]["parkplatz"];
-            $haustier = $_SESSION["reservation".$i]["haustier"];
-            echo "
-            <div class='accordion mt-5 m-2' id='accordionExample'>
-                <div class='accordion-item'>
-                <h2 class='accordion-header'>
-                    <button class='accordion-button collapsed bg-dark text-white' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$i' aria-expanded='true' aria-controls='collapse$i'>
-                        Reservation$i
-                    </button>
-                </h2>
-                <div id='collapse$i' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>
-                    <div class='accordion-body'>
-                        <p>Zimmer : $zimmer</p>
-                        <p>Anreisedatum : $anreiseDatum</p>
-                        <p>Abreisedatum : $abreiseDatum</p>
-                        <p>Frühstück : $fruehstueck</p>
-                        <p>Parkplatz : $parkplatz</p>
-                        <p>Haustier : $haustier</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-            ";
+        $numberOfReservations=1;
+        $reservationCounter=1;
+        foreach($reservationdata as $reservation){
+            if($reservation["reservationEmail"]==$_SESSION["email"]){
+                $numberOfReservations++;
+            }
         }
+        if($numberOfReservations>1){
+            foreach($reservationdata as $reservation){
+                if($reservation["reservationEmail"]==$_SESSION["email"]){
+                    $zimmer = $reservation["zimmer"];
+                    $anreiseDatum = $reservation["anreiseDatum"];
+                    $abreiseDatum = $reservation["abreiseDatum"];
+                    $fruehstueck = $reservation["fruehstueck"];
+                    $parkplatz = $reservation["parkplatz"];
+                    $haustier = $reservation["haustier"];
+                    echo "
+                    <div class='accordion mt-5 m-2' id='accordionExample'>
+                        <div class='accordion-item'>
+                        <h2 class='accordion-header'>
+                            <button class='accordion-button collapsed bg-dark text-white' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$reservationCounter' aria-expanded='true' aria-controls='collapse$reservationCounter'>
+                                Reservation $reservationCounter
+                            </button>
+                        </h2>
+                        <div id='collapse$reservationCounter' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>
+                            <div class='accordion-body'>
+                                <p>Zimmer : $zimmer</p>
+                                <p>Anreisedatum : $anreiseDatum</p>
+                                <p>Abreisedatum : $abreiseDatum</p>
+                                <p>Frühstück : $fruehstueck</p>
+                                <p>Parkplatz : $parkplatz</p>
+                                <p>Haustier : $haustier</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    ";
+                    $reservationCounter++;
+                }
+            }
+        }
+        $reservationCounter=1;
         if($numberOfReservations==1){      
             echo "
             <div class='d-flex flex-column  align-items-center'>
