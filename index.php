@@ -31,7 +31,7 @@
     if(isset($_POST["changeInformation"])){
         $newEmail = $_POST["email"];
         foreach($signdata as $key =>$user){
-            if($user["email"]==$newEmail){
+            if($user["email"]==$newEmail&&$user["email"]!== $_SESSION["email"]){
                 $emailexist = true;
                 break;
             }
@@ -80,6 +80,7 @@
             if(!$emailexist){
                 $signdata[] = $newArrayToAdd;
                 $jsonString = json_encode($signdata, JSON_PRETTY_PRINT);
+                file_put_contents($signinJsonFile, $jsonString);
             }
             else{
                 $page = "signup";

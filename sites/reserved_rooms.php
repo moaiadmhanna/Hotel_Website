@@ -53,8 +53,8 @@
                         </div>
                     </div>
                     ";
+                    $reservationCounter++;
                 }
-                $reservationCounter++;
             }
         }
         $reservationCounter=1;

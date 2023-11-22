@@ -9,8 +9,25 @@
 <?php
         include_once "navbar.php";
 ?>
-<img src="./styles/fotos/parisi-udvar-hotel-budapest-exterior-night-2.webp" class="d-block w-100" style="height:70vh;" alt="Unser Hotel">
-<p class="newsP mt-5" style="text-align:center; font-family: 'Courier New', Courier, monospace; font-size: 30px; font-weight:bolder;">Unser News</p>
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="./styles/fotos/parisi-udvar-hotel-budapest-exterior-night-2.webp" class="d-block w-100" alt="Unser Hotel">
+        </div>
+    </div>
+</div>
+<div class="d-flex flex-column align-items-center">
+    <p class="newsP mt-5" style="text-align:center; font-family: 'Courier New', Courier, monospace; font-size: 30px; font-weight:bolder;">Unser News</p>
+    <?php
+            if($_SESSION["email"]=="admin@gmail.com"){
+                echo "
+                <div>
+                    <button class='btn bg-black text-white'><a href='?addphoto' style='color:white;'>Fotos ändern</a></button>
+                </div>
+            ";
+            }
+    ?>
+</div>
 <div class="container mt-5 pb-5">
     <div class='row justify-content-around'>
             <?php
@@ -21,15 +38,14 @@
                     echo "
                     <div class='card col-4' style='width: 27rem;'>
                         <img src='$picture' class='card-img' style='height:27rem;' alt='...'>
-                        <div class='card-body' style='border:1px solid gray;'>
+                        <div class='card-body'>
                             <h5 style='text-align:center;'>$newsHeader<h5>
                             <p class='pt-5 pr-2'>$newsBody</p>
                         </div>
-                    </div>
+                        </div>
                     ";
                 }
             ?>
-        </div>
     </div>
 </div>
 </body>

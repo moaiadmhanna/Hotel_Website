@@ -18,10 +18,19 @@
         "haustier": "no"
     },
     {
-        "reservationEmail": "ahmedsairawan2019@gmail.com",
+        "reservationEmail": "admin@gmail.com",
+        "zimmer": "Zimmer 4",
+        "anreiseDatum": "2023-11-01",
+        "abreiseDatum": "2023-11-03",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "no"
+    },
+    {
+        "reservationEmail": "moaiadmhanna@gmail.com",
         "zimmer": "Zimmer 3",
-        "anreiseDatum": "2023-11-15",
-        "abreiseDatum": "2023-11-17",
+        "anreiseDatum": "2023-11-22",
+        "abreiseDatum": "2023-11-23",
         "fruehstueck": "yes",
         "parkplatz": "no",
         "haustier": "no"
