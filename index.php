@@ -3,13 +3,15 @@
     $page = "hotel";
     $roomsFile='data/rooms.json';
     $signinJsonFile = 'data/signdata.json';
+    $newsFile='data/news.json';
     $reservationJsonFile = 'data/reservations.json';
     $signdata = file_exists($signinJsonFile) ? json_decode(file_get_contents($signinJsonFile), true) : array();
     $reservationdata= file_exists($reservationJsonFile) ? json_decode(file_get_contents($reservationJsonFile), true) : array();
     $roomsData=file_exists($roomsFile) ? json_decode(file_get_contents($roomsFile), true) : array();
+    $newsData=file_exists($newsFile) ? json_decode(file_get_contents($newsFile), true) : array();
     $emailexist = false;
     $changeInformation=false;
-    $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation"];
+    $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation","news","addphoto"];
     foreach($validPages as $p){
         if(isset($_GET[$p])){
             $page = $p;

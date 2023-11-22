@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "reservationEmail": "moaiadmhanna@gmail.com",
         "zimmer": "Zimmer 5",
         "anreiseDatum": "2023-11-08",
@@ -7,5 +8,32 @@
         "fruehstueck": "yes",
         "parkplatz": "no",
         "haustier": "yes"
+=======
+        "reservationEmail": "admin@gmail.com",
+        "zimmer": "Zimmer 1",
+        "anreiseDatum": "2023-11-15",
+        "abreiseDatum": "2023-11-16",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "no"
+    },
+    {
+        "reservationEmail": "admin@gmail.com",
+        "zimmer": "Zimmer 2",
+        "anreiseDatum": "2023-11-16",
+        "abreiseDatum": "2023-11-18",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "no"
+    },
+    {
+        "reservationEmail": "ahmedsairawan2019@gmail.com",
+        "zimmer": "Zimmer 3",
+        "anreiseDatum": "2023-11-15",
+        "abreiseDatum": "2023-11-17",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "no"
+>>>>>>> 7531e6e34780edd5612ca97d3ed047f7bc9bf80e
     }
 ]

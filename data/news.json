@@ -1,0 +1,17 @@
+[
+    {
+        "newsHeader" : "SILVESTERDINNER IN WIEN 2023 | 2024",
+        "newsBody" : "Planen Sie, Silvester 2023-2024 in Wien zu feiern? Vor den Fenstern des Restaurants Veranda erstrahlt der Wiener Nachthimmel vor Festlichkeit. Doch die wahren Highlights des Neujahrsfests finden sich auf den Tellern und in den Gläsern unserer Gäste. Das heurige Silvester Galadinner ist ein wahres Feuerwerk der Kulinarik.",
+        "picture" : "./styles/fotos/news/wout-vanacker-l4HBYkURqvE-unsplash.jpg"
+    },
+    {
+        "newsHeader" : "WEIHNACHTSDINNER IN WIEN",
+        "newsBody" : "Lassen Sie sich zu Weihnachten von den kulinarischen Highlights unseres Küchenteams verwöhnen. Mit dem bewährten Sans Souci Service überlassen Sie nichts dem Zufall.",
+        "picture" : "./styles/fotos/news/libby-penner-TgdGlcJX75A-unsplash.jpg"
+    },
+    {
+        "newsHeader" : "SOMMERAKTIVITÄTEN IN WIEN",
+        "newsBody" : "Genießen Sie die Sonnenseiten der Stadt. Wir präsentieren Ihnen die besten Sommeraktivitäten in Wien für Kunstfansund Outdoor-Begeisterte.",
+        "picture" : "./styles/fotos/news/vicko-mozara-m82uh_vamhg-unsplash.jpg"
+    }
+]

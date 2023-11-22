@@ -1,10 +1,27 @@
 [
     {
+<<<<<<< HEAD
         "vorname": "muayad",
         "nachname": "mhanna",
         "username": "moaiad",
         "email": "moaiadmhanna@gmail.com",
         "password": "$2y$10$ilbH1...rWAXcdnQ55fJNuIqdOFqp9HlbcEyC30PIq92R7acrbFMy",
         "salt": "f42292a528b49dcf019cf663364a73fc"
+=======
+        "vorname": "Muayad",
+        "nachname": "Mhanna",
+        "username": "admin",
+        "email": "admin@gmail.com",
+        "password": "$2y$10$i9d.XmSngxffhVf4dReqeOs4VHMT3VqwcUyJ\/vZvHVkQvdJeP2pMq",
+        "salt": "f407664d4c3345edf43ee83004090f74"
+    },
+    {
+        "vorname": "Ahmed",
+        "nachname": "5ra",
+        "username": "ahmed5ra",
+        "email": "ahmedsairawan2019@gmail.com",
+        "password": "$2y$10$XqLEMw8N.7\/9HCCBbiDku.sB4yspD0HK4GN03pFlpnuSmGQspdvwa",
+        "salt": "9ea0978557a86f182812c5ee69493083"
+>>>>>>> 7531e6e34780edd5612ca97d3ed047f7bc9bf80e
     }
 ]
