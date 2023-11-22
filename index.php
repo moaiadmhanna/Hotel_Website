@@ -78,7 +78,6 @@
             if(!$emailexist){
                 $signdata[] = $newArrayToAdd;
                 $jsonString = json_encode($signdata, JSON_PRETTY_PRINT);
-                file_put_contents($signinJsonFile, $jsonString);
             }
             else{
                 $page = "signup";

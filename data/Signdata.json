@@ -1,3 +1,10 @@
 [
-    
+    {
+        "vorname": "muayad",
+        "nachname": "mhanna",
+        "username": "moaiad",
+        "email": "moaiadmhanna@gmail.com",
+        "password": "$2y$10$ilbH1...rWAXcdnQ55fJNuIqdOFqp9HlbcEyC30PIq92R7acrbFMy",
+        "salt": "f42292a528b49dcf019cf663364a73fc"
+    }
 ]
