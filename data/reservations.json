@@ -16,5 +16,14 @@
         "fruehstueck": "yes",
         "parkplatz": "no",
         "haustier": "no"
+    },
+    {
+        "reservationEmail": "ahmedsairawan2019@gmail.com",
+        "zimmer": "Zimmer 3",
+        "anreiseDatum": "2023-11-15",
+        "abreiseDatum": "2023-11-17",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "no"
     }
 ]

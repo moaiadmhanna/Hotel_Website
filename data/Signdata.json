@@ -6,5 +6,13 @@
         "email": "admin@gmail.com",
         "password": "$2y$10$i9d.XmSngxffhVf4dReqeOs4VHMT3VqwcUyJ\/vZvHVkQvdJeP2pMq",
         "salt": "f407664d4c3345edf43ee83004090f74"
+    },
+    {
+        "vorname": "Ahmed",
+        "nachname": "5ra",
+        "username": "ahmed5ra",
+        "email": "ahmedsairawan2019@gmail.com",
+        "password": "$2y$10$XqLEMw8N.7\/9HCCBbiDku.sB4yspD0HK4GN03pFlpnuSmGQspdvwa",
+        "salt": "9ea0978557a86f182812c5ee69493083"
     }
 ]
