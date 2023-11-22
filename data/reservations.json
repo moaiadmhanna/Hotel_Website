@@ -1,14 +1,5 @@
 [
     {
-<<<<<<< HEAD
-        "reservationEmail": "moaiadmhanna@gmail.com",
-        "zimmer": "Zimmer 5",
-        "anreiseDatum": "2023-11-08",
-        "abreiseDatum": "2023-11-10",
-        "fruehstueck": "yes",
-        "parkplatz": "no",
-        "haustier": "yes"
-=======
         "reservationEmail": "admin@gmail.com",
         "zimmer": "Zimmer 1",
         "anreiseDatum": "2023-11-15",
@@ -34,6 +25,5 @@
         "fruehstueck": "yes",
         "parkplatz": "no",
         "haustier": "no"
->>>>>>> 7531e6e34780edd5612ca97d3ed047f7bc9bf80e
     }
 ]
