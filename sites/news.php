@@ -19,7 +19,7 @@
 <div class="d-flex flex-column align-items-center">
     <p class="newsP mt-5" style="text-align:center; font-family: 'Courier New', Courier, monospace; font-size: 30px; font-weight:bolder;">Unser News</p>
     <?php
-            if($_SESSION["email"]=="admin@gmail.com"){
+            if(isset($_SESSION["email"]) && $_SESSION["email"]=="admin@gmail.com"){
                 echo "
                 <div>
                     <button class='btn bg-black text-white'><a href='?addphoto' style='color:white;'>Fotos ändern</a></button>

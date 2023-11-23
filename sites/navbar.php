@@ -23,36 +23,39 @@
                                 Dropdown
                             </a>
                             <ul class="dropdown-menu">
-                                <?php
-                                    if(!empty($_SESSION["logged"])){
-                                        echo 
-                                        "
-                                        <li><a class='dropdown-item' href='?new_reservation'>Neue Reservierung</a></li>
-                                        <li><a class='dropdown-item' href='?reserved_rooms'>Resvierungen</a></li>
-                                        ";
-                                    }
-                                ?>
                                 <li><a class="dropdown-item" href="?news">News</a></li>
                                 <li><a class="dropdown-item" href="?impressum">Impressum</a></li>
                                 <li><a class="dropdown-item" href="?F_and_Q">F&Q</a></li>
                             </ul>
                         </li>
+                        <?php
+                            if(!empty($_SESSION["logged"])){
+                                echo "
+                                <li class='nav-item dropdown ms-auto'>
+                                    <a class='nav-link dropdown-toggle' style='font-family: serif; font-size: 22px; color:green;' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Welcome "
+                                        .$_SESSION["username"].
+                                    "</a>
+                                    <ul class='dropdown-menu'>
+                                        <li><a class='dropdown-item' href='?new_reservation'>Neue Reservierung</a></li>
+                                        <li><a class='dropdown-item' href='?reserved_rooms'>Resvierungen</a></li>
+                                        <li><a class='dropdown-item' href='?userInformation'>User Information</a></li>
+                                    </ul>
+                                </li>
+                                        ";
+                            }
+                        ?>
                     <?php
                         if(empty($_SESSION["logged"])){
                             echo "<li class='nav-item ms-auto'>
-                                    <a class='nav-link active' style='font-family: serif; font-size: 22px;'' href='?signup'>Signup</a>
+                                    <a class='nav-link active' style='font-family: serif; font-size: 22px;' href='?signup'>Signup</a>
                                 </li>";
                             echo "<li class='nav-item ms-auto'>
-                                    <a class='nav-link active' style='font-family: serif; font-size: 22px;'' href='?signin'>Signin</a>
+                                    <a class='nav-link active' style='font-family: serif; font-size: 22px;' href='?signin'>Signin</a>
                                 </li>";
                         }
                         else{
-                            echo "<p class='nav-p ms-auto mt-2 mx-1' style='color:green;'>Welcome: ".$_SESSION["username"]."</p>";
                             echo "<li class='nav-item ms-auto'>
-                                    <a class='nav-link active' style='font-family: serif; font-size: 22px;'' href='?userInformation'>User Information</a>
-                                </li>";
-                            echo "<li class='nav-item ms-auto'>
-                                    <a class='nav-link active' style='font-family: serif; font-size: 22px;'' href='?logout'>Logout</a>
+                                    <a class='nav-link active' style='font-family: serif; font-size: 22px;' href='?logout'>Logout</a>
                                 </li>";
                         }
                     ?>

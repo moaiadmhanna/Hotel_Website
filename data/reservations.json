@@ -27,12 +27,21 @@
         "haustier": "no"
     },
     {
-        "reservationEmail": "moaiadmhanna@gmail.com",
-        "zimmer": "Zimmer 3",
-        "anreiseDatum": "2023-11-22",
-        "abreiseDatum": "2023-11-23",
+        "reservationEmail": "admin@gmail.com",
+        "zimmer": "Zimmer 6",
+        "anreiseDatum": "2023-11-16",
+        "abreiseDatum": "2023-11-17",
         "fruehstueck": "yes",
         "parkplatz": "no",
         "haustier": "no"
+    },
+    {
+        "reservationEmail": "moaiadmhana999@gmail.com",
+        "zimmer": "Zimmer 3",
+        "anreiseDatum": "2023-11-23",
+        "abreiseDatum": "2023-11-24",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "yes"
     }
 ]
