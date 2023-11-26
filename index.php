@@ -14,8 +14,30 @@
     $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation","news","addphoto"];
     foreach($validPages as $p){
         if(isset($_GET[$p])){
-            $page = $p;
-            break;
+            if(isset($_SESSION["logged"])&&$_SESSION["logged"]==true){
+                if($p == "addphoto"){
+                    if($_SESSION["email"]=="admin@gmail.com"){
+                        $page = $p;
+                        break;
+                    }
+                    else{
+                        $page = "hotel"; 
+                    }
+                }
+                else{
+                    $page = $p;
+                    break;
+                }
+            }
+            else{
+                if($p == "hotel" || $p == "impressum" ||  $p =="F_and_Q" ||  $p =="signup" ||  $p =="signin" || $p == "news"){
+                    $page = $p;
+                }
+                else{
+                    $page = "signin";
+                }
+                break;
+            }
         }
     }
     

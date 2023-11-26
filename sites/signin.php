@@ -54,9 +54,12 @@
                         echo "<span class='error' style='text-align:center;'>".$errors["password"]."</span>";
                     }
                 ?>
-                <div class="sign-buttons d-flex justify-content-between">
-                    <button class="btn bg-dark text-white" type="submit" name="login" id="submit">Submit</button>
-                    <a href="?hotel"><img src="./styles/fotos/house-solid.svg" alt="home" width="30px" title="Back to Home"></a>
+                <div class="sign-buttons">
+                    <p>Haben Sie sich regestiert? <a href="?signup">Zur Registerung</a></p>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn bg-dark text-white" type="submit" name="login" id="submit">Submit</button>
+                        <a href="?hotel"><img src="./styles/fotos/house-solid.svg" alt="home" width="30px" title="Back to Home"></a>
+                    </div>
                 </div>
             </div>
     </div>
