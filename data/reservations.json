@@ -43,5 +43,14 @@
         "fruehstueck": "yes",
         "parkplatz": "no",
         "haustier": "yes"
+    },
+    {
+        "reservationEmail": "admin@gmail.com",
+        "zimmer": "Zimmer 5",
+        "anreiseDatum": "2023-11-17",
+        "abreiseDatum": "2023-11-18",
+        "fruehstueck": "yes",
+        "parkplatz": "no",
+        "haustier": "yes"
     }
 ]
