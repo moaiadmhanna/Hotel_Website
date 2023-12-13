@@ -105,10 +105,13 @@
                         echo "<p class='error' style='font-weight:bold; text-align:center;'>Passwords sind nicht identisch</p>";
                     }
                 ?>
-                <div class="sign-buttons d-flex justify-content-between">
-                    <button class="btn bg-dark text-white" type="submit" name="signup" id="Submit">Submit</button>
-                    <a href="?hotel"><img src="./styles/fotos/house-solid.svg" alt="home" width="30px" title="Back to Home"></a> 
-                </div>    
+                <div class="sign-buttons">
+                    <p>Haben Sie sich schon regestiert? <a href="?signin">Zur Anmeldung</a></p> 
+                    <div class="d-flex justify-content-between">
+                        <button class="btn bg-dark text-white" type="submit" name="signup" id="Submit">Submit</button>
+                        <a href="?hotel"><img src="./styles/fotos/house-solid.svg" alt="home" width="30px" title="Back to Home"></a> 
+                    </div>
+                </div>  
             </div>
         </div>
     </form>
