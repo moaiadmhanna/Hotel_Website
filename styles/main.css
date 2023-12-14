@@ -56,7 +56,10 @@ html,body{
 /*------------------*/
 /* for Reservation Page */
 /*--------------------------*/
-
+div#collapsediv{
+    background-color:rgb(0,0,0,0.5);
+    overflow: auto;
+}
 /*--------------------------*/
 
 

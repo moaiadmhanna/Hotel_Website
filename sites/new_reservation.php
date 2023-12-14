@@ -39,8 +39,20 @@
         <div class="col-md-4 mb-4">
             <div class="card text-white">
                 <img src="./styles/fotos/jaredd-craig-HH4WBGNyltc-unsplash.jpg" class="card-img" alt="..." style="height: 32rem;">
-                <div class="card-img-overlay d-flex justify-content-center align-items-end">
-                    <a href="?impressum" class="py-2 px-3">Impressum</a>
+                <div class="card-img-overlay d-flex flex-column justify-content-end align-items-center" style="gap:10px;">
+                    <div>
+                        <div class="collapse-verticale collapse" id="collapseWidthExample" style="overflow: auto; max-height: 425px;">
+                            <div class="card card-body" id="collapsediv">
+                                <h5>Zimmer 1</h5>
+                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <a class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                            Mehr Erfahren
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
