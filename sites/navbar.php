@@ -36,7 +36,7 @@
                                         .$_SESSION["username"].
                                     "</a>
                                     <ul class='dropdown-menu'>
-                                        <li><a class='dropdown-item' href='?new_reservation'>Neue Reservierung</a></li>
+                                        <li><a class='dropdown-item' href='?rooms'>Neue Reservierung</a></li>
                                         <li><a class='dropdown-item' href='?reserved_rooms'>Resvierungen</a></li>
                                         <li><a class='dropdown-item' href='?userInformation'>User Information</a></li>
                                     </ul>

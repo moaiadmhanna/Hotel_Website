@@ -45,7 +45,7 @@
     }
 ?>
 <body class="sign-body">
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form method="post">
         <div class="sign-outter">
             <div class="sign-logo">
                 <img src="./styles/fotos/upper-belvedere-vienna.png" class="sign-logo-img" alt="Logo" width="80px">
@@ -90,13 +90,13 @@
                         echo "<p class='error' style='text-align:center;'>".$errors['email']."</p>";
                     }
                 ?>
-                <input type="password" id="passwort" name="passwort" value="<?php echo $passwort ?>" placeholder="Passwort">
+                <input type="password" id="passwort" name="passwort" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="<?php echo $passwort ?>" placeholder="Passwort">
                 <?php
                     if(isset($errors['passwort'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['passwort']."</p>";
                     }
                 ?>
-                <input type="password" id="confirmpasswort" name="confirmpasswort" value="<?php echo $confirmpasswort ?>"  placeholder="passwort wiederholen">
+                <input type="password" id="confirmpasswort"  title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="confirmpasswort" value="<?php echo $confirmpasswort ?>"  placeholder="passwort wiederholen">
                 <?php
                     if(isset($errors['confirmpasswort'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['confirmpasswort']."</p>";

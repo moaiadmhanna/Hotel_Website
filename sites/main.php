@@ -9,7 +9,7 @@ $roomsData=file_exists($roomsFile) ? json_decode(file_get_contents($roomsFile), 
 $newsData=file_exists($newsFile) ? json_decode(file_get_contents($newsFile), true) : array();
 $emailexist = false;
 $changeInformation=false;
-$validPages = ["hotel", "impressum", "F_and_Q", "new_reservation", "reserved_rooms", "signup", "signin", "userInformation","news","addphoto"];
+$validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addphoto"];
 foreach($validPages as $p){
     if(isset($_GET[$p])){
         if(isset($_SESSION["logged"])&&$_SESSION["logged"]==true){

@@ -77,7 +77,7 @@
                 <div class='card text-white'>
                   <img src='./styles/fotos/alev-takil-lw3Lqe2K7xc-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
                   <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-                    <a href='?new_reservation' class='py-2 px-3'>Neue Resvierung</a>
+                    <a href='?rooms' class='py-2 px-3'>Neue Resvierung</a>
                   </div>
                 </div>
               </div>
