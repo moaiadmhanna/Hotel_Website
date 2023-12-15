@@ -17,7 +17,7 @@
     </div>
 </div>
 <div class="d-flex flex-column align-items-center">
-    <p class="newsP mt-5" style="text-align:center; font-family: 'Courier New', Courier, monospace; font-size: 30px; font-weight:bolder;">Unser News</p>
+    <p class="newsP mt-5" style="text-align:center;font-size: 30px; font-weight:bolder;">Unser News</p>
     <?php
             if(isset($_SESSION["email"]) && $_SESSION["email"]=="admin@gmail.com"){
                 echo "
@@ -28,7 +28,7 @@
             }
     ?>
 </div>
-<div class="container mt-5 pb-5">
+<div class="container mt-5">
     <div class='row justify-content-around'>
             <?php
                 foreach($newsData as $news){
@@ -36,11 +36,11 @@
                     $newsBody=$news["newsBody"];
                     $picture=$news["picture"];
                     echo "
-                    <div class='card col-4' style='width: 27rem;'>
+                    <div class='card col-4 m-2 p-0' style='width: 27rem; border:none;'>
                         <img src='$picture' class='card-img' style='height:27rem;' alt='...'>
                         <div class='card-body'>
                             <h5 style='text-align:center;'>$newsHeader<h5>
-                            <p class='pt-5 pr-2'>$newsBody</p>
+                            <p class='pt-5 pr-2' style='font-family: \'Courier New\', Courier, monospace;'>$newsBody</p>
                         </div>
                         </div>
                     ";

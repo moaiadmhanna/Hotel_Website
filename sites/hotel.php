@@ -54,10 +54,10 @@
             echo "<div class='container my-4'>
             <div class='row'>
               <div class='col-md-4 mb-4'>
-                <div class='card bg-secondary text-white'>
+                <div class='card text-white'>
                   <img src='./styles/fotos/dad-hotel-h_8i38IHqEI-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
                   <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-                    <a href='?signup' class='btn bg-white text-muted'style='width: 30%;'>Sign Up</a>
+                    <a href='?signup' class='py-2 px-3'>Sign Up</a>
                   </div>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                 <div class='card text-dark'>
                   <img src='./styles/fotos/tobi-w38wBWIliw4-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
                   <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-                    <a href='?signin' class='btn bg-white text-muted' style='width: 30%;'>Sign In</a>
+                    <a href='?signin' class='py-2 px-3'>Sign In</a>
                   </div>
                 </div>
               </div>";
@@ -74,10 +74,10 @@
             echo "<div class='container my-4'>
             <div class='row'>
               <div class='col-md-4 mb-4'>
-                <div class='card bg-secondary text-white'>
+                <div class='card text-white'>
                   <img src='./styles/fotos/alev-takil-lw3Lqe2K7xc-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
                   <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-                    <a href='?new_reservation' class='btn bg-white text-muted'style='width: 35%;'>Neue Resvierung</a>
+                    <a href='?new_reservation' class='py-2 px-3'>Neue Resvierung</a>
                   </div>
                 </div>
               </div>
@@ -85,17 +85,17 @@
                 <div class='card text-dark'>
                   <img src='./styles/fotos/behnam-norouzi-XWTrHfOoMqw-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
                   <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-                    <a href='?reserved_rooms' class='btn bg-white text-muted' style='width: 35%;'>Resvierungen</a>
+                    <a href='?reserved_rooms' class='py-2 px-3'>Resvierungen</a>
                   </div>
                 </div>
               </div>";
           }
         ?>
             <div class="col-md-4 mb-4">
-              <div class="card bg-secondary text-white">
+              <div class="card text-white">
                 <img src="./styles/fotos/jaredd-craig-HH4WBGNyltc-unsplash.jpg" class="card-img" alt="..." style="height: 32rem;">
                 <div class="card-img-overlay d-flex justify-content-center align-items-end">
-                  <a href="?impressum" class="btn bg-white text-muted">Impressum</a>
+                  <a href="?impressum" class="py-2 px-3">Impressum</a>
                 </div>
               </div>
             </div>

@@ -28,7 +28,63 @@
             $errors["datumsfehler"]= "Das Abreisedatum muss nach dem Anreisedatum liegen.";
         }
     }
-?>  
+?>
+<body>
+    <?php
+        include_once "navbar.php";
+    ?>
+</body>
+<div class="container my-5">
+    <div class="row d-flex justify-content-between">
+        <div class="col-md-4 mb-4">
+            <div class="card text-white">
+                <img src="./styles/fotos/jaredd-craig-HH4WBGNyltc-unsplash.jpg" class="card-img" alt="..." style="height: 32rem;">
+                <div class="card-img-overlay d-flex flex-column justify-content-end align-items-center" style="gap:10px;">
+                    <div>
+                        <div class="collapse-verticale collapse" id="collapseWidthExample" style="overflow: auto; max-height: 425px;">
+                            <div class="card card-body" id="collapsediv">
+                                <h5>Zimmer 1</h5>
+                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <a class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                            Mehr Erfahren
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-white">
+                <img src="./styles/fotos/jaredd-craig-HH4WBGNyltc-unsplash.jpg" class="card-img" alt="..." style="height: 32rem;">
+                <div class="card-img-overlay d-flex justify-content-center align-items-end">
+                    <a href="?impressum" class="py-2 px-3">Impressum</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-between">
+        <div class="col-md-4 mb-4">
+            <div class="card text-white">
+                <img src="./styles/fotos/jaredd-craig-HH4WBGNyltc-unsplash.jpg" class="card-img" alt="..." style="height: 32rem;">
+                <div class="card-img-overlay d-flex justify-content-center align-items-end">
+                    <a href="?impressum" class="py-2 px-3">Impressum</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-white">
+                <img src="./styles/fotos/jaredd-craig-HH4WBGNyltc-unsplash.jpg" class="card-img" alt="..." style="height: 32rem;">
+                <div class="card-img-overlay d-flex justify-content-center align-items-end">
+                    <a href="?impressum" class="py-2 px-3">Impressum</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
 <body class="d-flex justify-content-center align-items-center">
     <form method="post">
         <div class="sign-outter">
@@ -40,7 +96,9 @@
             </div>
             <div class="sign-bar" style="gap:5px;">
                 <h5 style="text-align:center;">Reservation</h5>
+                
                 <?php
+                    /*
                     if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
                         echo "
                             <p style='color:green; text-align:center;'> Sie haben $zimmer reserviert</p>
@@ -110,9 +168,11 @@
                             </div>
                         ";
                     }
+                */
                 ?>
             </div>
         </div>
     </form>
 </body>
+-->
 </html>
