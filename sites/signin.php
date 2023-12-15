@@ -8,16 +8,16 @@
 <?php
     $errors=[];
     $email="";
-    $password="";
+    $passwort="";
     if(isset($_POST["login"])){
         $email=isset($_POST["email"])?$_POST["email"]:"";
-        $password=isset($_POST["password"])?$_POST["password"]:"";
+        $passwort=isset($_POST["passwort"])?$_POST["passwort"]:"";
         if(empty($email)){
             $errors["email"]="Kein Email wurde eingegeben";
         }
     
-        if(empty($password)){
-            $errors["password"]="Kein password wurde eingegeben";
+        if(empty($passwort)){
+            $errors["passwort"]="Kein passwort wurde eingegeben";
         }
     }
 ?>
@@ -36,7 +36,7 @@
                 <div>
                     <?php
                         if(isset($_POST["login"])){
-                            if(!isset($_SESSION["logged"])&&!isset($errors["email"])&&!isset($errors["password"])){
+                            if(!isset($_SESSION["logged"])&&!isset($errors["email"])&&!isset($errors["passwort"])){
                                 echo "<p class='error' style='text-align:center;'>Email oder passwort ist falsch</p>";
                             }
                         }
@@ -48,10 +48,10 @@
                         echo "<span class='error' style='text-align:center;'>".$errors["email"]."</span>";
                     }
                 ?>
-                <input type="password" id="password" name="password"  value="<?php echo $password?>" placeholder="Password:">
+                <input type="password" id="passwort" name="passwort"  value="<?php echo $passwort?>" placeholder="Passwort:">
                 <?php
-                    if(isset($errors["password"])){
-                        echo "<span class='error' style='text-align:center;'>".$errors["password"]."</span>";
+                    if(isset($errors["passwort"])){
+                        echo "<span class='error' style='text-align:center;'>".$errors["passwort"]."</span>";
                     }
                 ?>
                 <div class="sign-buttons">

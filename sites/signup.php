@@ -11,15 +11,15 @@
     $nachname="";
     $username="";
     $email="";
-    $password="";
-    $confirmpassword="";
+    $passwort="";
+    $confirmpasswort="";
     if (isset($_POST["signup"])){
         $vorname = isset($_POST["vorname"])? $_POST["vorname"]:"";
         $nachname = isset($_POST["nachname"])? $_POST["nachname"]:"";
         $username = isset($_POST["username"])? $_POST["username"]:"";
         $email = isset($_POST["email"])? $_POST["email"]:"";
-        $password = isset($_POST["password"])? $_POST["password"]:"";
-        $confirmpassword = isset($_POST["confirmpassword"])? $_POST["confirmpassword"]:"";
+        $passwort = isset($_POST["passwort"])? $_POST["passwort"]:"";
+        $confirmpasswort = isset($_POST["confirmpasswort"])? $_POST["confirmpasswort"]:"";
         if(empty($vorname)){
             $errors["vorname"]="vorname wurde nicht eingegeben";
         }
@@ -36,11 +36,11 @@
             $errors["email"]="email wurde nicht eingegeben";
         }
 
-        if(empty($password)){
-            $errors["password"]="password wurde nicht eingegeben";
+        if(empty($passwort)){
+            $errors["passwort"]="passwort wurde nicht eingegeben";
         }
-        if(empty($confirmpassword)){
-            $errors["confirmpassword"]="confirmpassword wurde nicht eingegeben";
+        if(empty($confirmpasswort)){
+            $errors["confirmpasswort"]="confirmpasswort wurde nicht eingegeben";
         }
     }
 ?>
@@ -62,9 +62,9 @@
                         }
                     ?>
                 </div>
-                <select class="sign-buttons" id="Anrede" name="Anrede" width="">
-                    <option value="Herr.">Herr.</option>
-                    <option value="Frau.">Frau.</option>
+                <select class="sign-buttons" id="anrede" name="anrede" width="">
+                    <option value="M" selected >Herr.</option>
+                    <option value="F">Frau.</option>
                 </select>
                 <input type="text" id="vorname" name="vorname" placeholder="Vorname" value="<?php echo $vorname ?>"  size="12">
                 <?php
@@ -78,7 +78,7 @@
                         echo "<p class='error' style='text-align:center;'>".$errors['nachname']."</p>";
                     }
                 ?>
-                <input type="text" id="username" name="username" value="<?php echo $username ?>"  placeholder="UserName">
+                <input type="text" id="username" name="username" value="<?php echo $username ?>"  placeholder="Username">
                 <?php
                     if(isset($errors['username'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['username']."</p>";
@@ -90,19 +90,19 @@
                         echo "<p class='error' style='text-align:center;'>".$errors['email']."</p>";
                     }
                 ?>
-                <input type="password" id="password" name="password" value="<?php echo $password ?>" placeholder="Password">
+                <input type="password" id="passwort" name="passwort" value="<?php echo $passwort ?>" placeholder="Passwort">
                 <?php
-                    if(isset($errors['password'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['password']."</p>";
+                    if(isset($errors['passwort'])){
+                        echo "<p class='error' style='text-align:center;'>".$errors['passwort']."</p>";
                     }
                 ?>
-                <input type="password" id="confirmPassword" name="confirmpassword" value="<?php echo $confirmpassword ?>"  placeholder="Password wiederholen">
+                <input type="password" id="confirmpasswort" name="confirmpasswort" value="<?php echo $confirmpasswort ?>"  placeholder="passwort wiederholen">
                 <?php
-                    if(isset($errors['confirmpassword'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['confirmpassword']."</p>";
+                    if(isset($errors['confirmpasswort'])){
+                        echo "<p class='error' style='text-align:center;'>".$errors['confirmpasswort']."</p>";
                     }
-                    if($password !== $confirmpassword){
-                        echo "<p class='error' style='font-weight:bold; text-align:center;'>Passwords sind nicht identisch</p>";
+                    if($passwort !== $confirmpasswort){
+                        echo "<p class='error' style='font-weight:bold; text-align:center;'>passworts sind nicht identisch</p>";
                     }
                 ?>
                 <div class="sign-buttons">

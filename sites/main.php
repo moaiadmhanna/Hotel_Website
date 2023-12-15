@@ -2,10 +2,8 @@
 session_start();
 $page = "hotel";
 $roomsFile='data/rooms.json';
-$signinJsonFile = 'data/signdata.json';
 $newsFile='data/news.json';
 $reservationJsonFile = 'data/reservations.json';
-$signdata = file_exists($signinJsonFile) ? json_decode(file_get_contents($signinJsonFile), true) : array();
 $reservationdata= file_exists($reservationJsonFile) ? json_decode(file_get_contents($reservationJsonFile), true) : array();
 $roomsData=file_exists($roomsFile) ? json_decode(file_get_contents($roomsFile), true) : array();
 $newsData=file_exists($newsFile) ? json_decode(file_get_contents($newsFile), true) : array();
@@ -77,32 +75,30 @@ if(isset($_POST["changeInformation"])){
     $page="userInformation";
 }
 if(isset($_POST["signup"])){
-    if(empty($_POST["vorname"])||empty($_POST["nachname"])||empty($_POST["username"])||empty($_POST["email"])||empty($_POST["password"])||empty($_POST["confirmpassword"])||$_POST["confirmpassword"]!==$_POST["password"]){
+    if(empty($_POST["vorname"])||empty($_POST["nachname"])||empty($_POST["username"])||empty($_POST["email"])||empty($_POST["passwort"])||empty($_POST["confirmpasswort"])||$_POST["confirmpasswort"]!==$_POST["passwort"]){
         $page = "signup";
     }
     else{
-        $rawPassword = $_POST['password'];
-        $salt = bin2hex(random_bytes(16));
-        $hashedPassword = password_hash($rawPassword . $salt, PASSWORD_DEFAULT);
-        $newArrayToAdd = array(
-            "vorname" => $_POST["vorname"],
-            "nachname" => $_POST["nachname"],
-            "username" => $_POST["username"],
-            "email" => $_POST["email"],
-            "password" => $hashedPassword,
-            "salt" => $salt,
-        );
-        $newEmail = $_POST["email"];
-        foreach($signdata as $user){
-            if($user["email"]==$newEmail){
+        $sql= "SELECT email FROM benutzer";
+        $resualt = $db->query($sql);
+        while($row = $resualt->fetch_assoc()){
+            if($_POST["email"] == $row["email"]){
                 $emailexist = true;
                 break;
             }
         }
         if(!$emailexist){
-            $signdata[] = $newArrayToAdd;
-            $jsonString = json_encode($signdata, JSON_PRETTY_PRINT);
-            file_put_contents($signinJsonFile, $jsonString);
+            $sql = "INSERT INTO benutzer(anrede,username,vorname,nachname,email,passwort) VALUES (?,?,?,?,?,?)";
+            $stmt = $db->prepare($sql);
+            $anrede = $_POST["anrede"];
+            $vorname = $_POST["vorname"];
+            $nachname  = $_POST["nachname"];
+            $username = $_POST["username"];
+            $email = $_POST["email"];
+            $rawpasswort = $_POST["passwort"];
+            $hashedpasswort = password_hash($rawpasswort, PASSWORD_DEFAULT);
+            $stmt->bind_param("ssssss",$anrede,$username,$vorname,$nachname,$email,$hashedpasswort);
+            $stmt->execute();
         }
         else{
             $page = "signup";
@@ -111,13 +107,14 @@ if(isset($_POST["signup"])){
 }
 
 if(isset($_POST["login"])){
-    $page = "signin";
-    foreach($signdata as $user){
-        if($user["email"]==$_POST["email"] && password_verify($_POST["password"].$user["salt"],$user["password"])){
-            $_SESSION["vorname"]=$user["vorname"];
-            $_SESSION["nachname"]=$user["nachname"];
-            $_SESSION["username"]=$user["username"];
-            $_SESSION["email"]=$user["email"];
+    $sql= "SELECT * FROM benutzer";
+    $resualt = $db->query($sql);
+    while($row = $resualt->fetch_assoc()){
+        if($_POST["email"] == $row["email"] && password_verify($_POST["passwort"],$row["passwort"])){
+            $_SESSION["vorname"]=$row["vorname"];
+            $_SESSION["nachname"]=$row["nachname"];
+            $_SESSION["username"]=$row["username"];
+            $_SESSION["email"]=$row["email"];
             $_SESSION["logged"]=true;
             $page ="hotel";
             break;

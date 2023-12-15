@@ -1,4 +1,5 @@
 <?php
+    require_once "sites/db.php";
     include_once "sites/main.php";
 ?>
 <!DOCTYPE html>
