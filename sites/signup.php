@@ -44,17 +44,20 @@
         }
     }
 ?>
-<body class="sign-body">
+<body>
+    <div class="sign-body">
     <form method="post">
         <div class="sign-outter">
             <div class="sign-logo">
-                <img src="./styles/fotos/upper-belvedere-vienna.png" class="sign-logo-img" alt="Logo" width="80px">
-                <p class="sign-logo-p mt-4" style="font-size: 30px;">Vienna Stars Hotel</p>
+                <a href="?hotel">
+                  <img src="./styles/fotos/upper-belvedere-vienna.png"  alt="Logo" width="65px">
+                </a>
+                <p class="sign-logo-p" style="font-size: 30px;">Vienna Stars Hotel</p>
+            </div>
+            <div class="signup-and-home">
+                <p>Sign Up</p>
             </div>
             <div class="sign-bar">
-                <div class="signup-and-home">
-                    <p>Sign Up</p>
-                </div>
                 <div>
                     <?php
                         if($emailexist){
@@ -66,45 +69,45 @@
                     <option value="M" selected >Herr.</option>
                     <option value="F">Frau.</option>
                 </select>
-                <input type="text" id="vorname" name="vorname" placeholder="Vorname" value="<?php echo $vorname ?>"  size="12">
-                <?php
-                    if(isset($errors['vorname'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['vorname']."</p>";
-                    }
-                ?>
-                <input type="text" id="nachname" name="nachname" placeholder="Nachname" value="<?php echo $nachname ?>"  size="12">
-                <?php
-                    if(isset($errors['nachname'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['nachname']."</p>";
-                    }
-                ?>
-                <input type="text" id="username" name="username" value="<?php echo $username ?>"  placeholder="Username">
-                <?php
-                    if(isset($errors['username'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['username']."</p>";
-                    }
-                ?>
-                <input type="email" id="email" name="email" value="<?php echo $email ?>"  placeholder="Email">
-                <?php
-                    if(isset($errors['email'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['email']."</p>";
-                    }
-                ?>
-                <input type="password" id="passwort" name="passwort" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="<?php echo $passwort ?>" placeholder="Passwort">
-                <?php
-                    if(isset($errors['passwort'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['passwort']."</p>";
-                    }
-                ?>
-                <input type="password" id="confirmpasswort"  title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="confirmpasswort" value="<?php echo $confirmpasswort ?>"  placeholder="passwort wiederholen">
-                <?php
-                    if(isset($errors['confirmpasswort'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['confirmpasswort']."</p>";
-                    }
-                    if($passwort !== $confirmpasswort){
-                        echo "<p class='error' style='font-weight:bold; text-align:center;'>passworts sind nicht identisch</p>";
-                    }
-                ?>
+                    <input type="text" id="vorname" name="vorname" placeholder="Vorname" value="<?php echo $vorname ?>"  size="12">
+                    <?php
+                        if(isset($errors['vorname'])){
+                            echo "<p class='error' style='text-align:center;'>".$errors['vorname']."</p>";
+                        }
+                    ?>
+                    <input type="text" id="nachname" name="nachname" placeholder="Nachname" value="<?php echo $nachname ?>"  size="12">
+                    <?php
+                        if(isset($errors['nachname'])){
+                            echo "<p class='error' style='text-align:center;'>".$errors['nachname']."</p>";
+                        }
+                    ?>
+                    <input type="text" id="username" name="username" value="<?php echo $username ?>"  placeholder="Username">
+                    <?php
+                        if(isset($errors['username'])){
+                            echo "<p class='error' style='text-align:center;'>".$errors['username']."</p>";
+                        }
+                    ?>
+                    <input type="email" id="email" name="email" value="<?php echo $email ?>"  placeholder="Email">
+                    <?php
+                        if(isset($errors['email'])){
+                            echo "<p class='error' style='text-align:center;'>".$errors['email']."</p>";
+                        }
+                    ?>
+                    <input type="password" id="passwort" name="passwort" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="<?php echo $passwort ?>" placeholder="Passwort">
+                    <?php
+                        if(isset($errors['passwort'])){
+                            echo "<p class='error' style='text-align:center;'>".$errors['passwort']."</p>";
+                        }
+                    ?>
+                    <input type="password" id="confirmpasswort"  title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="confirmpasswort" value="<?php echo $confirmpasswort ?>"  placeholder="passwort wiederholen">
+                    <?php
+                        if(isset($errors['confirmpasswort'])){
+                            echo "<p class='error' style='text-align:center;'>".$errors['confirmpasswort']."</p>";
+                        }
+                        if($passwort !== $confirmpasswort){
+                            echo "<p class='error' style='font-weight:bold; text-align:center;'>passworts sind nicht identisch</p>";
+                        }
+                    ?>
                 <div class="sign-buttons">
                     <p>Haben Sie sich schon regestiert? <a href="?signin">Zur Anmeldung</a></p> 
                     <div class="d-flex justify-content-between">
@@ -115,5 +118,6 @@
             </div>
         </div>
     </form>
+    </div>
 </body>
 </html>

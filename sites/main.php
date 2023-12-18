@@ -1,47 +1,33 @@
 <?php
 session_start();
 $page = "hotel";
-$roomsFile='data/rooms.json';
-$newsFile='data/news.json';
-$reservationJsonFile = 'data/reservations.json';
-$reservationdata= file_exists($reservationJsonFile) ? json_decode(file_get_contents($reservationJsonFile), true) : array();
-$roomsData=file_exists($roomsFile) ? json_decode(file_get_contents($roomsFile), true) : array();
-$newsData=file_exists($newsFile) ? json_decode(file_get_contents($newsFile), true) : array();
 $emailexist = false;
 $changeInformation=false;
 $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addphoto"];
-foreach($validPages as $p){
-    if(isset($_GET[$p])){
-        if(isset($_SESSION["logged"])&&$_SESSION["logged"]==true){
-            if($p == "addphoto"){
-                if($_SESSION["email"]=="admin@gmail.com"){
-                    $page = $p;
-                    break;
-                }
-                else{
-                    $page = "hotel"; 
-                }
-            }
-            else{
+foreach ($validPages as $p) {
+    if (isset($_GET[$p])) {
+        if (isset($_SESSION["logged"]) && $_SESSION["logged"]==true) {
+            if ($p == "addphoto" && $_SESSION["email"] == "admin@gmail.com") {
                 $page = $p;
                 break;
             }
-        }
-        else{
-            if($p == "hotel" || $p == "impressum" ||  $p =="F_and_Q" ||  $p =="signup" ||  $p =="signin" || $p == "news"){
+        } else {
+            if (in_array($p, ["hotel", "impressum", "F_and_Q", "signup", "signin", "news"])) {
                 $page = $p;
-            }
-            else{
-                $page = "signin";
+            } else {
+                header("Location: index.php?signin");
             }
             break;
         }
+
+        $page = $p;
+        break;
     }
 }
 
 if (isset($_GET["logout"])) {
     session_destroy();
-    header("Location: index.php");
+    header("Location: index.php?hotel");
     exit();
 }    
 if(isset($_GET["changeInformation"])){
@@ -75,10 +61,7 @@ if(isset($_POST["changeInformation"])){
     $page="userInformation";
 }
 if(isset($_POST["signup"])){
-    if(empty($_POST["vorname"])||empty($_POST["nachname"])||empty($_POST["username"])||empty($_POST["email"])||empty($_POST["passwort"])||empty($_POST["confirmpasswort"])||$_POST["confirmpasswort"]!==$_POST["passwort"]){
-        $page = "signup";
-    }
-    else{
+    if(!empty($_POST["vorname"])&&!empty($_POST["nachname"])&&!empty($_POST["username"])&&!empty($_POST["email"])&&!empty($_POST["passwort"])&&!empty($_POST["confirmpasswort"])&&$_POST["confirmpasswort"]==$_POST["passwort"]){
         $sql= "SELECT email FROM benutzer";
         $resualt = $db->query($sql);
         while($row = $resualt->fetch_assoc()){
@@ -99,9 +82,8 @@ if(isset($_POST["signup"])){
             $hashedpasswort = password_hash($rawpasswort, PASSWORD_DEFAULT);
             $stmt->bind_param("ssssss",$anrede,$username,$vorname,$nachname,$email,$hashedpasswort);
             $stmt->execute();
-        }
-        else{
-            $page = "signup";
+            header("q");
+            
         }
     }
 }
@@ -116,7 +98,7 @@ if(isset($_POST["login"])){
             $_SESSION["username"]=$row["username"];
             $_SESSION["email"]=$row["email"];
             $_SESSION["logged"]=true;
-            $page ="hotel";
+            header("Location: index.php?hotel");
             break;
         }
         else{
@@ -126,24 +108,58 @@ if(isset($_POST["login"])){
 }
 if(isset($_POST["newReservation"])){
     if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
-        $fruehstueck = empty($_POST["fruehstueck"])?"no":"yes";
-        $parkplatz = empty($_POST["parkplatz"])?"no":"yes";
-        $haustier = empty($_POST["haustier"])?"no":"yes";
-        $reservation = array(
-            "reservationEmail" => $_SESSION["email"],
-            "zimmer" => $_POST["zimmer"],
-            "anreiseDatum" => $_POST["anreiseDatum"],
-            "abreiseDatum" => $_POST["abreiseDatum"],
-            "fruehstueck" => $fruehstueck,
-            "parkplatz" => $parkplatz,
-            "haustier" => $haustier,
-        );
-        $reservationdata[]=$reservation;
-        $jsonString = json_encode($reservationdata, JSON_PRETTY_PRINT);
-        file_put_contents($reservationJsonFile, $jsonString);
-        $roomsData[$_POST["zimmer"]]="reserved";
-        $newJsonString = json_encode($roomsData,JSON_PRETTY_PRINT);
-        file_put_contents($roomsFile, $newJsonString);
+        // um die Benutzerid vom Datenbank holen:
+        $sql = "SELECT benutzerid FROM benutzer WHERE email = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("s", $_SESSION['email']);
+        $stmt->execute();
+        $result=$stmt->get_result();
+        $row = $result->fetch_assoc();
+        $benutzerid = $row["benutzerid"];
+        $stmt->close();
+
+        //um die Zimmerid vom Datenbank zu holen:
+        $sql = "SELECT zimmerid FROM zimmer WHERE name = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("s",$_POST['zimmer']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $zimmerid = $row["zimmerid"];
+        $stmt->close();
+
+        // jetzt wird alle eingaben vom benutzer in der tabelle Reservierung hinzufügt:
+        $anreiseDatum = new DateTime($_POST["anreiseDatum"]);
+        $abreiseDatum = new DateTime($_POST["abreiseDatum"]);
+        $fruehstueck = isset($_POST["fruehstueck"])&&$_POST["fruehstueck"] == "on" ? 1:0;
+        $parkplatz = isset($_POST["parkplatz"])&&$_POST["parkplatz"] == "on" ? 1:0;
+        $haustier = isset($_POST["haustier"])&&$_POST["haustier"] == "on" ? 1:0;
+        $gesamtPreis =0;
+        // hier werden die Preise berechnet und in eine Variable gespeichert:
+        $sql = "SELECT * From zimmer";
+        $result = $db->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            if ($row["name"] == $_POST["zimmer"]) {
+                $preisProTag = $row["preis"];
+                $interval = $abreiseDatum->diff($anreiseDatum);
+                $gebuchteTage = $interval->format('%a');
+                $gesamtPreis = ($gebuchteTage * $preisProTag)+($fruehstueck*$gebuchteTage*50)+($parkplatz*$gebuchteTage*30)+($haustier*$gebuchteTage*10);
+                break;
+            }
         };
-}
+        //jetzt werden alle daten in datenbank gespeichert
+        $sql = "INSERT INTO reservierung(anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,benutzerid,zimmerid) VALUES(?,?,?,?,?,?,?,?)";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("ssdddddd",$anreiseDatum->format('Y-m-d'), $abreiseDatum->format('Y-m-d'),$fruehstueck,$parkplatz,$haustier,$gesamtPreis,$benutzerid,$zimmerid);
+        $stmt->execute();
+        $_GET[$p]=$_POST["zimmer"];
+        $stmt->close();
+
+        // um die verfüguberkeit des zimmers zu verringern
+        $sql="UPDATE zimmer SET verfuegber = verfuegber-1 WHERE zimmerid=?";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("i",$zimmerid);
+        $stmt->execute();
+    }
+};
 ?>

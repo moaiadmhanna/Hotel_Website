@@ -20,7 +20,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbar-dropdown">
                         <li class="nav-item dropdown ms-auto">
                             <a class="nav-link dropdown-toggle" style="font-size: 22px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                                Über Uns
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="?news">News</a></li>
@@ -36,7 +36,7 @@
                                         .$_SESSION["username"].
                                     "</a>
                                     <ul class='dropdown-menu'>
-                                        <li><a class='dropdown-item' href='?rooms'>Neue Reservierung</a></li>
+                                        <li><a class='dropdown-item' href='?rooms'>Unsere Zimmern</a></li>
                                         <li><a class='dropdown-item' href='?reserved_rooms'>Resvierungen</a></li>
                                         <li><a class='dropdown-item' href='?userInformation'>User Information</a></li>
                                     </ul>

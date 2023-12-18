@@ -10,18 +10,16 @@
         include_once "navbar.php";
     ?>
 </body>
-<div class="container my-5">
-    <div class="row d-flex justify-content-between">
+<div class="container my-5" style="gap:20px;">
+    <div class="row d-flex justify-content-center">
 <?php
-    $counter = 0;
     $sql = "SELECT * FROM zimmer";
     $result = $db->query($sql);
         while($row=$result->fetch_assoc()){
-            if($row["status"]="frei"){
-                $counter++;
+            if($row["verfuegber"]>0){
                 $zimmerId = $row['zimmerid'];
                 echo"
-                <div class='col-md-4 mb-4'>
+                <div class='col-12 col-md-6 col-lg-4'>
                 <div class='card text-white'>
                     <img src='./styles/fotos/rooms/".$row['name'].".jpg' class='card-img' alt='...' style='height: 32rem;'>
                     <div class='card-img-overlay d-flex flex-column justify-content-end align-items-center' style='gap:10px;'>
@@ -30,8 +28,11 @@
                                 <div class='card card-body' id='collapsediv'>
                                     <h5>".$row['name']."</h5>
                                     <p>".$row['beschreibung']."</p>
-                                    <h6>Die Größe:".$row['groesse']." m2</h6>
-                                    <h6>Der Preis pro Nacht:".$row['preispronacht']." Euro</h6>
+                                    <h6>Größe: ".$row['groesse']." m2</h6>
+                                    <h6>Preis: ".$row['preispronacht']." Euro pro Nacht</h6>
+                                    <h6>
+                                        <a href='?new_reservation=".$row["name"]."' style='font-size:15px;'>Zur Reservierung</a>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -44,13 +45,6 @@
                 </div>
             </div>
                 ";
-                if($counter==2){
-                    echo"
-                        </div>
-                        <div class='row d-flex justify-content-between'>
-                    ";
-                    $counter = 0;
-                }
             }
         }
 ?>

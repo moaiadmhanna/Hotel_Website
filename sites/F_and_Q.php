@@ -54,7 +54,7 @@
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>Man kann sich mit der Kontaktdaten anmelden <a href="./signup.php">(link zur Anmeldung)</a>.</p>
+                    <p>Man kann sich mit der Kontaktdaten anmelden <a href="?signin">(link zur Anmeldung)</a>.</p>
                 </div>
             </div>
         </div>

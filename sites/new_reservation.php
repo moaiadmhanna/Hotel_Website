@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Reservation</title>
-</head>
 <?php
+    $heutigeDatum = date('Y-m-d');
+    $minDatum = date('Y-m-d', time() + 86400);
     $errors=[];
     $zimmer;
     $anreiseDatum;
     $abreiseDatum;
+    $sql = "SELECT * From zimmer";
+    $result = $db->query($sql);
     if (isset($_POST["newReservation"])){
         $zimmer = isset($_POST["zimmer"])?$_POST["zimmer"]:null;
-        $anreiseDatum = isset($_POST["anreiseDatum"])?$_POST["anreiseDatum"]:null;
-        $abreiseDatum = isset($_POST["abreiseDatum"])?$_POST["abreiseDatum"]:null;
-        $anreiseDatum = isset($_POST["anreiseDatum"])?$_POST["anreiseDatum"]:null;
+        $anreiseDatum = isset($_POST["anreiseDatum"])?new DateTime($_POST["anreiseDatum"]):null;
+        $abreiseDatum = isset($_POST["abreiseDatum"])?new DateTime($_POST["abreiseDatum"]):null;
         if(empty($_POST["zimmer"])){
             $errors["zimmer"]="Kein Zimmer wurde gewählt";
         }
@@ -29,12 +25,19 @@
         }
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Reservation</title>
+</head>
 <body class="d-flex justify-content-center align-items-center">
     <form method="post">
         <div class="sign-outter">
             <div class="sign-logo">
                 <a href="?hotel" class="d-flex align-items-center">
-                    <img src="./styles/fotos/upper-belvedere-vienna.png" class="sign-logo-img" width="65px" alt="Logo">
+                    <img src="styles/fotos/upper-belvedere-vienna.png" class="sign-logo-img" width="65px" alt="Logo">
                 </a>
                 <p class="sign-logo-p mt-4" style="font-size: 30px;">Vienna Stars Hotel</p>
             </div>
@@ -45,17 +48,22 @@
                     
                     if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
                         echo "
-                            <p style='color:green; text-align:center;'> Sie haben $zimmer reserviert</p>
+                            <p style='color:green; text-align:center;'> Sie haben $zimmer reserviert</p> 
                         ";
                     }
                 ?>
                 <select id="zimmer" name="zimmer">
-                    <option value="" disabled selected>Bitte wählen Sie</option>
+                    <option value="">Bitte wählen Sie</option>
                     <?php
-                        foreach($roomsData as $room => $status){
-                            if($status == "free"){
-                                echo "<option value='$room'>".$room."</option>";
-                            };
+                        $result->data_seek(0);
+                        while($row = $result->fetch_assoc()){
+                            if($row["verfuegber"]>0){
+                                echo "<option value=".$row["name"];
+                                if($row["name"]==$_GET[$p]){
+                                    echo" selected";
+                                }
+                                echo ">".$row["name"]."</option>";
+                            }
                         }
                     ?>
                 </select>
@@ -67,7 +75,7 @@
                 <div>
                     <div class="checkindate" style="padding-bottom:5px;">
                         <label for="anreiseDatum">Anreisedatum:</label>
-                        <input type="date" id="anreiseDatum" name="anreiseDatum" value="">
+                        <input type="date" id="anreiseDatum" name="anreiseDatum" min="<?php echo $heutigeDatum; ?>" value="">
                         <?php
                             if(isset($errors["anreiseDatum"])){
                                 echo '<div style="color:red;">'.$errors['anreiseDatum'].'</div>';
@@ -76,7 +84,7 @@
                     </div>
                     <div class="checkoutdate">
                         <label for="abreiseDatum">Abreisedatum:</label>
-                        <input type="date" id="abreiseDatum" name="abreiseDatum" value="">
+                        <input type="date" id="abreiseDatum" name="abreiseDatum" min="<?php echo $minDatum; ?>" value="">
                         <?php
                             if(isset($errors["abreiseDatum"])){
                                 echo '<div style="color:red;">'.$errors['abreiseDatum'].'</div>';

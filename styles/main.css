@@ -9,7 +9,6 @@ html,body{
     margin: 0px;
     padding: 0px;
 }
-
 /*-----------------------------------------*/
 
 
@@ -143,6 +142,8 @@ div#collapsediv{
 /*-----------------*/
 .sign-outter{
     padding:10px;
+    max-width: 500px;
+    margin: auto;
 }
 .sign-body{
     display: flex;
@@ -153,10 +154,11 @@ div#collapsediv{
 {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .sign-logo-p{ 
     font-size: 30px;
-    padding-top: 25px;
+    padding-top: 20px;
     padding-left: 5px;
 }
 .sign-bar{
@@ -173,11 +175,10 @@ div#collapsediv{
 }
 .signup-and-home{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 5px;
 }
 .signup-and-home>p{
-    margin-left: 35%;
     font-size: 25px;
 }
 .sign-bar>input:focus{

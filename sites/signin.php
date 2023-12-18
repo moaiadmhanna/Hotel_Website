@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in </title>
-</head>
+
 <?php
     $errors=[];
     $email="";
@@ -26,7 +20,9 @@
     <div class="sign-outter">
         <div>
             <div class="sign-logo">
-                <img src="./styles/fotos/upper-belvedere-vienna.png" alt="Logo" width="60px">
+                <a href="?hotel">
+                  <img src="./styles/fotos/upper-belvedere-vienna.png"  alt="Logo" width="65px">
+                </a>
                 <p class="sign-logo-p">Vienna Stars Hotel</p>
             </div>
             <div class="sign-bar">
@@ -65,4 +61,3 @@
     </div>
 </form>
 </body>
-</html>
