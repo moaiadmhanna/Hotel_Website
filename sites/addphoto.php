@@ -13,10 +13,13 @@
         if(empty($_FILES["foto"]["name"])){
             $errors["foto"]="Kein foto wurde gewählt";
         }
+        if(empty($_POST["ueberschrift"])){
+            $errors["ueberschrift"]="Kein überschrift wurde gewählt";
+        }
         if(empty($_POST["beitrag"])){
             $errors["beitrag"]="Kein beitrag wurde gewählt";
         }
-        if(!empty($_FILES["foto"]["name"]) && !empty($beitrag)){
+        if(empty($errors)){
             $info = pathinfo($_FILES["foto"]["name"]);
             //echo "Mime-Type: " . mime_content_type($_FILES["foto"]["tmp_name"]);
             if (mime_content_type($_FILES["foto"]["tmp_name"]) !== "image/jpeg") {
@@ -28,15 +31,6 @@
                     $errors["uploadError"]="Fehler aufgetreten";
                 }
                 else{
-                    foreach($newsData as $key => $new){
-                        if($new["newsHeader"]==$beitrag){
-                            $newsData[$key]["picture"]=$filename;
-                            $uploadok=1;
-                            break;
-                        }
-                    }
-                    $newJsonString = json_encode($newsData,JSON_PRETTY_PRINT);
-                    file_put_contents($newsFile, $newJsonString);
                 }
             }
         }
@@ -61,15 +55,13 @@
                         echo '<div style="color:green; text-align:center;">Das Foto wurde geändert</div>';
                     }
                 ?>
-                <select id="beitrag" name="beitrag">
-                    <option value="" disabled selected>Bitte wählen Sie</option>
-                    <?php
-                        foreach($newsData as $news){
-                            $newHeader=$news["newsHeader"];
-                            echo "<option value='$newHeader'>".$newHeader."</option>";
-                        }
-                    ?>
-                </select>
+                <input type="text" id="ueberschrift" name="ueberschrift" placeholder="Bitte geben Sie Ihre Überschrift">
+                <?php
+                    if(isset($errors["ueberschrift"])){
+                        echo '<div style="color:red; text-align:center;">'.$errors['ueberschrift'].'</div>';
+                    }
+                ?>
+                <input type="text" id="beitrag" name="beitrag" placeholder="Bitte geben Sie Ihre Beitrag">
                 <?php
                     if(isset($errors["beitrag"])){
                         echo '<div style="color:red; text-align:center;">'.$errors['beitrag'].'</div>';
