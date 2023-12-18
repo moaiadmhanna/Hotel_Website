@@ -29,7 +29,7 @@
                                     <h5>".$row['name']."</h5>
                                     <p>".$row['beschreibung']."</p>
                                     <h6>Größe: ".$row['groesse']." m2</h6>
-                                    <h6>Preis: ".$row['preispronacht']." Euro pro Nacht</h6>
+                                    <h6>Preis: ".$row['preis']." Euro pro Nacht</h6>
                                     <h6>
                                         <a href='?new_reservation=".$row["name"]."' style='font-size:15px;'>Zur Reservierung</a>
                                     </h6>

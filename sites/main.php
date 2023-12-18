@@ -11,11 +11,14 @@ foreach ($validPages as $p) {
                 $page = $p;
                 break;
             }
+            else if($p == "new_reservation"){
+                $_SESSION["zimmer"] = $_GET[$p];
+            }
         } else {
             if (in_array($p, ["hotel", "impressum", "F_and_Q", "signup", "signin", "news"])) {
                 $page = $p;
             } else {
-                header("Location: index.php?signin");
+                header("Location: ?signin");
             }
             break;
         }
@@ -27,7 +30,7 @@ foreach ($validPages as $p) {
 
 if (isset($_GET["logout"])) {
     session_destroy();
-    header("Location: index.php?hotel");
+    header("Location: ?hotel");
     exit();
 }    
 if(isset($_GET["changeInformation"])){
@@ -98,7 +101,7 @@ if(isset($_POST["login"])){
             $_SESSION["username"]=$row["username"];
             $_SESSION["email"]=$row["email"];
             $_SESSION["logged"]=true;
-            header("Location: index.php?hotel");
+            header("Location: ?hotel");
             break;
         }
         else{
@@ -148,11 +151,13 @@ if(isset($_POST["newReservation"])){
             }
         };
         //jetzt werden alle daten in datenbank gespeichert
+        // die an und ab reise datum müssen in string umgewandelt werden
+        $anreiseDatum = $anreiseDatum->format("Y-m-d");
+        $abreiseDatum = $abreiseDatum->format("Y-m-d");
         $sql = "INSERT INTO reservierung(anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,benutzerid,zimmerid) VALUES(?,?,?,?,?,?,?,?)";
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("ssdddddd",$anreiseDatum->format('Y-m-d'), $abreiseDatum->format('Y-m-d'),$fruehstueck,$parkplatz,$haustier,$gesamtPreis,$benutzerid,$zimmerid);
+        $stmt->bind_param("ssdddddd",$anreiseDatum, $abreiseDatum,$fruehstueck,$parkplatz,$haustier,$gesamtPreis,$benutzerid,$zimmerid);
         $stmt->execute();
-        $_GET[$p]=$_POST["zimmer"];
         $stmt->close();
 
         // um die verfüguberkeit des zimmers zu verringern
@@ -160,6 +165,7 @@ if(isset($_POST["newReservation"])){
         $stmt = $db->prepare($sql);
         $stmt->bind_param("i",$zimmerid);
         $stmt->execute();
+        $_SESSION["zimmer"] = $_POST["zimmer"];
     }
 };
 ?>
