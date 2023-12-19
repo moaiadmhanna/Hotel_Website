@@ -5,8 +5,7 @@
     $zimmer;
     $anreiseDatum;
     $abreiseDatum;
-    $sql = "SELECT * From zimmer";
-    $result = $db->query($sql);
+    echo $_GET[$p];
     if (isset($_POST["newReservation"])){
         $zimmer = isset($_POST["zimmer"])?$_POST["zimmer"]:null;
         $anreiseDatum = isset($_POST["anreiseDatum"])?new DateTime($_POST["anreiseDatum"]):null;
@@ -55,7 +54,8 @@
                 <select id="zimmer" name="zimmer">
                     <option value="">Bitte wählen Sie</option>
                     <?php
-                        $result->data_seek(0);
+                        $sql = "SELECT * From zimmer";
+                        $result = $db->query($sql);
                         while($row = $result->fetch_assoc()){
                             if($row["verfuegber"]>0){
                                 echo "<option value=".$row["name"];
