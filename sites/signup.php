@@ -69,13 +69,13 @@
                     <option value="M" selected >Herr.</option>
                     <option value="F">Frau.</option>
                 </select>
-                    <input type="text" id="vorname" name="vorname" placeholder="Vorname" value="<?php echo $vorname ?>"  size="12">
+                    <input type="text" id="vorname" name="vorname" placeholder="Vorname" value="<?php echo $vorname ?>">
                     <?php
                         if(isset($errors['vorname'])){
                             echo "<p class='error' style='text-align:center;'>".$errors['vorname']."</p>";
                         }
                     ?>
-                    <input type="text" id="nachname" name="nachname" placeholder="Nachname" value="<?php echo $nachname ?>"  size="12">
+                    <input type="text" id="nachname" name="nachname" placeholder="Nachname" value="<?php echo $nachname ?>">
                     <?php
                         if(isset($errors['nachname'])){
                             echo "<p class='error' style='text-align:center;'>".$errors['nachname']."</p>";

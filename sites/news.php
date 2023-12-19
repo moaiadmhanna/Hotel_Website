@@ -31,20 +31,26 @@
 <div class="container mt-5">
     <div class='row justify-content-around'>
             <?php
-                foreach($newsData as $news){
-                    $newsHeader=$news["newsHeader"];
-                    $newsBody=$news["newsBody"];
-                    $picture=$news["picture"];
+                $sql = "SELECT * FROM beitrag ORDER BY ? desc";
+                $stmt = $db->prepare($sql);
+                $columnToOrderBy = "beitragsdatum";
+                $stmt->bind_param("s",$columnToOrderBy);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while($row=$result->fetch_assoc()){
+                    $ueberschrift = $row["ueberschrift"];
+                    $beschreibung = $row["beschreibung"];
+                    $fotopfad = $row["fotopfad"];
                     echo "
-                    <div class='card col-4 m-2 p-0' style='width: 27rem; border:none;'>
-                        <img src='$picture' class='card-img' style='height:27rem;' alt='...'>
+                    <div class='card col-12 col-md-6 col-lg-4 m-2 p-0' style='width: 27rem; border:none;'>
+                        <img src='$fotopfad' class='card-img' style='height:27rem;' alt='...'>
                         <div class='card-body'>
-                            <h5 style='text-align:center;'>$newsHeader<h5>
-                            <p class='pt-5 pr-2' style='font-family: \'Courier New\', Courier, monospace;'>$newsBody</p>
+                            <h5 style='text-align:center;'>$ueberschrift<h5>
+                            <p class='pt-5 pr-2' style='font-family: \'Courier New\', Courier, monospace;'>$beschreibung</p>
                         </div>
                         </div>
                     ";
-                }
+                };
             ?>
     </div>
 </div>

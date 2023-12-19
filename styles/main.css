@@ -53,12 +53,31 @@ html,body{
     text-underline-offset: 5px;
   }
 /*------------------*/
-/* for Reservation Page */
-/*--------------------------*/
+/* for rooms Page */
+/*----------------*/
 div#collapsediv{
     background-color:rgb(0,0,0,0.5);
     overflow: auto;
 }
+/*-----------------*/
+
+/* for new_Reservation Page */
+/*--------------------------*/
+.new_reservation_a{
+    font-size: 20px;
+    background-color:rgb(0,0,0);
+    color:white;
+    padding:5px;
+    border-radius:5px;
+    text-decoration:none;
+}
+.new_reservation_a:hover{
+    border:2px solid white;
+    border-radius:5px;
+    text-decoration: underline orange;
+    color:orange;
+    text-underline-offset: 5px;
+  }
 /*--------------------------*/
 
 

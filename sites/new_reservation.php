@@ -59,7 +59,7 @@
                         while($row = $result->fetch_assoc()){
                             if($row["verfuegber"]>0){
                                 echo "<option value=".$row["name"];
-                                if($row["name"]==$_GET[$p]){
+                                if($row["name"]==$_SESSION["zimmer"]){
                                     echo" selected";
                                 }
                                 echo ">".$row["name"]."</option>";
@@ -116,7 +116,7 @@
                     if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
                         echo "
                             <div class='d-flex justify-content-center'>
-                                <button class='btn bg-black text-white'><a href='?reserved_rooms' style='color:white;'> Zur Reservierungen</a></button>
+                                <a href='?reserved_rooms' class='new_reservation_a'> Zur Reservierungen</a>
                             </div>
                         ";
                     }
