@@ -10,7 +10,7 @@
             <nav class="navbar navbar-expand-lg bg-body-transperent">
                 <div class="container-fluid">
                 <a href="?hotel">
-                  <img src="./styles/fotos/upper-belvedere-vienna.png"  alt="Logo" width="50px">
+                  <img src="styles/fotos/Else/upper-belvedere-vienna.png"  alt="Logo" width="50px">
                 </a>
                 <a class="navbar-brand mx-4 mt-2 " style="font-size: 30px;">Vienna Star Hotel</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

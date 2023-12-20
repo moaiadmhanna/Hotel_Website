@@ -184,7 +184,7 @@ div#collapsediv{
     display: flex;
     flex-direction: column;
 }
-.sign-bar>input{
+.sign-bar>input,textarea{
     padding: 5px;
     margin: 10px;
 }

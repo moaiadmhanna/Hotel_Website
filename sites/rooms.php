@@ -19,9 +19,9 @@
             if($row["verfuegber"]>0){
                 $zimmerId = $row['zimmerid'];
                 echo"
-                <div class='col-12 col-md-6 col-lg-4'>
+                <div class='col-12 col-md-6 col-lg-4 p-2'>
                 <div class='card text-white'>
-                    <img src='./styles/fotos/rooms/".$row['name'].".jpg' class='card-img' alt='...' style='height: 32rem;'>
+                    <img src='styles/fotos/rooms/".$row['name'].".jpg' class='card-img' alt='...' style='height: 32rem;'>
                     <div class='card-img-overlay d-flex flex-column justify-content-end align-items-center' style='gap:10px;'>
                         <div>
                             <div class='collapse-verticale collapse' id='collapseWidthExample_$zimmerId' style='overflow: auto; max-height: 425px;'>

@@ -5,7 +5,6 @@
     $zimmer;
     $anreiseDatum;
     $abreiseDatum;
-    echo $_GET[$p];
     if (isset($_POST["newReservation"])){
         $zimmer = isset($_POST["zimmer"])?$_POST["zimmer"]:null;
         $anreiseDatum = isset($_POST["anreiseDatum"])?new DateTime($_POST["anreiseDatum"]):null;
@@ -36,7 +35,7 @@
         <div class="sign-outter">
             <div class="sign-logo">
                 <a href="?hotel" class="d-flex align-items-center">
-                    <img src="styles/fotos/upper-belvedere-vienna.png" class="sign-logo-img" width="65px" alt="Logo">
+                    <img src="styles/fotos/Else/upper-belvedere-vienna.png" class="sign-logo-img" width="65px" alt="Logo">
                 </a>
                 <p class="sign-logo-p mt-4" style="font-size: 30px;">Vienna Stars Hotel</p>
             </div>
@@ -47,8 +46,13 @@
                     
                     if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
                         echo "
-                            <p style='color:green; text-align:center;'> Sie haben $zimmer reserviert</p> 
+                            <p style='color:green; text-align:center; margin-bottom:0px;'> Sie haben $zimmer reserviert</p> 
                         ";
+                        echo "
+                        <div class='d-flex justify-content-center'>
+                            <a href='?reserved_rooms' class='new_reservation_a' style='font-size:15px;'> Zur Reservierungen</a>
+                        </div>
+                    ";
                     }
                 ?>
                 <select id="zimmer" name="zimmer">
@@ -112,16 +116,6 @@
                     <input type="checkbox" id="haustier" name="haustier">
                 </div>
                 <button type="submit" class="btn bg-black text-white" name="newReservation">Reservieren</button>
-                <?php
-                    if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
-                        echo "
-                            <div class='d-flex justify-content-center'>
-                                <a href='?reserved_rooms' class='new_reservation_a'> Zur Reservierungen</a>
-                            </div>
-                        ";
-                    }
-                
-                ?>
             </div>
         </div>
     </form>

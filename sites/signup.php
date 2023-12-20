@@ -50,7 +50,7 @@
         <div class="sign-outter">
             <div class="sign-logo">
                 <a href="?hotel">
-                  <img src="./styles/fotos/upper-belvedere-vienna.png"  alt="Logo" width="65px">
+                  <img src="styles/fotos/Else/upper-belvedere-vienna.png"  alt="Logo" width="65px">
                 </a>
                 <p class="sign-logo-p" style="font-size: 30px;">Vienna Stars Hotel</p>
             </div>
@@ -112,7 +112,7 @@
                     <p>Haben Sie sich schon regestiert? <a href="?signin">Zur Anmeldung</a></p> 
                     <div class="d-flex justify-content-between">
                         <button class="btn bg-dark text-white" type="submit" name="signup" id="Submit">Submit</button>
-                        <a href="?hotel"><img src="./styles/fotos/house-solid.svg" alt="home" width="30px" title="Back to Home"></a> 
+                        <a href="?hotel"><img src="styles/fotos/Else/house-solid.svg" alt="home" width="30px" title="Back to Home"></a> 
                     </div>
                 </div>  
             </div>
