@@ -1,71 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservations</title>
 <style>
     /* Add custom styles for the scrollable content */
     .accordion-body {
         overflow-y: scroll; /* Enable vertical scrolling */
     }
 </style>
-</head>
-<body>
-    <?php
-        include_once "navbar.php";
-    ?>
-    <?php
-        $numberOfReservations=1;
-        $reservationCounter=1;
-        foreach($reservationdata as $reservation){
-            if($reservation["reservationEmail"]==$_SESSION["email"]){
-                $numberOfReservations++;
-            }
-        }
-        if($numberOfReservations>1){
-            foreach($reservationdata as $reservation){
-                if($reservation["reservationEmail"]==$_SESSION["email"]){
-                    $zimmer = $reservation["zimmer"];
-                    $anreiseDatum = $reservation["anreiseDatum"];
-                    $abreiseDatum = $reservation["abreiseDatum"];
-                    $fruehstueck = $reservation["fruehstueck"];
-                    $parkplatz = $reservation["parkplatz"];
-                    $haustier = $reservation["haustier"];
-                    echo "
-                    <div class='accordion mt-5 m-2' id='accordionExample'>
-                        <div class='accordion-item'>
-                        <h2 class='accordion-header'>
-                            <button class='accordion-button collapsed bg-dark text-white' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$reservationCounter' aria-expanded='true' aria-controls='collapse$reservationCounter'>
-                                Reservation $reservationCounter
-                            </button>
-                        </h2>
-                        <div id='collapse$reservationCounter' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>
-                            <div class='accordion-body'>
-                                <p>Zimmer : $zimmer</p>
-                                <p>Anreisedatum : $anreiseDatum</p>
-                                <p>Abreisedatum : $abreiseDatum</p>
-                                <p>Frühstück : $fruehstueck</p>
-                                <p>Parkplatz : $parkplatz</p>
-                                <p>Haustier : $haustier</p>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    ";
-                    $reservationCounter++;
-                }
-            }
-        }
-        $reservationCounter=1;
-        if($numberOfReservations==1){      
+<?php
+    //TODO the Reervation for admins
+    include_once "navbar.php";
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    // holt die benutzerid vom datenbank, wobei die email adresse = session email adresse.
+    $benutzerid = get_user();
+    $sql = "SELECT anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,status,date(reservierungsdatum)
+            FROM reservierung WHERE  benutzerid = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->bind_param("i",$benutzerid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if (mysqli_num_rows($result) > 0) {
+        echo "
+        <div class='container-fluid pt-4'>
+            <div class='table-responsive'>
+                <table class='table table-hover'>
+                    <thead class='table-dark'>
+                        <tr>
+                            <th scope='col'>#</th>
+                            <th scope='col'>Anreise Datum</th>
+                            <th scope='col'>Abreise Datum</th>
+                            <th scope='col'>Frühstück</th>
+                            <th scope='col'>Parkplatz</th>
+                            <th scope='col'>Haustier</th>
+                            <th scope='col'>Status</th>
+                            <th scope='col'>Gesamtpreis</th>
+                            <th scope='col'>Reservierungsdatum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        ";
+
+        $counter = 1;
+        while ($row = $result->fetch_assoc()) {
             echo "
-            <div class='d-flex flex-column  align-items-center'>
-                <p style='color:red;'>Sie haben kein Zimmer Reserviert</p>
-                <button class='btn bg-black text-white'><a href='?new_reservation' style='color:white;'> Zur Reservierung</a></button>
-            </div>
+                <tr class='table-warning'>
+                    <th scope='row'>$counter</th>
+                    <td>{$row['anreisedatum']}</td>
+                    <td>{$row['abreisedatum']}</td>
+                    <td>" . ($row['fruehstuck'] ? 'inklusiv' : 'nicht inklusive') . "</td>
+                    <td>" . ($row['parkplatz'] ? 'inklusiv' : 'nicht inklusive') . "</td>
+                    <td>" . ($row['haustier'] ? 'inklusiv' : 'nicht inklusive') . "</td>
+                    <td>{$row['status']}</td>
+                    <td>{$row['gesamtpreis']}</td>
+                    <td>{$row['date(reservierungsdatum)']}</td>
+                </tr>
             ";
+            $counter++;
         }
-    ?>
-</body>
-</html>
+
+        echo "
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        ";
+    } else {
+        echo "
+        <div class='container text-center mt-5'>
+            <p class='text-danger'>Sie haben kein Zimmer reserviert.</p>
+            <button class='btn btn-dark'><a href='?rooms' class='text-white'>Zur Reservierung</a></button>
+        </div>
+        ";
+}
+?>

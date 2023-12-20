@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impressum</title>
-</head>
-<body id="impressum-body">
+<div id="impressum-body">
     <div id="impressum-and-home">
         <div>
             <h1 class="impressum-header" style="font-size: 30px;">Impressum</h1>
@@ -49,5 +42,4 @@
             <p class="impressum-p">+43 660 427 2241</p>
         </div>
     </div>
-</body>
-</html>
+</div>

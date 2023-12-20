@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Reservation</title>
-</head>
-<body>
-    <?php
-        include_once "navbar.php";
-    ?>
-</body>
+
+<?php
+    include_once "navbar.php";
+?>
 <div class="container my-5" style="gap:20px;">
     <div class="row d-flex justify-content-center">
 <?php
@@ -50,4 +42,3 @@
 ?>
     </div>
 </div>
-</html>

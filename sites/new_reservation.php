@@ -23,14 +23,7 @@
         }
     }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Reservation</title>
-</head>
-<body class="d-flex justify-content-center align-items-center">
+<div class="d-flex justify-content-center align-items-center">
     <form method="post">
         <div class="sign-outter">
             <div class="sign-logo">
@@ -119,5 +112,4 @@
             </div>
         </div>
     </form>
-</body>
-</html>
+</div>

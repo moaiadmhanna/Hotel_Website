@@ -1,4 +1,3 @@
-
 <?php
     $errors=[];
     $email="";
@@ -15,7 +14,7 @@
         }
     }
 ?>
-<body class="sign-body">
+<div class="sign-body">
 <form method="post">
     <div class="sign-outter">
         <div>
@@ -60,4 +59,4 @@
             </div>
     </div>
 </form>
-</body>
+</div>

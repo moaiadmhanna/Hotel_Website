@@ -1,9 +1,11 @@
 <?php
+//TODO make the function.php and convert this page to  only functions
 session_start();
+include_once "functions.php";
 $page = "hotel";
 $emailexist = false;
 $changeInformation=false;
-$validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addphoto"];
+$validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addnews"];
 foreach ($validPages as $p) {
     if (isset($_GET[$p])) {
         if (isset($_SESSION["logged"]) && $_SESSION["logged"]==true) {
@@ -32,7 +34,8 @@ if (isset($_GET["logout"])) {
     session_destroy();
     header("Location: ?hotel");
     exit();
-}    
+} 
+//TODO changeinformation should change   
 if(isset($_GET["changeInformation"])){
     $changeInformation=true;
     $page="userInformation";
@@ -112,14 +115,7 @@ if(isset($_POST["login"])){
 if(isset($_POST["newReservation"])){
     if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
         // um die Benutzerid vom Datenbank holen:
-        $sql = "SELECT benutzerid FROM benutzer WHERE email = ?";
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param("s", $_SESSION['email']);
-        $stmt->execute();
-        $result=$stmt->get_result();
-        $row = $result->fetch_assoc();
-        $benutzerid = $row["benutzerid"];
-        $stmt->close();
+        $benutzerid = get_user();
 
         //um die Zimmerid vom Datenbank zu holen:
         $sql = "SELECT zimmerid FROM zimmer WHERE name = ?";

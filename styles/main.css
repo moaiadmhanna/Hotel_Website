@@ -168,6 +168,7 @@ div#collapsediv{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 .sign-logo
 {
@@ -209,5 +210,10 @@ div#collapsediv{
 /*-----------------*/
 
 
-
+.table-warning:hover{
+    background-color: white;
+    text-decoration: underline orange;
+    text-underline-offset: 5px;
+    color:orange;
+}
 
