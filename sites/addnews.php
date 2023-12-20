@@ -37,7 +37,7 @@
         }
     }
 ?>  
-<div class="d-flex justify-content-center align-items-center">
+<div class="d-flex justify-content-center align-items-center h-100">
     <form enctype="multipart/form-data" method="post">
         <div class="sign-outter">
             <div class="sign-logo">

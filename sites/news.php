@@ -41,7 +41,6 @@
                         </div>
                     ";
                 };
-                $stmt->close();
             ?>
     </div>
 </div>
