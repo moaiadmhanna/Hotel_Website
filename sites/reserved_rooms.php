@@ -11,14 +11,9 @@
     ini_set('display_errors', 1);
     
     if(isset($_POST["reservierungstornieren"])){
-        $d = strtotime($_POST["datum"]);
-        $reservierungsdatum = date("Y-m-d H:i:s",$d);
-        $sql = "UPDATE reservierung SET status = 'storniert' WHERE reservierungsdatum = ?";
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param("s",$reservierungsdatum);
-        $stmt->execute();
-        $stmt->close();
-    }
+        $status = 'storniert';
+        change_status($status);
+    };
     // holt die benutzerid vom datenbank, wobei die email adresse = session email adresse.
     $benutzerid = get_user();
     $sql = "SELECT anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,status,date(reservierungsdatum),reservierungsdatum
