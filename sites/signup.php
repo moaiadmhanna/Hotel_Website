@@ -55,7 +55,7 @@
                     if($emailexist){
                         echo "<p class='error' style='text-align:center;'>Email ist ungültig oder existiert schon</p>";
                     }
-                    else{
+                    else if ($emailexist !== 0 && isset($_POST["email"])){
                         echo "<p style='text-align:center; color:green;'>Sie haben erfolgreich regstiert</p>";
                     }
                 ?>
