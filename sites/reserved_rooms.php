@@ -9,6 +9,16 @@
     include_once "navbar.php";
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
+    
+    if(isset($_POST["reservierungstornieren"])){
+        $d = strtotime($_POST["datum"]);
+        $reservierungsdatum = date("Y-m-d H:i:s",$d);
+        $sql = "UPDATE reservierung SET status = 'storniert' WHERE reservierungsdatum = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("s",$reservierungsdatum);
+        $stmt->execute();
+        $stmt->close();
+    }
     // holt die benutzerid vom datenbank, wobei die email adresse = session email adresse.
     $benutzerid = get_user();
     $sql = "SELECT anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,status,date(reservierungsdatum),reservierungsdatum
@@ -45,7 +55,7 @@
                 <tr class='table-warning'>
                     <form method='post'>
                         <th scope='row'>$counter</th>
-                        <input type='hidden' name='{$row['reservierungsdatum']}'>
+                        <input type='hidden' name='datum' value='{$row['reservierungsdatum']}'>
                         <td>{$row['anreisedatum']}</td>
                         <td>{$row['abreisedatum']}</td>
                         <td>" . ($row['fruehstuck'] ? 'inklusiv' : 'nicht inklusiv') . "</td>
@@ -84,6 +94,7 @@
             </div>
         </div>
         ";
+        $stmt->close();
     } else {
         echo "
         <div class='container text-center mt-5'>
