@@ -209,11 +209,3 @@ div#collapsediv{
 }
 /*-----------------*/
 
-
-.table-warning:hover{
-    background-color: white;
-    text-decoration: underline orange;
-    text-underline-offset: 5px;
-    color:orange;
-}
-
