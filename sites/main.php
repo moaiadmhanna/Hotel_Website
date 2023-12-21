@@ -77,19 +77,7 @@ if(isset($_POST["signup"])){
             }
         }
         if(!$emailexist){
-            $sql = "INSERT INTO benutzer(anrede,username,vorname,nachname,email,passwort) VALUES (?,?,?,?,?,?)";
-            $stmt = $db->prepare($sql);
-            $anrede = $_POST["anrede"];
-            $vorname = $_POST["vorname"];
-            $nachname  = $_POST["nachname"];
-            $username = $_POST["username"];
-            $email = $_POST["email"];
-            $rawpasswort = $_POST["passwort"];
-            $hashedpasswort = password_hash($rawpasswort, PASSWORD_DEFAULT);
-            $stmt->bind_param("ssssss",$anrede,$username,$vorname,$nachname,$email,$hashedpasswort);
-            $stmt->execute();
-            header("q");
-            
+            insert_user();
         }
     }
 }
