@@ -1,5 +1,7 @@
 <?php
 //TODO make the function.php and convert this page to  only functions
+ini_set('session.gc_maxlifetime', 1800);
+session_set_cookie_params(1800);
 session_start();
 include_once "functions.php";
 $page = "hotel";
@@ -102,18 +104,13 @@ if(isset($_POST["login"])){
 }
 if(isset($_POST["newReservation"])){
     if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
         // um die Benutzerid vom Datenbank holen:
         $benutzerid = get_user();
 
         //um die Zimmerid vom Datenbank zu holen:
-        $sql = "SELECT zimmerid FROM zimmer WHERE name = ?";
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param("s",$_POST['zimmer']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $zimmerid = $row["zimmerid"];
-        $stmt->close();
+        $zimmerid = get_room();
 
         // jetzt wird alle eingaben vom benutzer in der tabelle Reservierung hinzufügt:
         $anreiseDatum = new DateTime($_POST["anreiseDatum"]);
@@ -121,35 +118,15 @@ if(isset($_POST["newReservation"])){
         $fruehstueck = isset($_POST["fruehstueck"])&&$_POST["fruehstueck"] == "on" ? 1:0;
         $parkplatz = isset($_POST["parkplatz"])&&$_POST["parkplatz"] == "on" ? 1:0;
         $haustier = isset($_POST["haustier"])&&$_POST["haustier"] == "on" ? 1:0;
-        $gesamtPreis =0;
-        // hier werden die Preise berechnet und in eine Variable gespeichert:
-        $sql = "SELECT * From zimmer";
-        $result = $db->query($sql);
-        while ($row = $result->fetch_assoc()) {
-            if ($row["name"] == $_POST["zimmer"]) {
-                $preisProTag = $row["preis"];
-                $interval = $abreiseDatum->diff($anreiseDatum);
-                $gebuchteTage = $interval->format('%a');
-                $gesamtPreis = ($gebuchteTage * $preisProTag)+($fruehstueck*$gebuchteTage*50)+($parkplatz*$gebuchteTage*30)+($haustier*$gebuchteTage*10);
-                break;
-            }
-        };
-        //jetzt werden alle daten in datenbank gespeichert
+        $gesamtPreis = calclute_price($anreiseDatum,$abreiseDatum,$fruehstueck,$parkplatz,$haustier);
+
         // die an und ab reise datum müssen in string umgewandelt werden
         $anreiseDatum = $anreiseDatum->format("Y-m-d");
         $abreiseDatum = $abreiseDatum->format("Y-m-d");
-        $sql = "INSERT INTO reservierung(anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,benutzerid,zimmerid) VALUES(?,?,?,?,?,?,?,?)";
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param("ssdddddd",$anreiseDatum, $abreiseDatum,$fruehstueck,$parkplatz,$haustier,$gesamtPreis,$benutzerid,$zimmerid);
-        $stmt->execute();
-        $stmt->close();
 
+        insert_reservation($anreiseDatum, $abreiseDatum,$fruehstueck,$parkplatz,$haustier,$gesamtPreis,$benutzerid,$zimmerid);
         // um die verfüguberkeit des zimmers zu verringern
-        $sql="UPDATE zimmer SET verfuegber = verfuegber-1 WHERE zimmerid=?";
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param("i",$zimmerid);
-        $stmt->execute();
-        $_SESSION["zimmer"] = $_POST["zimmer"];
+        change_room_availablity($zimmerid);
     }
 };
 ?>
