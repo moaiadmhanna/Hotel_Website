@@ -23,6 +23,7 @@ foreach ($validPages as $p) {
                 $page = $p;
             } else {
                 header("Location: ?signin");
+                exit();
             }
             break;
         }
