@@ -24,42 +24,39 @@
     $stmt->execute();
     $result = $stmt->get_result();
     if (mysqli_num_rows($result) > 0) {
-        echo "
-        <div class='container-fluid pt-4'>
-            <div class='table-responsive'>
-                <table class='table table-hover'>
-                    <thead class='table-dark'>
-                        <tr>
-                            <th scope='col'>#</th>
-                            <th scope='col'>Zimmer</th>
-                            <th scope='col'>Anreise Datum</th>
-                            <th scope='col'>Abreise Datum</th>
-                            <th scope='col'>Frühstück</th>
-                            <th scope='col'>Parkplatz</th>
-                            <th scope='col'>Haustier</th>
-                            <th scope='col'>Status</th>
-                            <th scope='col'>Gesamtpreis</th>
-                            <th scope='col'>Reservierungsdatum</th>
-                            <th scope='col'>Stornieren</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-        ";
-
+        echo "<div class='container-fluid pt-4'>";
+        echo    "<div class='table-responsive'>";
+        echo        "<table class='table table-hover'>";
+        echo            "<thead class='table-dark'>";
+        echo                "<tr>";
+        echo                    "<th scope='col'>#</th>";
+        echo                    "<th scope='col'>Zimmer</th>";
+        echo                    "<th scope='col'>Anreise Datum</th>";
+        echo                    "<th scope='col'>Abreise Datum</th>";
+        echo                    "<th scope='col'>Frühstück</th>";
+        echo                    "<th scope='col'>Parkplatz</th>";
+        echo                    "<th scope='col'>Haustier</th>";
+        echo                    "<th scope='col'>Status</th>";
+        echo                    "<th scope='col'>Gesamtpreis</th>";
+        echo                    "<th scope='col'>Reservierungsdatum</th>";
+        echo                    "<th scope='col'>Stornieren</th>";
+        echo                "</tr>";
+        echo            "</thead>";
+        echo            "<tbody>";
         $counter = 1;
         while ($row = $result->fetch_assoc()) {
             echo "<tr class='table-warning'>";
         echo "<form method='post'>";
-        echo "<th scope='row'>$counter</th>";
-        echo "<input type='hidden' name='datum' value='{$row['reservierungsdatum']}'>";
-        echo "<td>{$row['name']}</td>";
-        echo "<td>{$row['anreisedatum']}</td>";
-        echo "<td>{$row['abreisedatum']}</td>";
-        echo "<td>" . ($row['fruehstuck'] ? 'inklusiv' : 'nicht inklusiv') . "</td>";
-        echo "<td>" . ($row['parkplatz'] ? 'inklusiv' : 'nicht inklusiv') . "</td>";
-        echo "<td>" . ($row['haustier'] ? 'inklusiv' : 'nicht inklusiv') . "</td>";
+        echo    "<th scope='row'>$counter</th>";
+        echo        "<input type='hidden' name='datum' value='{$row['reservierungsdatum']}'>";
+        echo        "<td>{$row['name']}</td>";
+        echo        "<td>{$row['anreisedatum']}</td>";
+        echo        "<td>{$row['abreisedatum']}</td>";
+        echo        "<td>" . ($row['fruehstuck'] ? 'inklusiv' : 'nicht inklusiv') . "</td>";
+        echo        "<td>" . ($row['parkplatz'] ? 'inklusiv' : 'nicht inklusiv') . "</td>";
+        echo        "<td>" . ($row['haustier'] ? 'inklusiv' : 'nicht inklusiv') . "</td>";
 
-        // Determine the text color based on the reservation status
+        // Bestimmet die Textfarbe basierend auf dem Reservierungsstatus
         $statusColor = '';
         if ($row["status"] == 'neu') {
             $statusColor = 'primary';
@@ -69,12 +66,12 @@
             $statusColor = 'danger';
         }
 
-        echo "<td class='text-$statusColor'>{$row['status']}</td>";
-        echo "<td>{$row['gesamtpreis']}</td>";
-        echo "<td>{$row['date(reservierungsdatum)']}</td>";
-        echo "<td>";
+        echo       "<td class='text-$statusColor'>{$row['status']}</td>";
+        echo       "<td>{$row['gesamtpreis']}</td>";
+        echo       "<td>{$row['date(reservierungsdatum)']}</td>";
+        echo       "<td>";
 
-        // Display the modal and button only for reservations with status 'neu'
+        // Zeigt Modal und Button nur für Reservierungen mit Status „neu“ anzeigen
         if ($row["status"] == "neu") {
             echo "
                 <!-- Button trigger modal -->
