@@ -9,7 +9,10 @@
     include_once "navbar.php";
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    
+    $admin = false;
+    if($_SESSION["email"]=="admin@gmail.com"){
+        $admin = true;
+    }
     if(isset($_POST["reservierungstornieren"])){
         $status = 'storniert';
         change_status($status);

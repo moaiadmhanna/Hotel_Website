@@ -1,4 +1,20 @@
 <?php
+    // checkt ob die email adresse in Datenbank vorhanden ist bevor ein neues User hinzufügen
+    function email_exist(){
+        global $emailexist;
+        global $db;
+        $sql= "SELECT email FROM benutzer where email = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("s",$_POST["email"]);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($row = $result->fetch_assoc()){
+            $emailexist = true;
+        }
+        else{
+            insert_user();
+        }
+    }
     // fügt ein neues User in der Datenbank
     function insert_user(){
         global $db;
@@ -15,6 +31,27 @@
         $stmt->execute();
         $stmt->close();
     };
+    //für die anmeldung vom benutzer
+    function login(){
+        global $db;
+        $sql= "SELECT * FROM benutzer where email = ?";
+        $stmt = $db->prepare($sql);
+        $email = $_POST["email"];
+        $stmt->bind_param("s",$email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($row = $result->fetch_assoc()){
+            if($row !== null && password_verify($_POST["passwort"],$row["passwort"])){
+                $_SESSION["vorname"]=$row["vorname"];
+                $_SESSION["nachname"]=$row["nachname"];
+                $_SESSION["username"]=$row["username"];
+                $_SESSION["email"]=$row["email"];
+                $_SESSION["logged"]=true;
+                header("Location: ?hotel");
+                exit();
+            }
+        }
+    }
     //holt die zimmer id vom Datenbank.
     function get_room(){
         global $db;

@@ -71,36 +71,13 @@ if(isset($_POST["changeInformation"])){
 }
 if(isset($_POST["signup"])){
     if(!empty($_POST["vorname"])&&!empty($_POST["nachname"])&&!empty($_POST["username"])&&!empty($_POST["email"])&&!empty($_POST["passwort"])&&!empty($_POST["confirmpasswort"])&&$_POST["confirmpasswort"]==$_POST["passwort"]){
-        $sql= "SELECT email FROM benutzer";
-        $resualt = $db->query($sql);
-        while($row = $resualt->fetch_assoc()){
-            if($_POST["email"] == $row["email"]){
-                $emailexist = true;
-                break;
-            }
-        }
-        if(!$emailexist){
-            insert_user();
-        }
+        email_exist();
     }
 }
 
 if(isset($_POST["login"])){
-    $sql= "SELECT * FROM benutzer";
-    $resualt = $db->query($sql);
-    while($row = $resualt->fetch_assoc()){
-        if($_POST["email"] == $row["email"] && password_verify($_POST["passwort"],$row["passwort"])){
-            $_SESSION["vorname"]=$row["vorname"];
-            $_SESSION["nachname"]=$row["nachname"];
-            $_SESSION["username"]=$row["username"];
-            $_SESSION["email"]=$row["email"];
-            $_SESSION["logged"]=true;
-            header("Location: ?hotel");
-            break;
-        }
-        else{
-            $signInFalse=true;
-        }
+    if(!login()){
+        $signInFalse=true;
     }
 }
 if(isset($_POST["newReservation"])){

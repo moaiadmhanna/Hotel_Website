@@ -55,7 +55,7 @@
                     if($emailexist){
                         echo "<p class='error' style='text-align:center;'>Email ist ungültig oder existiert schon</p>";
                     }
-                    else if ($emailexist !== 0 && isset($_POST["email"])){
+                    else if ($emailexist == false && isset($_POST["email"]) && isset($_POST["vorname"]) && isset($_POST["nachname"]) && isset($_POST["username"]) && isset($_POST["passwort"]) && isset($_POST["confirmpasswort"])&&$_POST["confirmpasswort"]==$_POST["passwort"]){
                         echo "<p style='text-align:center; color:green;'>Sie haben erfolgreich regstiert</p>";
                     }
                 ?>
