@@ -1,4 +1,6 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     // checkt ob die email adresse in Datenbank vorhanden ist bevor ein neues User hinzufügen
     function email_exist(){
         global $emailexist;
@@ -118,9 +120,11 @@
         global $db;
         $d = strtotime($_POST["datum"]);
         $reservierungsdatum = date("Y-m-d H:i:s",$d);
-        $sql = "UPDATE reservierung SET status = '$status'  WHERE reservierungsdatum = ?";
+        $sql = "UPDATE reservierung SET status = '$status'  WHERE reservierungsdatum = ?
+                AND benutzerid = (SELECT benutzerid from benutzer where email = ?)
+                ";
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("s",$reservierungsdatum);
+        $stmt->bind_param("ss",$reservierungsdatum,$_SESSION['email']);
         $stmt->execute();
         $stmt->close();
     };
