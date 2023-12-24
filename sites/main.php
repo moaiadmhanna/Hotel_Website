@@ -7,17 +7,28 @@ include_once "functions.php";
 $page = "hotel";
 $emailexist = false;
 $changeInformation=false;
-$validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addnews"];
+$validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addnews","manage_users","manage_reservations"];
 foreach ($validPages as $p) {
     if (isset($_GET[$p])) {
         if (isset($_SESSION["logged"]) && $_SESSION["logged"]==true) {
-            if ($p == "addphoto" && $_SESSION["email"] == "admin@gmail.com") {
-                $page = $p;
+            if (in_array($p,["addnews","manage_users","manage_reservations"])){
+                if($_SESSION["email"] == "admin@gmail.com"){
+                    $page = $p;
+                }
+                else{
+                    header("Location: ?hotel");
+                    exit();
+                }
                 break;
             }
             else if($p == "new_reservation"){
+                $page = $p;
                 $_SESSION["zimmer"] = $_GET[$p];
             }
+            else{
+                $page = $p;
+            }
+            break;
         } else {
             if (in_array($p, ["hotel", "impressum", "F_and_Q", "signup", "signin", "news"])) {
                 $page = $p;
@@ -27,9 +38,6 @@ foreach ($validPages as $p) {
             }
             break;
         }
-
-        $page = $p;
-        break;
     }
 }
 

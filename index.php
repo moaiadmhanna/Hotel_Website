@@ -17,6 +17,9 @@
 </head>
 <body>
 <?php
+    if(in_array($page,['F_and_Q','hotel','manage_reservations','manage_users','news','reserved_rooms','rooms','userInformation'])){
+        include_once "sites/navbar.php";
+    }
     include_once "sites/".$page.".php";
 ?>
 </body>

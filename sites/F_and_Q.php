@@ -1,6 +1,3 @@
-<?php
-    include_once "navbar.php";
-?>
 <div class="accordion mt-5 m-2" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header">

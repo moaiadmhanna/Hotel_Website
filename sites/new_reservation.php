@@ -96,17 +96,17 @@
                 </div>
                 <div>
                     <label for="fruehstueck">Frühstück:</label>
-                    <input type="checkbox" id="fruehstueck" name="fruehstueck">
+                    <input type="checkbox" class='form-check-input' id="fruehstueck" name="fruehstueck">
                 </div>
 
                 <div>
                     <label for="parkplatz">Parkplatz:</label>
-                    <input type="checkbox" id="parkplatz" name="parkplatz">
+                    <input type="checkbox" class='form-check-input' id="parkplatz" name="parkplatz">
                 </div>
 
                 <div>
                     <label for="haustier">Haustiere:</label>
-                    <input type="checkbox" id="haustier" name="haustier">
+                    <input type="checkbox" class='form-check-input' id="haustier" name="haustier">
                 </div>
                 <button type="submit" class="btn bg-black text-white" name="newReservation">Reservieren</button>
             </div>

@@ -1,6 +1,3 @@
-<?php
-    include_once "navbar.php";
-?>
 <form method='post'>
     <div class="p-4">
         <h5 style="padding-left:6vw; padding-bottom:3vh;">User Information:</h5>

@@ -1,7 +1,3 @@
-
-<?php
-    include_once "navbar.php";
-?>
 <div class="container my-5" style="gap:20px;">
     <div class="row d-flex justify-content-center">
 <?php

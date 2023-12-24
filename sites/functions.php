@@ -43,7 +43,7 @@
         $stmt->execute();
         $result = $stmt->get_result();
         if($row = $result->fetch_assoc()){
-            if($row !== null && password_verify($_POST["passwort"],$row["passwort"])){
+            if($row !== null && password_verify($_POST["passwort"],$row["passwort"]) && $row["status"]=="Aktiv"){
                 $_SESSION["vorname"]=$row["vorname"];
                 $_SESSION["nachname"]=$row["nachname"];
                 $_SESSION["username"]=$row["username"];
@@ -128,5 +128,23 @@
         $stmt->execute();
         $stmt->close();
     };
+    // fuctionen für Admin
+    function get_users($search){
+        global $db;
+        $sql = "SELECT * FROM benutzer where email LIKE CONCAT('%', ?, '%')";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("s",$search);
+        $stmt->execute();
+        $result=$stmt->get_result();
+        return $result;
+    }
+    function change_user_status($status){
+        global $db;
+        $sql = "UPDATE benutzer set status = '$status' WHERE email = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("s",$_POST['email']);
+        $stmt->execute();
+        $stmt->close();
+    }
 
 ?>

@@ -21,19 +21,21 @@
                     </ul>
                 </li>
                 <?php
-                    if(!empty($_SESSION["logged"])){
-                        echo "
-                        <li class='nav-item dropdown ms-auto'>
-                            <a class='nav-link dropdown-toggle' style='font-size: 22px; color:green;' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Welcome "
-                                .$_SESSION["username"].
-                            "</a>
-                            <ul class='dropdown-menu'>
-                                <li><a class='dropdown-item' href='?rooms'>Unsere Zimmern</a></li>
-                                <li><a class='dropdown-item' href='?reserved_rooms'>Resvierungen</a></li>
-                                <li><a class='dropdown-item' href='?userInformation'>User Information</a></li>
-                            </ul>
-                        </li>
-                                ";
+                    if (!empty($_SESSION["logged"])) {
+                        echo "<li class='nav-item dropdown ms-auto'>";
+                        echo "<a class='nav-link dropdown-toggle' style='font-size: 22px; color:green;' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Welcome " . $_SESSION["username"] . "</a>";
+                        echo "<ul class='dropdown-menu'>";
+                        if($_SESSION["email"] == "admin@gmail.com"){
+                            echo "<li><a class='dropdown-item' href='?manage_users'>Benutzern verwalten</a></li>";
+                            echo "<li><a class='dropdown-item' href='?manage_reservations'>Resvierungen verwalten</a></li>";
+                        }
+                        else{
+                            echo "<li><a class='dropdown-item' href='?rooms'>Unsere Zimmern</a></li>";
+                            echo "<li><a class='dropdown-item' href='?reserved_rooms'>Resvierungen</a></li>";
+                        }
+                        echo "<li><a class='dropdown-item' href='?userInformation'>User Information</a></li>";
+                        echo "</ul>";
+                        echo "</li>";
                     }
                 ?>
             <?php
