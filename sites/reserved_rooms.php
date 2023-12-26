@@ -5,9 +5,6 @@
     }
 </style>
 <?php
-    //TODO the Reervation for admins
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
     if(isset($_POST["reservierungstornieren"])){
         $status = 'storniert';
         change_status($status,$_SESSION['email']);
