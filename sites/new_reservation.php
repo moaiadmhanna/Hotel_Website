@@ -1,5 +1,6 @@
 <?php
 //TODO  fix the session["zimmer"] issue;
+//TODO add the price for the features
     $heutigeDatum = date('Y-m-d');
     $minDatum = date('Y-m-d', time() + 86400);
     $errors=[];
