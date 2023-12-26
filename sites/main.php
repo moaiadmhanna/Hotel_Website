@@ -10,6 +10,13 @@ $changeInformation=false;
 $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addnews","manage_users","manage_reservations"];
 foreach ($validPages as $p) {
     if (isset($_GET[$p])) {
+        if($p !== "manage_users"){
+            unset($_SESSION['search']);
+        }
+        if($p !== "manage_reservations"){
+            unset($_SESSION['searchUser']);
+            unset($_SESSION['searchStatus']);
+        }
         if (isset($_SESSION["logged"]) && $_SESSION["logged"]==true) {
             if (in_array($p,["addnews","manage_users","manage_reservations"])){
                 if($_SESSION["email"] == "admin@gmail.com"){
@@ -96,7 +103,7 @@ if(isset($_POST["newReservation"])){
         $benutzerid = get_user();
 
         //um die Zimmerid vom Datenbank zu holen:
-        $zimmerid = get_room();
+        $zimmerid = get_room($_POST["zimmer"]);
 
         // jetzt wird alle eingaben vom benutzer in der tabelle Reservierung hinzufügt:
         $anreiseDatum = new DateTime($_POST["anreiseDatum"]);
@@ -112,7 +119,8 @@ if(isset($_POST["newReservation"])){
 
         insert_reservation($anreiseDatum, $abreiseDatum,$fruehstueck,$parkplatz,$haustier,$gesamtPreis,$benutzerid,$zimmerid);
         // um die verfüguberkeit des zimmers zu verringern
-        change_room_availablity($zimmerid);
+        change_room_availablity($zimmerid,-1);
+        $_SESSION["zimmer"] = $_POST["zimmer"];
     }
 };
 ?>

@@ -59,24 +59,46 @@
       </div>";
   }
   else{
-    echo "<div class='container my-4'>
-    <div class='row'>
-      <div class='col-md-4 mb-4'>
-        <div class='card text-white'>
-          <img src='styles/fotos/Else/alev-takil-lw3Lqe2K7xc-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
-          <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-            <a href='?rooms' class='py-2 px-3'>Neue Resvierung</a>
+    if($_SESSION['email'] !== "admin@gmail.com"){
+      echo "<div class='container my-4'>
+      <div class='row'>
+        <div class='col-md-4 mb-4'>
+          <div class='card text-white'>
+            <img src='styles/fotos/Else/alev-takil-lw3Lqe2K7xc-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
+            <div class='card-img-overlay d-flex justify-content-center align-items-end'>
+              <a href='?rooms' class='py-2 px-3'>Neue Resvierung</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class='col-md-4 mb-4'>
-        <div class='card text-dark'>
-          <img src='styles/fotos/Else/behnam-norouzi-XWTrHfOoMqw-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
-          <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-            <a href='?reserved_rooms' class='py-2 px-3'>Resvierungen</a>
+        <div class='col-md-4 mb-4'>
+          <div class='card text-dark'>
+            <img src='styles/fotos/Else/behnam-norouzi-XWTrHfOoMqw-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
+            <div class='card-img-overlay d-flex justify-content-center align-items-end'>
+              <a href='?reserved_rooms' class='py-2 px-3'>Resvierungen</a>
+            </div>
+          </div>
+        </div>";
+    }
+    else{
+      echo "<div class='container my-4'>
+      <div class='row'>
+        <div class='col-md-4 mb-4'>
+          <div class='card text-white'>
+            <img src='styles/fotos/Else/dipesh-shrestha-Diyc9vVaSqM-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
+            <div class='card-img-overlay d-flex justify-content-center align-items-end'>
+              <a href='?manage_users' class='py-2 px-3'>Benutzer verwahlten</a>
+            </div>
           </div>
         </div>
-      </div>";
+        <div class='col-md-4 mb-4'>
+          <div class='card text-dark'>
+            <img src='styles/fotos/Else/sincerely-media-XNwy-SuaH4M-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
+            <div class='card-img-overlay d-flex justify-content-center align-items-end'>
+              <a href='?manage_reservations' class='py-2 px-3'>Resvierungenen Verwahlten</a>
+            </div>
+          </div>
+        </div>";
+    }
   }
 ?>
     <div class="col-md-4 mb-4">

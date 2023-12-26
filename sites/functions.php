@@ -55,11 +55,11 @@
         }
     }
     //holt die zimmer id vom Datenbank.
-    function get_room(){
+    function get_room($zimmer){
         global $db;
         $sql = "SELECT zimmerid FROM zimmer WHERE name = ?";
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("s",$_POST['zimmer']);
+        $stmt->bind_param("s",$zimmer);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
@@ -106,17 +106,16 @@
         $stmt->close();
     }
     //ändert die verfügbarkeit vom zimmer
-    function change_room_availablity($zimmerid){
+    function change_room_availablity($zimmerid,$zahl){
         global $db;
-        $sql="UPDATE zimmer SET verfuegber = verfuegber-1 WHERE zimmerid=?";
+        $sql="UPDATE zimmer SET verfuegber = verfuegber+$zahl WHERE zimmerid=?";
         $stmt = $db->prepare($sql);
         $stmt->bind_param("i",$zimmerid);
         $stmt->execute();
-        $_SESSION["zimmer"] = $_POST["zimmer"];
         $stmt->close();
     }
     // ändert den Status der Reservierung
-    function change_status($status){
+    function change_status($status,$useremail){
         global $db;
         $d = strtotime($_POST["datum"]);
         $reservierungsdatum = date("Y-m-d H:i:s",$d);
@@ -124,16 +123,16 @@
                 AND benutzerid = (SELECT benutzerid from benutzer where email = ?)
                 ";
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("ss",$reservierungsdatum,$_SESSION['email']);
+        $stmt->bind_param("ss",$reservierungsdatum,$useremail);
         $stmt->execute();
         $stmt->close();
     };
     // fuctionen für Admin
     function get_users($search){
         global $db;
-        $sql = "SELECT * FROM benutzer where email LIKE CONCAT('%', ?, '%')";
+        $sql = "SELECT * FROM benutzer where email LIKE CONCAT('%', ?, '%') AND NOT email = ?";
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("s",$search);
+        $stmt->bind_param("ss",$search,$_SESSION['email']);
         $stmt->execute();
         $result=$stmt->get_result();
         return $result;
@@ -145,6 +144,20 @@
         $stmt->bind_param("s",$_POST['email']);
         $stmt->execute();
         $stmt->close();
+    }
+    function get_reservations($user,$status){
+        global $db;
+        $sql = "SELECT benutzer.email,anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,reservierung.status,date(reservierungsdatum),reservierungsdatum,zimmer.name 
+                FROM reservierung JOIN benutzer
+                USING(benutzerid)
+                JOIN zimmer
+                USING(zimmerid)
+                WHERE benutzer.email LIKE CONCAT('%', ?, '%') AND reservierung.status LIKE CONCAT('%', ?, '%')";
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("ss",$user,$status);
+        $stmt->execute();
+        $result=$stmt->get_result();
+        return $result;
     }
 
 ?>

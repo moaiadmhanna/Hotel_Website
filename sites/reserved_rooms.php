@@ -8,13 +8,12 @@
     //TODO the Reervation for admins
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    $admin = false;
-    if($_SESSION["email"]=="admin@gmail.com"){
-        $admin = true;
-    }
     if(isset($_POST["reservierungstornieren"])){
         $status = 'storniert';
-        change_status($status);
+        change_status($status,$_SESSION['email']);
+        $zimmer = $_POST['name'];
+        $zimmerid = get_room($zimmer);
+        change_room_availablity($zimmerid,1);
     };
     // holt die benutzerid vom datenbank, wobei die email adresse = session email adresse.
     $benutzerid = get_user();
@@ -51,6 +50,7 @@
         echo "<form method='post'>";
         echo    "<th scope='row'>$counter</th>";
         echo        "<input type='hidden' name='datum' value='{$row['reservierungsdatum']}'>";
+        echo        "<input type='hidden' name='name' value='{$row['name']}'>";
         echo        "<td>{$row['name']}</td>";
         echo        "<td>{$row['anreisedatum']}</td>";
         echo        "<td>{$row['abreisedatum']}</td>";
@@ -62,7 +62,7 @@
         $statusColor = '';
         if ($row["status"] == 'neu') {
             $statusColor = 'primary';
-        } elseif ($row["status"] == 'bestätig') {
+        } elseif ($row["status"] == 'bestaetigt') {
             $statusColor = 'success';
         } else {
             $statusColor = 'danger';
@@ -74,7 +74,7 @@
         echo       "<td>";
 
         // Zeigt Modal und Button nur für Reservierungen mit Status „neu“ anzeigen
-        if ($row["status"] == "neu") {
+        if ($row["status"] !== "storniert") {
             echo "
                 <!-- Button trigger modal -->
                 <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal_$counter' style='background: none; border: none;'>

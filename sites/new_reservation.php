@@ -1,4 +1,5 @@
 <?php
+//TODO  fix the session["zimmer"] issue;
     $heutigeDatum = date('Y-m-d');
     $minDatum = date('Y-m-d', time() + 86400);
     $errors=[];

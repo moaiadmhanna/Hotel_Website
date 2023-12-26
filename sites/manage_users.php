@@ -16,12 +16,8 @@
     if(isset($_POST["searchUsers"])){
         $_SESSION['search'] = $_POST['usersearch'];
     }
-    if(!isset($_SESSION['search'])){
-        $result = get_users('');
-    }
-    else{
+    if(!empty($_SESSION['search'])){
         $result = get_users($_SESSION['search']);
-    }
         if(mysqli_num_rows($result) > 0){
         echo "<div class='container-fluid pt-4 w-75'>";
         echo    "<div class='table-responsive'>";
@@ -141,8 +137,9 @@
                 </div>
             </div>
             ";
-    }
-    else{
-        echo "<p class='pt-4' style='color:red; text-align:center;'>Kein Benutzer gefunden</p>";
+        }
+        else{
+            echo "<p class='pt-4' style='color:red; text-align:center;'>Kein Benutzer gefunden</p>";
+        }
     }
 ?>
