@@ -1,6 +1,4 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
     // checkt ob die email adresse in Datenbank vorhanden ist bevor ein neues User hinzufügen
     function email_exist(){
         global $emailexist;

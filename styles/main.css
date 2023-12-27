@@ -154,6 +154,15 @@ div#collapsediv{
     #impressum-photos{
         margin: 0px;
     }
+    .userInformatinCard{
+        flex-direction: column;
+    }
+    .InformationCard{
+        width: 100%;
+    }
+    .userInformation{
+        width: 100vw !important;
+    }
 }
 /*------------------------*/
 
@@ -208,4 +217,6 @@ div#collapsediv{
     color: red;
 }
 /*-----------------*/
-
+.userInformation{
+    width: 40vw;
+}
