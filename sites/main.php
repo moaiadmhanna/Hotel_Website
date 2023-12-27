@@ -1,5 +1,4 @@
 <?php
-//TODO make the function.php and convert this page to  only functions
 ini_set('session.gc_maxlifetime', 1800);
 session_set_cookie_params(1800);
 session_start();
@@ -53,37 +52,6 @@ if (isset($_GET["logout"])) {
     header("Location: ?hotel");
     exit();
 } 
-//TODO changeinformation should change   
-if(isset($_GET["changeInformation"])){
-    $changeInformation=true;
-    $page="userInformation";
-}
-if(isset($_POST["changeInformation"])){
-    $newEmail = $_POST["email"];
-    foreach($signdata as $key =>$user){
-        if($user["email"]==$newEmail&&$user["email"]!== $_SESSION["email"]){
-            $emailexist = true;
-            break;
-        }
-        if($user["email"]==$_SESSION["email"]){
-            $signdata[$key]["vorname"] = $_POST["vorname"];
-            $signdata[$key]["nachname"] = $_POST["nachname"];
-            $signdata[$key]["username"] = $_POST["username"];
-            $signdata[$key]["email"] = $_POST["email"];
-            $signdata[$key]["password"] = password_hash($_POST["password"].$signdata[$key]["salt"],PASSWORD_DEFAULT);
-
-            $_SESSION["vorname"] = $signdata[$key]["vorname"];
-            $_SESSION["nachname"] = $signdata[$key]["nachname"];
-            $_SESSION["username"] = $signdata[$key]["username"];
-            $_SESSION["email"] = $signdata[$key]["email"];
-            break;
-        }
-    }
-    $newJsonString = json_encode($signdata,JSON_PRETTY_PRINT);
-    file_put_contents($signinJsonFile, $newJsonString);
-    $changeInformation=false;
-    $page="userInformation";
-}
 if(isset($_POST["signup"])){
     if(!empty($_POST["vorname"])&&!empty($_POST["nachname"])&&!empty($_POST["username"])&&!empty($_POST["email"])&&!empty($_POST["passwort"])&&!empty($_POST["confirmpasswort"])&&$_POST["confirmpasswort"]==$_POST["passwort"]){
         email_exist();
