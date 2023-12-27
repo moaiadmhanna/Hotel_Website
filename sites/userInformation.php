@@ -49,7 +49,7 @@
             $_SESSION['username'] = $_POST['username'];
         }
         if(isset($_POST['email'])){
-            $sql = "SELECT email FROM benutzer where email = ?";
+            $sql = "SELECT email FROM benutzer WHERE email = ?";
             $stmt = $db->prepare($sql);
             $stmt->bind_param('s',$_POST['email']);
             $result = $stmt->get_result();
