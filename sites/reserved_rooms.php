@@ -13,7 +13,7 @@
         change_room_availablity($zimmerid,1);
     };
     // holt die benutzerid vom datenbank, wobei die email adresse = session email adresse.
-    $benutzerid = get_user();
+    $benutzerid = get_user($_SESSION['email']);
     $sql = "SELECT name,anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,status,date(reservierungsdatum),reservierungsdatum
             FROM reservierung join zimmer using(zimmerid)
             WHERE  benutzerid = ?";

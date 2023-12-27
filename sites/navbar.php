@@ -23,7 +23,7 @@
                 <?php
                     if (!empty($_SESSION["logged"])) {
                         echo "<li class='nav-item dropdown ms-auto'>";
-                        echo "<a class='nav-link dropdown-toggle' style='font-size: 22px; color:green;' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Welcome " . $_SESSION["username"] . "</a>";
+                        echo "<a class='nav-link dropdown-toggle' style='font-size: 22px; color:green;' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Hi: " . $_SESSION["username"] . "</a>";
                         echo "<ul class='dropdown-menu'>";
                         if($_SESSION["email"] == "admin@gmail.com"){
                             echo "<li><a class='dropdown-item' href='?manage_users'>Benutzern verwalten</a></li>";

@@ -46,6 +46,7 @@
                 $_SESSION["nachname"]=$row["nachname"];
                 $_SESSION["username"]=$row["username"];
                 $_SESSION["email"]=$row["email"];
+                $_SESSION["erstelldatum"]=$row["erstelldatum"];
                 $_SESSION["logged"]=true;
                 header("Location: ?hotel");
                 exit();
@@ -66,11 +67,11 @@
         return $zimmerid;
     }
     // holt die benutzer id vom Datenbank.
-    function get_user(){
+    function get_user($email){
         global $db;
         $sql = "SELECT benutzerid FROM benutzer WHERE email = ?";
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("s", $_SESSION['email']);
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result=$stmt->get_result();
         $row = $result->fetch_assoc();

@@ -68,7 +68,7 @@ if(isset($_POST["newReservation"])){
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
         // um die Benutzerid vom Datenbank holen:
-        $benutzerid = get_user();
+        $benutzerid = get_user($_SESSION['email']);
 
         //um die Zimmerid vom Datenbank zu holen:
         $zimmerid = get_room($_POST["zimmer"]);
