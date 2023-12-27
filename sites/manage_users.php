@@ -5,6 +5,7 @@
     </form>
 </div>
 <?php
+//TODO USERS PROFILDMANGE FOR THE ADMIN
     if(isset($_POST['userdeaktivieren'])){
         $status = 'Inaktiv';
         change_user_status($status);

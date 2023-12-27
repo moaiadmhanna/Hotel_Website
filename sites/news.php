@@ -15,7 +15,9 @@
                 </div>
             ";
             }
-            //TODO  remove the news button;  
+            //TODO  remove the news button; 
+            //TODO add the date for the news
+            //TODO make the photos smaller 
             
     ?>
 </div>
