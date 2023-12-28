@@ -152,7 +152,7 @@
                     $sql = "SELECT * from beitrag";
                     $result = $db->query($sql);
                     while($row=$result->fetch_assoc()){
-                        echo "<option value=".$row["beitragsdatum"].">".$row["ueberschrift"]." am : ". $row["beitragsdatum"]."</option>";
+                        echo "<option value='".$row["beitragsdatum"]."'>".$row["ueberschrift"]." am : ". $row["beitragsdatum"]."</option>";
                     }
                 ?>
                 </select>
