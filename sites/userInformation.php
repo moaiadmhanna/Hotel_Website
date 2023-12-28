@@ -108,6 +108,10 @@
                     $errors['email'] = 'Die Email ist bereits benutzt';
                 }
             }
+            if(empty($_GET["userInformation"])){
+                header("Location: ?userInformation");
+                exit();
+            }
         }
 ?>
 <div class="userInformatinCard d-flex justify-content-center align-items-center" style="gap:5vw;">
