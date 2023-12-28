@@ -1,4 +1,3 @@
-<!-- TODO change the price of the früstuck and haustier -->
 <div class="accordion mt-5 m-2" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header">
@@ -32,7 +31,7 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <p>ja, die sind gratis für unsere Kunden.</p>
+                <p>ja, die kosten 30 pro Tag</p>
             </div>
         </div>
     </div>
@@ -56,7 +55,7 @@
         </h2>
         <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <p>Leider nicht</p>
+                <p>Ja sind erlaubt aber wird extra Gebühren dazu gerechnet</p>
             </div>
         </div>
     </div>

@@ -10,14 +10,13 @@
     <?php
             if(isset($_SESSION["email"]) && $_SESSION["email"]=="admin@gmail.com"){
                 echo "
-                <div>
-                    <button class='btn bg-black text-white'><a href='?addnews' style='color:white;'>Beitrag Hinzufügen</a></button>
+                <div class='d-flex justify-content-between w-25 '>
+                    <a class='new_reservation_a' href='?addnews'>Beitrag Hinzufügen</a>
+                    <a class='new_reservation_a 'href='?removenews'>Beitrag Löschen</a>
                 </div>
             ";
             }
             //TODO  remove the news button; 
-            //TODO add the date for the news
-            //TODO make the photos smaller 
             
     ?>
 </div>
@@ -30,12 +29,14 @@
                     $ueberschrift = $row["ueberschrift"];
                     $beschreibung = $row["beschreibung"];
                     $fotopfad = $row["fotopfad"];
+                    $beitragsdatum = $row['beitragsdatum'];
                     echo "
                     <div class='card col-12 col-md-6 col-lg-4 m-2 p-2' style='width: 27rem; border:none;'>
                         <img src='$fotopfad' class='card-img' style='height:27rem;' alt='...'>
-                        <div class='card-body'>
-                            <h5 style='text-align:center;'>$ueberschrift<h5>
-                            <p class='pt-5 pr-2' style='font-family: \'Courier New\', Courier, monospace;'>$beschreibung</p>
+                        <div class='card-body d-flex flex-column justify-content-between'>
+                            <h4 style='text-align:center;'>$ueberschrift</h4>
+                            <p class='fs-5 pt-3' style='font-family: \'Courier New\', Courier, monospace;'>$beschreibung</p>
+                            <p class='card-text' style='text-align:center;line-height:1.5;margin-top'>$beitragsdatum</p>
                         </div>
                         </div>
                     ";

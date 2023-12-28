@@ -25,8 +25,15 @@
                     $errors["uploadError"]="Fehler aufgetreten";
                 }
                 else{
-                    error_reporting(E_ALL);
-                    ini_set('display_errors', 1);
+                    list($width, $height) = getimagesize($filename);
+                    $newwidth = 3264;
+                    $newheight = 4928;
+                    $thumb = imagecreatetruecolor($newwidth, $newheight);
+                    $source = imagecreatefromjpeg($filename);
+                    imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                    imagejpeg($thumb, $filename);
+                    imagedestroy($thumb);
+                    imagedestroy($source);
                     $sql = "INSERT INTO beitrag(ueberschrift,beschreibung,fotopfad) VALUES(?,?,?)";
                     $stmt = $db->prepare($sql);
                     $stmt->bind_param("sss",$ueberschrift,$beschreibung,$filename);

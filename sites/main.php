@@ -6,7 +6,7 @@ include_once "functions.php";
 $page = "hotel";
 $emailexist = false;
 $changeInformation=false;
-$validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addnews","manage_users","manage_reservations"];
+$validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","addnews","removenews","manage_users","manage_reservations"];
 foreach ($validPages as $p) {
     if (isset($_GET[$p])) {
         if($p !== "manage_users"){
@@ -17,7 +17,7 @@ foreach ($validPages as $p) {
             unset($_SESSION['searchStatus']);
         }
         if (isset($_SESSION["logged"]) && $_SESSION["logged"]==true) {
-            if (in_array($p,["addnews","manage_users","manage_reservations"])){
+            if (in_array($p,["addnews","removenews","manage_users","manage_reservations"])){
                 if($_SESSION["email"] == "admin@gmail.com"){
                     $page = $p;
                 }

@@ -19,7 +19,6 @@
         }
     }
     if($allowed){
-        //TODO the alt password for the user if i am the admin
         $sql = "SELECT * FROM benutzer WHERE benutzerid = ?";
         $stmt = $db->prepare($sql);
         $stmt->bind_param('s',$benutzerid);
@@ -33,6 +32,7 @@
         $erstelldatum = $row['erstelldatum'];
         if(isset($_POST['BenutzerdatenAndern'])){
             if(isset($_POST['passwort'])){
+                if(empty($_GET['userInformation'])){
                 $sql = "SELECT passwort FROM benutzer WHERE benutzerid = ?";
                 $stmt = $db->prepare($sql);
                 $stmt->bind_param('s',$benutzerid);
@@ -47,7 +47,15 @@
                     $stmt->execute();
                 }
                 else{
-                    $errors['passwort'] = 'Das Passwort stimmt nicht ein';
+                    $errors['passwort'] = 'Das alte Passwort stimmt nicht ein';
+                }
+                }
+                else{
+                    $sql = "UPDATE benutzer SET passwort = ? WHERE benutzerid = ?";
+                    $hashedpasswort = password_hash($_POST['passwort'], PASSWORD_DEFAULT);
+                    $stmt = $db->prepare($sql);
+                    $stmt->bind_param('ss',$hashedpasswort,$benutzerid);
+                    $stmt->execute();
                 }
             }
             if(isset($_POST['vorname'])){
@@ -207,8 +215,14 @@
         if (fieldname == 'passwort') {
             input.hidden = !input.hidden;
             input.disabled = !input.disabled;
-            oldpassword.hidden = !oldpassword.hidden
-            oldpassword.disabled = !oldpassword.disabled;
+            <?php
+                if(empty($_GET["userInformation"])){
+            ?>
+                    oldpassword.hidden = !oldpassword.hidden
+                    oldpassword.disabled = !oldpassword.disabled;
+            <?php
+                }
+            ?>
         } else {
             input.disabled = !input.disabled;
         }

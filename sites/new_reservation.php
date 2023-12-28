@@ -1,6 +1,4 @@
 <?php
-//TODO  fix the session["zimmer"] issue;
-//TODO add the price for the features
     $heutigeDatum = date('Y-m-d');
     $minDatum = date('Y-m-d', time() + 86400);
     $errors=[];
@@ -13,6 +11,9 @@
         $abreiseDatum = isset($_POST["abreiseDatum"])?new DateTime($_POST["abreiseDatum"]):null;
         if(empty($_POST["zimmer"])){
             $errors["zimmer"]="Kein Zimmer wurde gewählt";
+        }
+        else{
+            $_SESSION["zimmer"] = $_POST["zimmer"];
         }
         if(empty($_POST["anreiseDatum"])){
             $errors["anreiseDatum"]="Kein Anreisedatum wurde gewählt";
@@ -97,18 +98,18 @@
                     ?>
                 </div>
                 <div>
-                    <label for="fruehstueck">Frühstück:</label>
-                    <input type="checkbox" class='form-check-input' id="fruehstueck" name="fruehstueck">
+                    <label for="fruehstueck">Frühstück (50€/T):</label>
+                    <input type="checkbox" id="fruehstueck" name="fruehstueck">
                 </div>
 
                 <div>
-                    <label for="parkplatz">Parkplatz:</label>
-                    <input type="checkbox" class='form-check-input' id="parkplatz" name="parkplatz">
+                    <label for="parkplatz">Parkplatz (30€/T):</label>
+                    <input type="checkbox" id="parkplatz" name="parkplatz">
                 </div>
 
                 <div>
-                    <label for="haustier">Haustiere:</label>
-                    <input type="checkbox" class='form-check-input' id="haustier" name="haustier">
+                    <label for="haustier">Haustiere (10€/T):</label>
+                    <input type="checkbox" id="haustier" name="haustier">
                 </div>
                 <button type="submit" class="btn bg-black text-white" name="newReservation">Reservieren</button>
             </div>
