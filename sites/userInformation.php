@@ -47,7 +47,7 @@
                     $stmt->execute();
                 }
                 else{
-                    $errors['passwort'] = 'Das alte Passwort stimmt nicht ein';
+                    $errors['passwort'] = 'Das alte Passwort stimmt nicht ';
                 }
                 }
                 else{

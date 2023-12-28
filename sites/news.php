@@ -11,8 +11,8 @@
             if(isset($_SESSION["email"]) && $_SESSION["email"]=="admin@gmail.com"){
                 echo "
                 <div class='d-flex justify-content-between w-25 '>
-                    <a class='new_reservation_a' href='?addnews'>Beitrag Hinzufügen</a>
-                    <a class='new_reservation_a 'href='?removenews'>Beitrag Löschen</a>
+                    <a class='new_reservation_a' href='?editnews=addnews'>Beitrag Hinzufügen</a>
+                    <a class='new_reservation_a 'href='?editnews=removenews'>Beitrag Löschen</a>
                 </div>
             ";
             }
@@ -36,7 +36,7 @@
                         <div class='card-body d-flex flex-column justify-content-between'>
                             <h4 style='text-align:center;'>$ueberschrift</h4>
                             <p class='fs-5 pt-3' style='font-family: \'Courier New\', Courier, monospace;'>$beschreibung</p>
-                            <p class='card-text' style='text-align:center;line-height:1.5;margin-top'>$beitragsdatum</p>
+                            <p class='card-text text-warning bg-dark p-2' style='text-align:center;line-height:1.5;margin-top'>$beitragsdatum</p>
                         </div>
                         </div>
                     ";
