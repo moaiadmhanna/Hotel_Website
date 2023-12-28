@@ -16,7 +16,6 @@
                 </div>
             ";
             }
-            //TODO  remove the news button; 
             
     ?>
 </div>
