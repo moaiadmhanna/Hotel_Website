@@ -32,23 +32,23 @@
         $erstelldatum = $row['erstelldatum'];
         if(isset($_POST['BenutzerdatenAndern'])){
             if(isset($_POST['passwort'])){
-                if(empty($_GET['userInformation'])){
-                $sql = "SELECT passwort FROM benutzer WHERE benutzerid = ?";
-                $stmt = $db->prepare($sql);
-                $stmt->bind_param('s',$benutzerid);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
-                if(password_verify($_POST["altepasswort"],$row["passwort"])){
-                    $sql = "UPDATE benutzer SET passwort = ? WHERE benutzerid = ?";
-                    $hashedpasswort = password_hash($_POST['passwort'], PASSWORD_DEFAULT);
+                if(empty($_GET['userInformation'])||$_GET['userInformation']==$_SESSION['email']){
+                    $sql = "SELECT passwort FROM benutzer WHERE benutzerid = ?";
                     $stmt = $db->prepare($sql);
-                    $stmt->bind_param('ss',$hashedpasswort,$benutzerid);
+                    $stmt->bind_param('s',$benutzerid);
                     $stmt->execute();
-                }
-                else{
-                    $errors['passwort'] = 'Das alte Passwort stimmt nicht ';
-                }
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
+                    if(password_verify($_POST["altepasswort"],$row["passwort"])){
+                        $sql = "UPDATE benutzer SET passwort = ? WHERE benutzerid = ?";
+                        $hashedpasswort = password_hash($_POST['passwort'], PASSWORD_DEFAULT);
+                        $stmt = $db->prepare($sql);
+                        $stmt->bind_param('ss',$hashedpasswort,$benutzerid);
+                        $stmt->execute();
+                    }
+                    else{
+                        $errors['passwort'] = 'Das alte Passwort stimmt nicht ';
+                    }
                 }
                 else{
                     $sql = "UPDATE benutzer SET passwort = ? WHERE benutzerid = ?";
@@ -220,7 +220,7 @@
             input.hidden = !input.hidden;
             input.disabled = !input.disabled;
             <?php
-                if(empty($_GET["userInformation"])){
+                if(empty($_GET["userInformation"])||$_GET['userInformation']==$_SESSION['email']){
             ?>
                     oldpassword.hidden = !oldpassword.hidden
                     oldpassword.disabled = !oldpassword.disabled;
