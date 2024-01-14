@@ -2,6 +2,7 @@
     $errors=[];
     $email="";
     $passwort="";
+    // wenn anmelden Button ist geklickt, checkt ob alle inputs sind eingegben falls nicht gibt eine Fehlermeldung aus.
     if(isset($_POST["login"])){
         $email=isset($_POST["email"])?$_POST["email"]:"";
         $passwort=isset($_POST["passwort"])?$_POST["passwort"]:"";
@@ -26,7 +27,7 @@
             </div>
             <div class="sign-bar">
                 <div class="signup-and-home">
-                    <p>Sign In</p>
+                    <p>Anmelden</p>
                 </div>
                 <div>
                     <?php
@@ -52,7 +53,7 @@
                 <div class="sign-buttons">
                     <p>Haben Sie sich regestiert? <a href="?signup">Zur Registerung</a></p>
                     <div class="d-flex justify-content-between">
-                        <button class="btn bg-dark text-white" type="submit" name="login" id="submit">Submit</button>
+                        <button class="btn bg-dark text-white" type="submit" name="login" id="submit">Anmelden</button>
                         <a href="?hotel"><img src="styles/fotos/Else/house-solid.svg" alt="home" width="30px" title="Back to Home"></a>
                     </div>
                 </div>

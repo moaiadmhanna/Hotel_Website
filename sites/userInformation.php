@@ -108,7 +108,7 @@
                     $errors['email'] = 'Die Email ist bereits benutzt';
                 }
             }
-            if(empty($_GET["userInformation"])){
+            if(empty($_GET["userInformation"]) && empty($errors)){
                 header("Location: ?userInformation");
                 exit();
             }
@@ -155,7 +155,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <div>
-                        <p class="fw-bold">Username:</p>
+                        <p class="fw-bold">Benutzername:</p>
                         <div class=" inputfield d-flex align-items-center mb-3">
                             <input type='text' class="input-group flex-nowrap" id='username' name='username'  required disabled value='<?php echo $username ?>'>
                             <button type='button' class='btn btn-primary' style='background: none; border: none;' onclick="toggleHiddenAttribute('username')">
@@ -192,14 +192,15 @@
                             </button>
                     </div>
                     <input type='password' class="input-group flex-nowrap mb-3" id='altepasswort' name='altepasswort' hidden disabled  required value='' placeholder="Altes Passwort">
-                    <input type='password' class="input-group flex-nowrap mb-3" id='passwort' name='passwort' hidden disabled required  value=''placeholder="Neues Passwort">
+                    <input type='password' class="input-group flex-nowrap mb-3" id='passwort' title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name='passwort' hidden disabled required  value=''placeholder="Neues Passwort">
+                </div>
+                <div>
                     <?php
                         if(isset($errors["passwort"])){
-                            echo "<span class='error' style='text-align:center;'>".$errors["passwort"]."</span>";
+                            echo "<p class='error' style='text-align:center;'>".$errors["passwort"]."</p>";
                         }
                     ?>
-                </div>
-                <button class='btn bg-dark text-white'  disabled type='submit' name='BenutzerdatenAndern' id='Submit'>Submit</button>
+                <button class='btn bg-dark text-white'  disabled type='submit' name='BenutzerdatenAndern' id='Submit'>Ändern</button>
             </div>
         </div>
     </form>

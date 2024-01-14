@@ -2,6 +2,7 @@
     $errors=[];
     $uploadok=FALSE;
     $removeok=FALSE;
+    // wenn der löschen button geklickt ist wird der Beitrag vom Datenbank gelöscht und auch das Foto vom news ordner.
     if(isset($_POST["beitraglöschen"])){
         if(isset($_POST['beitrag'])){
             $sql = "SELECT fotopfad FROM beitrag WHERE beitragsdatum = ?";
@@ -26,6 +27,7 @@
             $errors["beitrag"]="Kein Beitrag wurde gewählt";
         }
     }
+    // wenn der hochladen button geklickt ist wird der Beitrag vom Datenbank gespeichert und auch das Foto in news ordner wird auch hinzüfugt.
     if (isset($_POST["beitraghochladen"])){
         $ueberschrift = isset($_POST["ueberschrift"])?$_POST["ueberschrift"]:null;
         $beschreibung = isset($_POST["beschreibung"])?$_POST["beschreibung"]:null;
@@ -40,7 +42,6 @@
         }
         if(empty($errors)){
             $info = pathinfo($_FILES["foto"]["name"]);
-            //echo "Mime-Type: " . mime_content_type($_FILES["foto"]["tmp_name"]);
             if (mime_content_type($_FILES["foto"]["tmp_name"]) !== "image/jpeg") {
                 $errors["imageType"]= "Nur jpeg Fotos sind erlaubt";
             }
@@ -50,6 +51,7 @@
                     $errors["uploadError"]="Fehler aufgetreten";
                 }
                 else{
+                    // das Foto wird hier verkleinert.
                     list($width, $height) = getimagesize($filename);
                     $newwidth = 3264;
                     $newheight = 4928;
@@ -68,6 +70,7 @@
             }
         }
     }
+    // wenn der admin auf beitraghinzüfugen klickt.
     if($_GET['editnews']=="addnews"){
 ?>
 <div class="d-flex justify-content-center align-items-center h-100">
@@ -122,6 +125,7 @@
 </div>
 <?php
     }
+    // wenn der admin auf beitraglöschen klickt.
     else if($_GET['editnews']=="removenews"){
 ?>
 <div class="d-flex justify-content-center align-items-center h-100">
@@ -164,6 +168,7 @@
                 <button type="submit" class="btn bg-black text-white" name="beitraglöschen">Löschen</button>
 <?php
     }
+    // wenn ein normaler user versucht diese Seite zugreifen 
     else{
         header("Location: ?news");
         exit();

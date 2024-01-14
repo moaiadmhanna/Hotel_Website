@@ -5,14 +5,17 @@
     </form>
 </div>
 <?php
+    // wenn der deaktvieren button geklickt ist wird der stautus vom benutzer zu Inaktiv geändert.
     if(isset($_POST['userdeaktivieren'])){
         $status = 'Inaktiv';
         change_user_status($status);
     }
+    // wenn der aktivieren button geklickt ist wird der stautus vom benutzer zu Aktiv geändert.
     if(isset($_POST['useraktivieren'])){
         $status = 'Aktiv';
         change_user_status($status);
     }
+    // speichert die eingabe vom admin in session array.
     if(isset($_POST["searchUsers"])){
         $_SESSION['search'] = $_POST['usersearch'];
     }
@@ -76,7 +79,7 @@
 
                         <!-- Modal -->
                         <div class='modal fade' id='exampleModal_$counter' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                            <div class='modal-dialog modal-dialog-centered'>
+                            <div class='modal-dialog modal-dialog'>
                                 <div class='modal-content'>
                                     <div class='modal-header'>
                                         <h5 class='modal-title' id='exampleModalLabel'>Deaktvieren</h5>
@@ -107,7 +110,7 @@
                         </svg>
                     </button>
                     <div class='modal fade' id='exampleModal_$counter' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                            <div class='modal-dialog modal-dialog-centered'>
+                            <div class='modal-dialog modal-dialog'>
                                 <div class='modal-content'>
                                     <div class='modal-header'>
                                         <h5 class='modal-title' id='exampleModalLabel'>Aktivieren</h5>

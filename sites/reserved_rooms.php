@@ -1,7 +1,6 @@
 <style>
-    /* Add custom styles for the scrollable content */
     .accordion-body {
-        overflow-y: scroll; /* Enable vertical scrolling */
+        overflow-y: scroll;
     }
 </style>
 <?php
@@ -12,7 +11,7 @@
         $zimmerid = get_room($zimmer);
         change_room_availablity($zimmerid,1);
     };
-    // holt die benutzerid vom datenbank, wobei die email adresse = session email adresse.
+    // holt die benutzerid vom datenbank, wobei die email adresse gleich session email adresse.
     $benutzerid = get_user($_SESSION['email']);
     $sql = "SELECT name,anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,status,date(reservierungsdatum),reservierungsdatum
             FROM reservierung join zimmer using(zimmerid)
@@ -66,11 +65,11 @@
         }
 
         echo       "<td class='text-$statusColor'>{$row['status']}</td>";
-        echo       "<td>{$row['gesamtpreis']}</td>";
+        echo       "<td>{$row['gesamtpreis']}€</td>";
         echo       "<td>{$row['date(reservierungsdatum)']}</td>";
         echo       "<td>";
 
-        // Zeigt Modal und Button nur für Reservierungen mit Status „neu“ anzeigen
+        // Zeigt Modal und stornieren Button nur für Reservierungen mit Status „neu“ anzeigen
         if ($row["status"] !== "storniert") {
             echo "
                 <!-- Button trigger modal -->

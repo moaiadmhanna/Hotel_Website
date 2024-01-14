@@ -95,7 +95,7 @@
         };
         return $gesamtPreis;
     }
-    //fügt die neue Reservierung in der resvierung tabelle
+    //fügt die neue Reservierung in der resvierung tabelle in Datenbank
     function insert_reservation($anreiseDatum, $abreiseDatum,$fruehstueck,$parkplatz,$haustier,$gesamtPreis,$benutzerid,$zimmerid){
         global $db;
         $sql = "INSERT INTO reservierung(anreisedatum,abreisedatum,fruehstuck,parkplatz,haustier,gesamtpreis,benutzerid,zimmerid) VALUES(?,?,?,?,?,?,?,?)";
@@ -126,7 +126,7 @@
         $stmt->execute();
         $stmt->close();
     };
-    // fuctionen für Admin
+    // fuktionen für Admin
     function get_users($search){
         global $db;
         $sql = "SELECT * FROM benutzer where email LIKE CONCAT('%', ?, '%') AND NOT email = ?";

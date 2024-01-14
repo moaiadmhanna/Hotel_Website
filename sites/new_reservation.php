@@ -1,10 +1,10 @@
 <?php
     $heutigeDatum = date('Y-m-d');
-    $minDatum = date('Y-m-d', time() + 86400);
     $errors=[];
     $zimmer;
     $anreiseDatum;
     $abreiseDatum;
+    // wenn reservierung Button ist geklickt, checkt ob alle inputs sind eingegben falls nicht gibt eine Fehlermeldung aus.
     if (isset($_POST["newReservation"])){
         $zimmer = isset($_POST["zimmer"])?$_POST["zimmer"]:null;
         $anreiseDatum = isset($_POST["anreiseDatum"])?new DateTime($_POST["anreiseDatum"]):null;
@@ -40,7 +40,7 @@
                 
                 <?php
                     
-                    if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
+                    if(isset($_POST["newReservation"])&&empty($errors)){
                         echo "
                             <p style='color:green; text-align:center; margin-bottom:0px;'> Sie haben $zimmer reserviert</p> 
                         ";
@@ -52,8 +52,9 @@
                     }
                 ?>
                 <select id="zimmer" name="zimmer">
-                    <option value="">Bitte wählen Sie</option>
+                    <option value="" disabled>Bitte wählen Sie</option>
                     <?php
+                        // wurde alle zimmern namen vom datenbank geholt und in select gezeigt
                         $sql = "SELECT * From zimmer";
                         $result = $db->query($sql);
                         while($row = $result->fetch_assoc()){
@@ -84,7 +85,7 @@
                     </div>
                     <div class="checkoutdate">
                         <label for="abreiseDatum">Abreisedatum:</label>
-                        <input type="date" id="abreiseDatum" name="abreiseDatum" min="<?php echo $minDatum; ?>" value="">
+                        <input type="date" id="abreiseDatum" name="abreiseDatum" min="<?php echo $heutigeDatum; ?>" value="">
                         <?php
                             if(isset($errors["abreiseDatum"])){
                                 echo '<div style="color:red;">'.$errors['abreiseDatum'].'</div>';

@@ -8,9 +8,10 @@
 <div class="d-flex flex-column align-items-center">
     <p class="newsP mt-5" style="text-align:center;font-size: 30px; font-weight:bolder;">Unser News</p>
     <?php
+            // das wurde nur gezeigt wenn der admin eingeloggt ist.
             if(isset($_SESSION["email"]) && $_SESSION["email"]=="admin@gmail.com"){
                 echo "
-                <div class='d-flex justify-content-between w-25 '>
+                <div class='d-flex justify-content-between' style='gap:3vw;'>
                     <a class='new_reservation_a' href='?editnews=addnews'>Beitrag Hinzufügen</a>
                     <a class='new_reservation_a 'href='?editnews=removenews'>Beitrag Löschen</a>
                 </div>
@@ -22,6 +23,7 @@
 <div class="container mt-5">
     <div class='row justify-content-around'>
             <?php
+                // holt alle beitragdaten vom datenbank und die sind nach datum geordnert. 
                 $sql = "SELECT * FROM beitrag ORDER BY beitragsdatum desc";
                 $result = $db->query($sql);
                 while($row=$result->fetch_assoc()){

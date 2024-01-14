@@ -21,35 +21,40 @@
                     </ul>
                 </li>
                 <?php
+                    // checkt ob der user eingeloggt ist.
                     if (!empty($_SESSION["logged"])) {
                         echo "<li class='nav-item dropdown ms-auto'>";
                         echo "<a class='nav-link dropdown-toggle' style='font-size: 22px; color:green;' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Hi: " . $_SESSION["username"] . "</a>";
                         echo "<ul class='dropdown-menu'>";
+                        //  für admin nur 
                         if($_SESSION["email"] == "admin@gmail.com"){
                             echo "<li><a class='dropdown-item' href='?manage_users'>Benutzern verwalten</a></li>";
                             echo "<li><a class='dropdown-item' href='?manage_reservations'>Resvierungen verwalten</a></li>";
                         }
+                        // normaler user
                         else{
                             echo "<li><a class='dropdown-item' href='?rooms'>Unsere Zimmern</a></li>";
                             echo "<li><a class='dropdown-item' href='?reserved_rooms'>Resvierungen</a></li>";
                         }
-                        echo "<li><a class='dropdown-item' href='?userInformation'>User Information</a></li>";
+                        // für beide
+                        echo "<li><a class='dropdown-item' href='?userInformation'>Benutzerdaten</a></li>";
                         echo "</ul>";
                         echo "</li>";
                     }
                 ?>
             <?php
+                // checkt ob der user eingeloggt ist.
                 if(empty($_SESSION["logged"])){
                     echo "<li class='nav-item ms-auto'>
-                            <a class='nav-link active' style='font-size: 22px;' href='?signup'>Signup</a>
+                            <a class='nav-link active' style='font-size: 22px;' href='?signup'>Registrieren</a>
                         </li>";
                     echo "<li class='nav-item ms-auto'>
-                            <a class='nav-link active' style='font-size: 22px;' href='?signin'>Signin</a>
+                            <a class='nav-link active' style='font-size: 22px;' href='?signin'>Einloggen</a>
                         </li>";
                 }
                 else{
                     echo "<li class='nav-item ms-auto'>
-                            <a class='nav-link active' style='font-size: 22px;' href='?logout'>Logout</a>
+                            <a class='nav-link active' style='font-size: 22px;' href='?logout'>Ausloggen</a>
                         </li>";
                 }
             ?>

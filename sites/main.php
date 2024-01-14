@@ -1,11 +1,23 @@
 <?php
+
+// nach 30 Minuten ist die Session automatisch gelöscht
 ini_set('session.gc_maxlifetime', 1800);
 session_set_cookie_params(1800);
 session_start();
+
+
+// holt alle Funktionen von fuctions.php
 include_once "functions.php";
+
+
 $page = "hotel";
+
+
+// checkt ob die email adresse in Datenbank vorhanden ist
 $emailexist = false;
-$changeInformation=false;
+
+
+// um die Seite auf ausgewählte Seite umzuleiten
 $validPages = ["hotel", "impressum", "F_and_Q", "new_reservation","rooms", "reserved_rooms", "signup", "signin", "userInformation","news","editnews","manage_users","manage_reservations"];
 foreach ($validPages as $p) {
     if (isset($_GET[$p])) {
@@ -18,6 +30,7 @@ foreach ($validPages as $p) {
         }
         if (isset($_SESSION["logged"]) && $_SESSION["logged"]==true) {
             if (in_array($p,["editnews","manage_users","manage_reservations"])){
+                // checkt ob der benutzer der admin ist
                 if($_SESSION["email"] == "admin@gmail.com"){
                     $page = $p;
                 }
@@ -47,27 +60,33 @@ foreach ($validPages as $p) {
     }
 }
 
+
+// die Session wird gelöscht wenn der benutzer ausloggt
 if (isset($_GET["logout"])) {
     session_destroy();
     header("Location: ?hotel");
     exit();
 } 
+
+
+// mit email_exist() funktion wird die BenutzerDaten in Datenbank gespeichert
 if(isset($_POST["signup"])){
     if(!empty($_POST["vorname"])&&!empty($_POST["nachname"])&&!empty($_POST["username"])&&!empty($_POST["email"])&&!empty($_POST["passwort"])&&!empty($_POST["confirmpasswort"])&&$_POST["confirmpasswort"]==$_POST["passwort"]){
         email_exist();
     }
 }
 
+// mit login() funktion checkt ob das eingegbene Passwort mit dem passwort in Datenbank übereinstimmt.
 if(isset($_POST["login"])){
     if(!login()){
         $signInFalse=true;
     }
 }
+
+// hier wurde die neue Reservierung in Datenbank gespeichert
 if(isset($_POST["newReservation"])){
     if(isset($_POST["zimmer"])&&isset($_POST["anreiseDatum"])&&isset($_POST["abreiseDatum"])&&$_POST["abreiseDatum"]>$_POST["anreiseDatum"]){
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-        // um die Benutzerid vom Datenbank holen:
+        // um die Benutzerid vom Datenbank zu holen:
         $benutzerid = get_user($_SESSION['email']);
 
         //um die Zimmerid vom Datenbank zu holen:

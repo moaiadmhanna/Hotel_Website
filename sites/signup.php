@@ -6,6 +6,7 @@
     $email="";
     $passwort="";
     $confirmpasswort="";
+    // wenn registieren Button ist geklickt, checkt ob alle inputs sind eingegben falls nicht gibt eine Fehlermeldung aus.
     if (isset($_POST["signup"])){
         $vorname = isset($_POST["vorname"])? $_POST["vorname"]:"";
         $nachname = isset($_POST["nachname"])? $_POST["nachname"]:"";
@@ -14,26 +15,30 @@
         $passwort = isset($_POST["passwort"])? $_POST["passwort"]:"";
         $confirmpasswort = isset($_POST["confirmpasswort"])? $_POST["confirmpasswort"]:"";
         if(empty($vorname)){
-            $errors["vorname"]="vorname wurde nicht eingegeben";
+            $errors["vorname"]="Vorname wurde nicht eingegeben";
         }
 
         if(empty($nachname)){
-            $errors["nachname"]="nachname wurde nicht eingegeben";
+            $errors["nachname"]="Nachname wurde nicht eingegeben";
         }
 
         if(empty($username)){
-            $errors["username"]="username wurde nicht eingegeben";
+            $errors["username"]="Benutzername wurde nicht eingegeben";
         }
 
         if(empty($email)){
-            $errors["email"]="email wurde nicht eingegeben";
+            $errors["email"]="Email wurde nicht eingegeben";
         }
 
         if(empty($passwort)){
-            $errors["passwort"]="passwort wurde nicht eingegeben";
+            $errors["passwort"]="Passwort wurde nicht eingegeben";
         }
         if(empty($confirmpasswort)){
-            $errors["confirmpasswort"]="confirmpasswort wurde nicht eingegeben";
+            $errors["confirmpasswort"]="Bestätigungpasswort wurde nicht eingegeben";
+        }
+        // checkt ob das bestätigungspasswort mit dem passwort übereinstimmt
+        if($confirmpasswort != $passwort){
+            $errors["identischkeit"]="passworten sind nicht identisch";
         }
     }
 ?>
@@ -47,15 +52,16 @@
             <p class="sign-logo-p" style="font-size: 30px;">Vienna Stars Hotel</p>
         </div>
         <div class="signup-and-home">
-            <p>Sign Up</p>
+            <p>Registrieren</p>
         </div>
         <div class="sign-bar">
             <div>
                 <?php
+                    // gibt diese Fehlermeldung aus nur wenn die Email adresse in Datenbank vorhanden ist.
                     if($emailexist){
                         echo "<p class='error' style='text-align:center;'>Email ist ungültig oder existiert schon</p>";
                     }
-                    else if ($emailexist == false && isset($_POST["email"]) && isset($_POST["vorname"]) && isset($_POST["nachname"]) && isset($_POST["username"]) && isset($_POST["passwort"]) && isset($_POST["confirmpasswort"])&&$_POST["confirmpasswort"]==$_POST["passwort"]){
+                    else if ($emailexist == false && isset($_POST["signup"]) && empty($errors)){
                         echo "<p style='text-align:center; color:green;'>Sie haben erfolgreich regstiert</p>";
                     }
                 ?>
@@ -76,7 +82,7 @@
                         echo "<p class='error' style='text-align:center;'>".$errors['nachname']."</p>";
                     }
                 ?>
-                <input type="text" id="username" name="username" value=""  placeholder="Username">
+                <input type="text" id="username" name="username" value=""  placeholder="Benutzername">
                 <?php
                     if(isset($errors['username'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['username']."</p>";
@@ -88,25 +94,25 @@
                         echo "<p class='error' style='text-align:center;'>".$errors['email']."</p>";
                     }
                 ?>
-                <input type="password" id="passwort" name="passwort" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" placeholder="Passwort">
+                <input type="password" id="passwort" name="passwort" title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" placeholder="Passwort">
                 <?php
                     if(isset($errors['passwort'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['passwort']."</p>";
                     }
                 ?>
-                <input type="password" id="confirmpasswort"  title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="confirmpasswort" value=""  placeholder="passwort wiederholen">
+                <input type="password" id="confirmpasswort"  title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="confirmpasswort" value=""  placeholder="Passwort wiederholen">
                 <?php
                     if(isset($errors['confirmpasswort'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['confirmpasswort']."</p>";
                     }
                     if($passwort !== $confirmpasswort){
-                        echo "<p class='error' style='font-weight:bold; text-align:center;'>passworts sind nicht identisch</p>";
+                        echo "<p class='error' style='font-weight:bold; text-align:center;'>".$errors['identischkeit']."</p>";
                     }
                 ?>
             <div class="sign-buttons">
                 <p>Haben Sie sich schon regestiert? <a href="?signin">Zur Anmeldung</a></p> 
                 <div class="d-flex justify-content-between">
-                    <button class="btn bg-dark text-white" type="submit" name="signup" id="Submit">Submit</button>
+                    <button class="btn bg-dark text-white" type="submit" name="signup" id="Submit">Registrieren</button>
                     <a href="?hotel"><img src="styles/fotos/Else/house-solid.svg" alt="home" width="30px" title="Back to Home"></a> 
                 </div>
             </div>  

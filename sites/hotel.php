@@ -38,6 +38,8 @@
     </button>
 </div>
 <?php
+  // checkt ob der user eingeloggt ist.
+  // für anonym
   if(empty($_SESSION["logged"])){
     echo "<div class='container my-4'>
     <div class='row'>
@@ -45,7 +47,7 @@
         <div class='card text-white'>
           <img src='styles/fotos/Else/dad-hotel-h_8i38IHqEI-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
           <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-            <a href='?signup' class='py-2 px-3'>Sign Up</a>
+            <a href='?signup' class='py-2 px-3'>Registrieren</a>
           </div>
         </div>
       </div>
@@ -53,12 +55,13 @@
         <div class='card text-dark'>
           <img src='styles/fotos/Else/tobi-w38wBWIliw4-unsplash.jpg' class='card-img' alt='...' style='height: 32rem;'>
           <div class='card-img-overlay d-flex justify-content-center align-items-end'>
-            <a href='?signin' class='py-2 px-3'>Sign In</a>
+            <a href='?signin' class='py-2 px-3'>Einloggen</a>
           </div>
         </div>
       </div>";
   }
   else{
+    // für admin
     if($_SESSION['email'] !== "admin@gmail.com"){
       echo "<div class='container my-4'>
       <div class='row'>
@@ -80,6 +83,7 @@
         </div>";
     }
     else{
+      // normaler user
       echo "<div class='container my-4'>
       <div class='row'>
         <div class='col-md-4 mb-4'>

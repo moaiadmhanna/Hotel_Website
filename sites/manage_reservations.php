@@ -32,6 +32,7 @@
     </form>
 </div>
 <?php
+    // wenn der stornieren button geklickt ist wird der stautus vom reservierung zu storniert geändert.
     if(isset($_POST["reservierungstornieren"])){
         $status = 'storniert';
         change_status($status,$_POST["email"]);
@@ -39,10 +40,12 @@
         $zimmerid = get_room($zimmer);
         change_room_availablity($zimmerid,1);
     };
+    // wenn der bestätigen button geklickt ist wird der stautus vom reservierung zu bestätigt geändert.
     if(isset($_POST["reservierungbestaetigen"])){
         $status = 'bestaetigt';
         change_status($status,$_POST["email"]);
     };
+    // holt alle reservierungen vom Datenbank und gibt die in tabelle aus.
     if(isset($_SESSION["searchUser"])&&isset($_SESSION["searchStatus"])){
         $result = get_reservations($_SESSION["searchUser"],$_SESSION["searchStatus"]);
         if (mysqli_num_rows($result) > 0) {
@@ -221,7 +224,7 @@
         } else {
             echo "
             <div class='container text-center mt-5'>
-                <p class='text-danger'>Der Benutzer hat kein Zimmer reserviert.</p>
+                <p class='text-danger'>Kein Ergebnis.</p>
             </div>
             ";
         }

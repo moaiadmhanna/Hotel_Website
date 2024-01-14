@@ -1,6 +1,7 @@
 <div class="container my-5" style="gap:20px;">
     <div class="row d-flex justify-content-center">
 <?php
+    // holt alle Zimmerdaten vom Datenbank
     $sql = "SELECT * FROM zimmer";
     $result = $db->query($sql);
         while($row=$result->fetch_assoc()){
