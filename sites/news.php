@@ -1,52 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>news</title>
-</head>
-<body>
-<?php
-        include_once "navbar.php";
-?>
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="./styles/fotos/parisi-udvar-hotel-budapest-exterior-night-2.webp" class="d-block w-100" alt="Unser Hotel">
+            <img src="styles/fotos/Else/parisi-udvar-hotel-budapest-exterior-night-2.webp" class="d-block w-100" alt="Unser Hotel">
         </div>
     </div>
 </div>
 <div class="d-flex flex-column align-items-center">
-    <p class="newsP mt-5" style="text-align:center; font-family: 'Courier New', Courier, monospace; font-size: 30px; font-weight:bolder;">Unser News</p>
+    <p class="newsP mt-5" style="text-align:center;font-size: 30px; font-weight:bolder;">Unser News</p>
     <?php
-            if($_SESSION["email"]=="admin@gmail.com"){
+            // das wurde nur gezeigt wenn der admin eingeloggt ist.
+            if(isset($_SESSION["email"]) && $_SESSION["email"]=="admin@gmail.com"){
                 echo "
-                <div>
-                    <button class='btn bg-black text-white'><a href='?addphoto' style='color:white;'>Fotos ändern</a></button>
+                <div class='d-flex justify-content-between' style='gap:3vw;'>
+                    <a class='new_reservation_a' href='?editnews=addnews'>Beitrag Hinzufügen</a>
+                    <a class='new_reservation_a 'href='?editnews=removenews'>Beitrag Löschen</a>
                 </div>
             ";
             }
+            
     ?>
 </div>
-<div class="container mt-5 pb-5">
+<div class="container mt-5">
     <div class='row justify-content-around'>
             <?php
-                foreach($newsData as $news){
-                    $newsHeader=$news["newsHeader"];
-                    $newsBody=$news["newsBody"];
-                    $picture=$news["picture"];
+                // holt alle beitragdaten vom datenbank und die sind nach datum geordnert. 
+                $sql = "SELECT * FROM beitrag ORDER BY beitragsdatum desc";
+                $result = $db->query($sql);
+                while($row=$result->fetch_assoc()){
+                    $ueberschrift = $row["ueberschrift"];
+                    $beschreibung = $row["beschreibung"];
+                    $fotopfad = $row["fotopfad"];
+                    $beitragsdatum = $row['beitragsdatum'];
                     echo "
-                    <div class='card col-4' style='width: 27rem;'>
-                        <img src='$picture' class='card-img' style='height:27rem;' alt='...'>
-                        <div class='card-body'>
-                            <h5 style='text-align:center;'>$newsHeader<h5>
-                            <p class='pt-5 pr-2'>$newsBody</p>
+                    <div class='card col-12 col-md-6 col-lg-4 m-2 p-2' style='width: 27rem; border:none;'>
+                        <img src='$fotopfad' class='card-img' style='height:27rem;' alt='...'>
+                        <div class='card-body d-flex flex-column justify-content-between'>
+                            <h4 style='text-align:center;'>$ueberschrift</h4>
+                            <p class='fs-5 pt-3' style='font-family: \'Courier New\', Courier, monospace;'>$beschreibung</p>
+                            <p class='card-text text-warning bg-dark p-2' style='text-align:center;line-height:1.5;margin-top'>$beitragsdatum</p>
                         </div>
                         </div>
                     ";
-                }
+                };
             ?>
     </div>
 </div>
-</body>
-</html>

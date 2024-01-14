@@ -1,12 +1,14 @@
 
 /* For all pages thats linked to this sheet*/
 /*-----------------------------------------*/
+*{
+    font-family: 'Roboto Condensed', sans-serif;
+}
 html,body{
     height: 100%;
     margin: 0px;
     padding: 0px;
 }
-
 /*-----------------------------------------*/
 
 
@@ -28,27 +30,54 @@ html,body{
     max-height: 70vh;
 }
 .carousel-caption{
+    font-family: 'Courier New', Courier, monospace;
     background-color: rgb(0,0,0,0.5);
-    font-family:'Courier New', Courier, monospace;
     padding: 5px;
 }
 .carousel-caption>h5{
     font-weight: bold;
+    font-family: 'Roboto Condensed', sans-serif;
 }
-.card-text{
-    border: 2px;
-    border-radius: 5px;
-    padding: 5px;
-    background-color: rgb(0,0,0,0.3);
-    color: white;
-    font-family:'Courier New', Courier, monospace;
-    font-size: 18px;    
-    margin-top: 16%;
-}
+.card a {
+    font-size: 20px;
+    background-color:rgb(0,0,0,0.5);
+    color:orange;
+    padding:5px;
+    border-radius:5px;
+    text-decoration:none;
+  }
+  .card a:hover{
+    border:2px solid white;
+    background: none;
+    text-decoration: underline orange;
+    text-underline-offset: 5px;
+  }
 /*------------------*/
-/* for Reservation Page */
-/*--------------------------*/
+/* for rooms Page */
+/*----------------*/
+div#collapsediv{
+    background-color:rgb(0,0,0,0.5);
+    overflow: auto;
+}
+/*-----------------*/
 
+/* for new_Reservation Page */
+/*--------------------------*/
+.new_reservation_a{
+    font-size: 20px;
+    background-color:rgb(0,0,0);
+    color:white;
+    padding:5px;
+    border-radius:5px;
+    text-decoration:none;
+}
+.new_reservation_a:hover{
+    border:2px solid white;
+    border-radius:5px;
+    text-decoration: underline orange;
+    color:orange;
+    text-underline-offset: 5px;
+  }
 /*--------------------------*/
 
 
@@ -67,7 +96,6 @@ html,body{
     align-items: center;
 }
 .impressum-header{
-    font-family:Arial, Helvetica, sans-serif;
     font-weight: bolder;
     font-style: oblique;
     font-size: 20px;
@@ -104,12 +132,10 @@ html,body{
 }
 #accordionExample .accordion-body{
     height: 5rem;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 18px;
 }
 #accordionExample .accordion-button {
     height: 5rem;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
 }
 /*-----------------*/
@@ -128,6 +154,15 @@ html,body{
     #impressum-photos{
         margin: 0px;
     }
+    .userInformatinCard{
+        flex-direction: column;
+    }
+    .InformationCard{
+        width: 100%;
+    }
+    .userInformation{
+        width: 100vw !important;
+    }
 }
 /*------------------------*/
 
@@ -135,28 +170,31 @@ html,body{
 /*-----------------*/
 .sign-outter{
     padding:10px;
+    max-width: 500px;
+    margin: auto;
 }
 .sign-body{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 .sign-logo
 {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-.sign-logo-p{
-    font-family: serif; 
+.sign-logo-p{ 
     font-size: 30px;
-    padding-top: 25px;
+    padding-top: 20px;
     padding-left: 5px;
 }
 .sign-bar{
     display: flex;
     flex-direction: column;
 }
-.sign-bar>input{
+.sign-bar>input,textarea{
     padding: 5px;
     margin: 10px;
 }
@@ -166,13 +204,11 @@ html,body{
 }
 .signup-and-home{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 5px;
 }
 .signup-and-home>p{
-    margin-left: 35%;
     font-size: 25px;
-    font-family: serif;
 }
 .sign-bar>input:focus{
     outline: 1px solid gray;
@@ -181,9 +217,6 @@ html,body{
     color: red;
 }
 /*-----------------*/
-
-
-
-
-
-
+.userInformation{
+    width: 40vw;
+}

@@ -1,116 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
-</head>
 <?php
     $errors=[];
     $vorname="";
     $nachname="";
     $username="";
     $email="";
-    $password="";
-    $confirmpassword="";
+    $passwort="";
+    $confirmpasswort="";
+    // wenn registieren Button ist geklickt, checkt ob alle inputs sind eingegben falls nicht gibt eine Fehlermeldung aus.
     if (isset($_POST["signup"])){
         $vorname = isset($_POST["vorname"])? $_POST["vorname"]:"";
         $nachname = isset($_POST["nachname"])? $_POST["nachname"]:"";
         $username = isset($_POST["username"])? $_POST["username"]:"";
         $email = isset($_POST["email"])? $_POST["email"]:"";
-        $password = isset($_POST["password"])? $_POST["password"]:"";
-        $confirmpassword = isset($_POST["confirmpassword"])? $_POST["confirmpassword"]:"";
+        $passwort = isset($_POST["passwort"])? $_POST["passwort"]:"";
+        $confirmpasswort = isset($_POST["confirmpasswort"])? $_POST["confirmpasswort"]:"";
         if(empty($vorname)){
-            $errors["vorname"]="vorname wurde nicht eingegeben";
+            $errors["vorname"]="Vorname wurde nicht eingegeben";
         }
 
         if(empty($nachname)){
-            $errors["nachname"]="nachname wurde nicht eingegeben";
+            $errors["nachname"]="Nachname wurde nicht eingegeben";
         }
 
         if(empty($username)){
-            $errors["username"]="username wurde nicht eingegeben";
+            $errors["username"]="Benutzername wurde nicht eingegeben";
         }
 
         if(empty($email)){
-            $errors["email"]="email wurde nicht eingegeben";
+            $errors["email"]="Email wurde nicht eingegeben";
         }
 
-        if(empty($password)){
-            $errors["password"]="password wurde nicht eingegeben";
+        if(empty($passwort)){
+            $errors["passwort"]="Passwort wurde nicht eingegeben";
         }
-        if(empty($confirmpassword)){
-            $errors["confirmpassword"]="confirmpassword wurde nicht eingegeben";
+        if(empty($confirmpasswort)){
+            $errors["confirmpasswort"]="Bestätigungpasswort wurde nicht eingegeben";
+        }
+        // checkt ob das bestätigungspasswort mit dem passwort übereinstimmt
+        if($confirmpasswort != $passwort){
+            $errors["identischkeit"]="passworten sind nicht identisch";
         }
     }
 ?>
-<body class="sign-body">
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <div class="sign-outter">
-            <div class="sign-logo">
-                <img src="./styles/fotos/upper-belvedere-vienna.png" class="sign-logo-img" alt="Logo" width="80px">
-                <p class="sign-logo-p mt-4" style="font-size: 30px;">Vienna Stars Hotel</p>
+<div class="sign-body">
+<form method="post">
+    <div class="sign-outter">
+        <div class="sign-logo">
+            <a href="?hotel">
+                <img src="styles/fotos/Else/upper-belvedere-vienna.png"  alt="Logo" width="65px">
+            </a>
+            <p class="sign-logo-p" style="font-size: 30px;">Vienna Stars Hotel</p>
+        </div>
+        <div class="signup-and-home">
+            <p>Registrieren</p>
+        </div>
+        <div class="sign-bar">
+            <div>
+                <?php
+                    // gibt diese Fehlermeldung aus nur wenn die Email adresse in Datenbank vorhanden ist.
+                    if($emailexist){
+                        echo "<p class='error' style='text-align:center;'>Email ist ungültig oder existiert schon</p>";
+                    }
+                    else if ($emailexist == false && isset($_POST["signup"]) && empty($errors)){
+                        echo "<p style='text-align:center; color:green;'>Sie haben erfolgreich regstiert</p>";
+                    }
+                ?>
             </div>
-            <div class="sign-bar">
-                <div class="signup-and-home">
-                    <p>Sign Up</p>
-                </div>
-                <div>
-                    <?php
-                        if($emailexist){
-                            echo "<p class='error' style='text-align:center;'>Email existiert schon</p>";
-                        }
-                    ?>
-                </div>
-                <select class="sign-buttons" id="Anrede" name="Anrede" width="">
-                    <option value="Herr.">Herr.</option>
-                    <option value="Frau.">Frau.</option>
-                </select>
-                <input type="text" id="vorname" name="vorname" placeholder="Vorname" value="<?php echo $vorname ?>"  size="12">
+            <select class="sign-buttons" id="anrede" name="anrede" width="">
+                <option value="M" selected >Herr.</option>
+                <option value="F">Frau.</option>
+            </select>
+                <input type="text" id="vorname" name="vorname" placeholder="Vorname" value="">
                 <?php
                     if(isset($errors['vorname'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['vorname']."</p>";
                     }
                 ?>
-                <input type="text" id="nachname" name="nachname" placeholder="Nachname" value="<?php echo $nachname ?>"  size="12">
+                <input type="text" id="nachname" name="nachname" placeholder="Nachname" value="">
                 <?php
                     if(isset($errors['nachname'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['nachname']."</p>";
                     }
                 ?>
-                <input type="text" id="username" name="username" value="<?php echo $username ?>"  placeholder="UserName">
+                <input type="text" id="username" name="username" value=""  placeholder="Benutzername">
                 <?php
                     if(isset($errors['username'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['username']."</p>";
                     }
                 ?>
-                <input type="email" id="email" name="email" value="<?php echo $email ?>"  placeholder="Email">
+                <input type="email" id="email" name="email" value=""  placeholder="Email">
                 <?php
                     if(isset($errors['email'])){
                         echo "<p class='error' style='text-align:center;'>".$errors['email']."</p>";
                     }
                 ?>
-                <input type="password" id="password" name="password" value="<?php echo $password ?>" placeholder="Password">
+                <input type="password" id="passwort" name="passwort" title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" placeholder="Passwort">
                 <?php
-                    if(isset($errors['password'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['password']."</p>";
+                    if(isset($errors['passwort'])){
+                        echo "<p class='error' style='text-align:center;'>".$errors['passwort']."</p>";
                     }
                 ?>
-                <input type="password" id="confirmPassword" name="confirmpassword" value="<?php echo $confirmpassword ?>"  placeholder="Password wiederholen">
+                <input type="password" id="confirmpasswort"  title="Muss mindestens eine Zahl und einen Groß- und Kleinbuchstaben sowie mindestens 8 oder mehr Zeichen enthalten" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="confirmpasswort" value=""  placeholder="Passwort wiederholen">
                 <?php
-                    if(isset($errors['confirmpassword'])){
-                        echo "<p class='error' style='text-align:center;'>".$errors['confirmpassword']."</p>";
+                    if(isset($errors['confirmpasswort'])){
+                        echo "<p class='error' style='text-align:center;'>".$errors['confirmpasswort']."</p>";
                     }
-                    if($password !== $confirmpassword){
-                        echo "<p class='error' style='font-weight:bold; text-align:center;'>Passwords sind nicht identisch</p>";
+                    if($passwort !== $confirmpasswort){
+                        echo "<p class='error' style='font-weight:bold; text-align:center;'>".$errors['identischkeit']."</p>";
                     }
                 ?>
-                <div class="sign-buttons d-flex justify-content-between">
-                    <button class="btn bg-dark text-white" type="submit" name="signup" id="Submit">Submit</button>
-                    <a href="?hotel"><img src="./styles/fotos/house-solid.svg" alt="home" width="30px" title="Back to Home"></a> 
-                </div>    
-            </div>
+            <div class="sign-buttons">
+                <p>Haben Sie sich schon regestiert? <a href="?signin">Zur Anmeldung</a></p> 
+                <div class="d-flex justify-content-between">
+                    <button class="btn bg-dark text-white" type="submit" name="signup" id="Submit">Registrieren</button>
+                    <a href="?hotel"><img src="styles/fotos/Else/house-solid.svg" alt="home" width="30px" title="Back to Home"></a> 
+                </div>
+            </div>  
         </div>
-    </form>
-</body>
-</html>
+    </div>
+</form>
+</div>
