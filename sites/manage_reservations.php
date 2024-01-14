@@ -224,7 +224,7 @@
         } else {
             echo "
             <div class='container text-center mt-5'>
-                <p class='text-danger'>Der Benutzer hat kein Zimmer reserviert.</p>
+                <p class='text-danger'>Kein Ergebnis</p>
             </div>
             ";
         }
